@@ -1,9 +1,6 @@
 package org.example;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,25 +51,23 @@ public class User  {
     }
 
 
-    public void adduser (String password, String email){
+    public void adduser (String email, String password){
     if ( users.containsKey ( email ) ){
         loginFlag = false;
         return ;
     }
 
-
-
     if ( email.contains ( "@admin" ) ){
             user_type = 1;
-        users.put(email,password);
+        writeUsers (  email , password , users );
         loginFlag = true;}
     else if (email.contains("@user")){
             user_type = 2 ;
-        users.put(email,password);
+        writeUsers (  email , password , users );
         loginFlag = true;}
     else if (email.contains("@serviceprovider")){
             user_type = 3 ;
-        users.put(email,password);
+        writeUsers (  email , password , users );
         loginFlag = true;}
     else{
         user_type=-1;
@@ -91,6 +86,22 @@ public class User  {
                     users.put ( data[ 0 ] , data[ 1 ] );
                 }
             }
+        }
+        catch ( IOException e ) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+   public void writeUsers ( String username , String password , Map < String, String > users ) {
+        try {
+            users.clear ( );
+            File file = new File ( "src/users.txt" );
+            try (BufferedWriter bufferedWriter = new BufferedWriter ( new FileWriter ( file , true ) )) {
+                String nameAndPass = "\n"+ username + "," + password;
+                bufferedWriter.write ( nameAndPass+ "\n" );
+
+            }
+            getUsersFromFile ();
         }
         catch ( IOException e ) {
             System.out.println(e.getMessage());

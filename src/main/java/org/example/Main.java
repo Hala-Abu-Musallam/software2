@@ -16,13 +16,14 @@ while(true) {
         System.out.println("enter password");
         String password = scanner.next();
         user.login(username, password);
-    } else {
+    } else if(userinput==2) {
         System.out.println("enter username");
         String username = scanner.next();
         System.out.println("enter password");
         String password = scanner.next();
-        user.login(password, username);
+        user.adduser(username, password);
     }
+
 }
 
     }

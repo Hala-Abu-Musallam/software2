@@ -8,9 +8,9 @@ Feature: login and sign up
 
     Then user succesfull loged in
     Examples:
-      | username         | password |
-      |Hala@user.com     |1234hala  |
-      |Rahaf@user.com    |1234rahaf |
+      | username         | password   |
+      |Hala@user.com     |1234hala    |
+      |Rahaf@user.com    |1234rahaf   |
       |mohammed@user.com |1234mohammed|
 
 
@@ -25,21 +25,21 @@ Feature: login and sign up
       |         |          |
 
     Scenario Outline: valid sign up
-      When user provides valid information '<password>' '<email>'
+      When user provides valid information '<email>' '<password>'
       Then user succesfully signs up
 
       Examples:
-      |password |email               |
-      |hala1234 |halakhaled@admin.com|
+      |email               |password |
+      |halakhaled@admin.com|hala1234 |
 
   Scenario Outline: invalid sign up
-    When user provides invalid information '<password>' '<email>'
+    When user provides invalid information '<email>' '<password>'
     Then user failed to sign up
 
     Examples:
-       |password |email               |
-       |0000     |halakhaled.com      |
-       |         |                    |
+       |email          |password|
+       |halakhaled.com |0000    |
+       |               |        |
 
 
 
