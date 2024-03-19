@@ -17,6 +17,8 @@ public class User {
 
     public HashMap<String,User>userDatabase = new HashMap<>();
 
+
+
     public User() {
         getUsersFromFile();
 
@@ -107,6 +109,8 @@ public class User {
             System.out.println(e.getMessage());
         }
     }
+
+
 
     }
 
