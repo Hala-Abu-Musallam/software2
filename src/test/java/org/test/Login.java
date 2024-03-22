@@ -1,6 +1,7 @@
 package org.test;
 
 
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.User;
@@ -33,7 +34,6 @@ user.login(string,string2);
         // Write code here that turns the phrase above into concrete actions
         assertFalse(User.user_type>4 && User.user_type<1);
     }
-
 
 
 

@@ -3,11 +3,8 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.Event;
 import org.example.ServiceProvider;
-import org.example.User;
 import io.cucumber.java.en.Given;
 import org.junit.Before;
-
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
