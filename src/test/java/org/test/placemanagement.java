@@ -6,15 +6,14 @@ import io.cucumber.java.en.Then;
 import org.example.ServiceProvider;
 
 import static org.junit.Assert.*;
-import java.util.Optional;
-import org.example.Venue;
-import org.junit.Test;
 
-public class placemanagment {
+import org.example.Venue;
+
+public class placemanagement {
     private ServiceProvider serviceProvider=new ServiceProvider();
     private Venue venue=new Venue();
     private boolean operationResult;
-    @Test
+
 
     @Given("I am logged in as a service provider")
     public void iAmLoggedInAsAServiceProvider() {
@@ -22,7 +21,7 @@ public class placemanagment {
         assertTrue("Service provider should be logged in", serviceProvider.isLoggedIn());
 
     }
-    @Test
+
 
     @When("I choose to create a new wedding venue")
     public void iChooseToCreateANewWeddingVenue() {
@@ -30,7 +29,7 @@ public class placemanagment {
         venue = new Venue("Venue Name", "Owner Name", "Location", 100, 5000.00);
         assertNotNull("Venue should not be null after creation", venue);
     }
-    @Test
+
 
     @Then("I should be able to specify the venue's name, my name \\(as the owner), the location, and the asking price")
     public void iShouldBeAbleToSpecifyTheVenueSNameMyNameAsTheOwnerTheLocationAndTheAskingPrice() {
@@ -43,21 +42,21 @@ public class placemanagment {
         serviceProvider.addVenue(venue);
         assertTrue(serviceProvider.containsVenue(venue));
     }
-    @Test
+
 
     @Given("I have previously created a wedding venue")
     public void iHavePreviouslyCreatedAWeddingVenue() {
         venue = new Venue("Grand Hall", "Alice", "Downtown", 200, 5000.00);
         serviceProvider.addVenue(venue);
     }
-    @Test
+
 
     @When("I choose to edit this venue")
     public void iChooseToEditThisVenue() {
         // Here, you might simulate selecting the venue to edit
         // The actual update happens in the next step
     }
-    @Test
+
 
     @Then("I should be able to update the venue's name, location, and asking price")
     public void iShouldBeAbleToUpdateTheVenueSNameLocationAndAskingPrice() {
@@ -67,14 +66,14 @@ public class placemanagment {
         venue.setPricing(5500.00);
 
     }
-    @Test
+
 
     @When("I choose to delete this venue")
     public void iChooseToDeleteThisVenue() {
 
         operationResult = serviceProvider.deleteVenue(venue); // Assuming deleteVenue returns a boolean indicating success
     }
-    @Test
+
 
     @Then("the venue should be removed from the system")
     public void theVenueShouldBeRemovedFromTheSystem() {

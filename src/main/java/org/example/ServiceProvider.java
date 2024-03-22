@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ServiceProvider {
+    private Map<String, Vendor> vendors = new HashMap<>();
+    public static final String VENDORS_FILE_PATH = "src/vendor.txt";
 
     public static final String VENUES_FILE_PATH = "src/Venues.txt";
     private static final Map<String, Event> savedEvents = new HashMap<>();
@@ -206,6 +208,73 @@ public class ServiceProvider {
         } catch (IOException e) {
             System.err.println("Error saving venues to file: " + e.getMessage());
         }
+    }
+
+
+
+    public void addVendor(Vendor vendor) {
+        vendors.put(vendor.getId(), vendor);
+    }
+
+    public Vendor findVendorByName(String name) {
+        return vendors.values().stream()
+                .filter(v -> v.getName().equals(name))
+                .findFirst()
+                .orElse(null);
+    }
+
+    public void updateVendor(Vendor vendor) {
+        vendors.put(vendor.getId(), vendor);
+    }
+
+    public void deleteVendor(String id) {
+        vendors.remove(id);
+    }
+
+    public boolean containsVendor(Vendor vendor) {
+        return vendors.containsKey(vendor.getId());
+    }
+    public Vendor findVendorById(String id) {
+        return vendors.get(id);
+    }
+
+
+
+    public void saveVendorsToFile() {
+        List<String> lines = new ArrayList<>();
+        for (Vendor vendor : vendors.values()) {
+            String line = String.join(",",
+                    vendor.getId(),
+                    vendor.getName(),
+                    vendor.getServiceType(),
+                    String.valueOf(vendor.getPricing()));
+            lines.add(line);
+        }
+        try {
+            Files.write(Paths.get(VENDORS_FILE_PATH), lines);
+        } catch (IOException e) {
+            System.err.println("Error saving vendors to file: " + e.getMessage());
+        }
+    }
+
+    public void loadVendorsFromFile() {
+        vendors.clear(); // Clear existing vendors
+        try {
+            List<String> lines = Files.readAllLines(Paths.get(VENDORS_FILE_PATH));
+            for (String line : lines) {
+                String[] details = line.split(",");
+                if (details.length == 4) {
+                    Vendor vendor = new Vendor(details[0], details[1], details[2], Double.parseDouble(details[3]));
+                    vendors.put(vendor.getId(), vendor);
+                }
+            }
+        } catch (IOException e) {
+            System.err.println("Error loading vendors from file: " + e.getMessage());
+        }
+    }
+
+    public Collection<Vendor> getAllVendors() {
+        return vendors.values();
     }
 
 
