@@ -57,7 +57,7 @@ public class VendorsByUser{
 
     }
 
-    public void addvendor (String type){
+    public void addvendor   (String type){
         getVendorsfromFile();
         if ( type.contains ( "decoration" ) ){
             vendor_type = 1;
