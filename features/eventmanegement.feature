@@ -12,8 +12,6 @@ Scenario: Service Provider creates a new event.
 
 
 
-
-
 Scenario: Service Provider edits an existing event.
 
 Given a service provider is logged in.
