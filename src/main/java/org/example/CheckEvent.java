@@ -140,4 +140,17 @@ public class CheckEvent {
 
 
     }
+
+    /*public boolean deleteEvent(String username) {
+        if (events.contains(username)) {
+            events.remove(username);
+            System.out.println("Event deleted successfully!");
+            return true; // Return true indicating successful deletion
+        } else {
+            System.out.println("Event not found!");
+            return false; // Return false indicating event not found
+        }
+    }*/
+
+
 }
