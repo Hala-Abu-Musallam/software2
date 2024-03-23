@@ -249,7 +249,7 @@ public class ServiceProvider {
     }
 
     public void loadVendorsFromFile() {
-        vendors.clear(); // Clear existing vendors
+        vendors.clear();
         try {
             List<String> lines = Files.readAllLines(Paths.get(VENDORS_FILE_PATH));
             for (String line : lines) {
