@@ -6,7 +6,7 @@ import java.util.Map;
 
 
 
-public class User {
+public class User  {
 
     public  Map< String, String > users = new HashMap<>();
     public String  username;
