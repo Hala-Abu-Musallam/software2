@@ -210,32 +210,24 @@ public class ServiceProvider {
         }
     }
 
-
-
     public void addVendor(Vendor vendor) {
-        vendors.put(vendor.getId(), vendor);
+        vendors.put(vendor.getName(), vendor);
     }
 
     public Vendor findVendorByName(String name) {
-        return vendors.values().stream()
-                .filter(v -> v.getName().equals(name))
-                .findFirst()
-                .orElse(null);
+        return vendors.get(name);
     }
 
     public void updateVendor(Vendor vendor) {
-        vendors.put(vendor.getId(), vendor);
+        vendors.put(vendor.getName(), vendor);
     }
 
-    public void deleteVendor(String id) {
-        vendors.remove(id);
+    public void deleteVendor(String name) {
+        vendors.remove(name);
     }
 
     public boolean containsVendor(Vendor vendor) {
-        return vendors.containsKey(vendor.getId());
-    }
-    public Vendor findVendorById(String id) {
-        return vendors.get(id);
+        return vendors.containsKey(vendor.getName());
     }
 
 
@@ -244,7 +236,6 @@ public class ServiceProvider {
         List<String> lines = new ArrayList<>();
         for (Vendor vendor : vendors.values()) {
             String line = String.join(",",
-                    vendor.getId(),
                     vendor.getName(),
                     vendor.getServiceType(),
                     String.valueOf(vendor.getPricing()));
@@ -263,15 +254,16 @@ public class ServiceProvider {
             List<String> lines = Files.readAllLines(Paths.get(VENDORS_FILE_PATH));
             for (String line : lines) {
                 String[] details = line.split(",");
-                if (details.length == 4) {
-                    Vendor vendor = new Vendor(details[0], details[1], details[2], Double.parseDouble(details[3]));
-                    vendors.put(vendor.getId(), vendor);
+                if (details.length == 3) { // Adjust for the fact that there's no 'id'
+                    Vendor vendor = new Vendor(details[0], details[1], Double.parseDouble(details[2]));
+                    vendors.put(vendor.getName(), vendor);
                 }
             }
         } catch (IOException e) {
             System.err.println("Error loading vendors from file: " + e.getMessage());
         }
     }
+
 
     public Collection<Vendor> getAllVendors() {
         return vendors.values();

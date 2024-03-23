@@ -1,7 +1,6 @@
 package org.example;
 
 public class Vendor {
-    private String id;
     private String name;
     private String serviceType;
 
@@ -10,8 +9,7 @@ public class Vendor {
     public Vendor(){
 
     }
-    public Vendor(String id, String name, String serviceType, double pricing) {
-        this.id = id;
+    public Vendor( String name, String serviceType, double pricing) {
         this.name = name;
         this.serviceType = serviceType;
         this.pricing = pricing;
@@ -19,13 +17,7 @@ public class Vendor {
     }
 
     // Getters and setters
-    public String getId() {
-        return id;
-    }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -58,7 +50,7 @@ public class Vendor {
     @Override
     public String toString() {
         return "Vendor{" +
-                "id='" + id + '\'' +
+
                 ", name='" + name + '\'' +
                 ", serviceType='" + serviceType + '\'' +
                 ", pricing=" + pricing +
