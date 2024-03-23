@@ -217,11 +217,14 @@ public class ServiceProvider {
     }
 
     public Vendor findVendorByName(String name) {
-        return vendors.values().stream()
-                .filter(v -> v.getName().equals(name))
-                .findFirst()
-                .orElse(null);
+        for (Vendor vendor : vendors.values()) {
+            if (vendor.getName().equals(name)) {
+                return vendor; // Return the matching vendor
+            }
+        }
+        return null; // Return null if no matching vendor is found
     }
+
 
     public void updateVendor(Vendor vendor) {
         vendors.put(vendor.getId(), vendor);
@@ -232,6 +235,7 @@ public class ServiceProvider {
     }
 
     public boolean containsVendor(Vendor vendor) {
+
         return vendors.containsKey(vendor.getId());
     }
     public Vendor findVendorById(String id) {
