@@ -17,7 +17,7 @@ public class VendorManagement {
 
     @When("I choose to create a new vendor")
     public void iChooseToCreateANewVendor() {
-        vendor = new Vendor("vendor1", "moh", "Catering", 1500.0);
+        vendor = new Vendor( "moh", "Catering", 1500.0);
         serviceProvider.addVendor(vendor);
         assertNotNull("Venue should not be null after creation", vendor);
 
@@ -53,7 +53,7 @@ public class VendorManagement {
 
     @Then("I should see a confirmation message indicating the vendor's information has been updated successfully")
     public void iShouldSeeAConfirmationMessageIndicatingTheVendorSInformationHasBeenUpdatedSuccessfully() {
-        Vendor updatedVendor = serviceProvider.findVendorById(vendor.getId());
+        Vendor updatedVendor = serviceProvider.findVendorByName(vendor.getName());
         assertEquals("Vendor's name should be updated", "New Catering Co", updatedVendor.getName());
         assertEquals("Vendor's service type should be updated", "Premium Catering", updatedVendor.getServiceType());
         assertEquals("Vendor's pricing should be updated", 2000.0, updatedVendor.getPricing(), 0.0);
@@ -67,7 +67,7 @@ public class VendorManagement {
 
     @When("I confirm the deletion of the vendor")
     public void iConfirmTheDeletionOfTheVendor() {
-        serviceProvider.deleteVendor(vendor.getId());
+        serviceProvider.deleteVendor(vendor.getName());
     }
 
     @Then("I should see a confirmation message indicating the vendor has been deleted successfully")
