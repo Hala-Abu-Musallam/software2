@@ -36,7 +36,7 @@ public void username_and_password_are_true(String string, String string2) {
     @Then("user failed log in")
     public void userFailedLogIn() {
         // Write code here that turns the phrase above into concrete actions
-        assertFalse(User.user_type>4 && User.user_type<1);
+        assertFalse(User.user_type<0 && User.user_type>4);
     }
 
 

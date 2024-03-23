@@ -1,1 +1,3 @@
-lilaty,dd,444.0
+decoration@serviceprovider.com,1000,decoration
+DJ@serviceprovider.com,500,DJ
+photographer@serviceprovider.com,700,photographer
