@@ -116,6 +116,7 @@ public class CheckEvent {
                     String[] data = dateAndTime.split(",");
                     events.add(data[1]);
                     events.add(data[2]);
+                    events.add(data[4]);
                 }
             }
         } catch (IOException e) {
