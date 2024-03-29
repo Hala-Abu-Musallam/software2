@@ -1,5 +1,7 @@
 package org.example;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;
@@ -14,7 +16,7 @@ public class ServiceProvider {
 
     public static final String VENUES_FILE_PATH = "src/Venues.txt";
     private static final Map<String, Event> savedEvents = new HashMap<>();
-    private Venue venue;
+
     private String username;
     private String password;
     private boolean isLoggedIn;
@@ -54,27 +56,29 @@ public class ServiceProvider {
         String eventName = scanner.nextLine();
         System.out.print("Date: ");
         String date = scanner.nextLine();
-        System.out.print("Location: ");
-        String location = scanner.nextLine();
-        System.out.print("Services Required: ");
-        String services = scanner.nextLine();
-        event = new Event(eventName, date, location, services);
+        System.out.print("Time: ");
+        String time = scanner.nextLine();
+        System.out.print("Price: ");
+        double price = scanner.nextDouble();
+        scanner.nextLine();
+        System.out.print("Vendor Name: ");
+        String vendorName = scanner.nextLine();
+        event = new Event(eventName, date, time, price, vendorName);
     }
 
-    public void saveEventDetails(String eventName, String date, String location, String services) {
-        Event event = new Event(eventName, date, location, services);
+
+    public void saveEventDetails(String eventName, String date, String time, double price, String vendorName) {
+        Event event = new Event(eventName, date, time, price, vendorName);
         savedEvents.put(eventName, event);
         System.out.println("Event saved successfully!");
     }
-
 
     public Event getEvent() {
         return event;
     }
 
 
-    public void editEvent(String eventName) {
-        // Debugging: Print out all keys in savedEvents
+    public void editEvent(String eventName){
         System.out.println("Keys in savedEvents: " + savedEvents.keySet());
 
         if (savedEvents.containsKey(eventName)) {
@@ -83,9 +87,7 @@ public class ServiceProvider {
             System.out.println(event);
 
             System.out.println("Enter new event details:");
-            promptForEventDetails(); // Reusing the promptForEventDetails method for editing
-
-            // Update the event in the savedEvents map
+            promptForEventDetails();
             savedEvents.put(eventName, event);
 
             System.out.println("Event details updated successfully!");
@@ -99,24 +101,24 @@ public class ServiceProvider {
         if (savedEvents.containsKey(eventName)) {
             savedEvents.remove(eventName);
             System.out.println("Event deleted successfully!");
-            return true; // Return true indicating successful deletion
+            return true;
         } else {
             System.out.println("Event not found!");
-            return false; // Return false indicating event not found
+            return false;
         }
     }
 
-    public boolean modifyEventDetails(String eventName, String newDate, String newLocation, String newServices) {
+    public boolean modifyEventDetails(String eventName, String newDate,double newprice, String newServices) {
         if (savedEvents.containsKey(eventName)) {
             Event eventToUpdate = savedEvents.get(eventName);
             eventToUpdate.setDate(newDate);
-            eventToUpdate.setLocation(newLocation);
-            eventToUpdate.setServices(newServices);
+            eventToUpdate.setVendorName(newServices);
             savedEvents.put(eventName, eventToUpdate);
             return true;
         }
         return false;
     }
+
 
     public static Event getEventFromDatabase(String eventName) {
         return savedEvents.get(eventName);
@@ -238,7 +240,9 @@ public class ServiceProvider {
             String line = String.join(",",
                     vendor.getName(),
                     vendor.getServiceType(),
-                    String.valueOf(vendor.getPricing()));
+                    vendor.getEmail(),
+                    String.valueOf(vendor.getTime()),
+                    String.valueOf(vendor.getDate()));
             lines.add(line);
         }
         try {
@@ -248,14 +252,15 @@ public class ServiceProvider {
         }
     }
 
+
     public void loadVendorsFromFile() {
         vendors.clear();
         try {
             List<String> lines = Files.readAllLines(Paths.get(VENDORS_FILE_PATH));
             for (String line : lines) {
                 String[] details = line.split(",");
-                if (details.length == 3) { // Adjust for the fact that there's no 'id'
-                    Vendor vendor = new Vendor(details[0], details[1], Double.parseDouble(details[2]));
+                if (details.length == 5) {
+                    Vendor vendor = new Vendor(details[0], details[1], details[2], Integer.parseInt(details[3]), Integer.parseInt(details[4]));
                     vendors.put(vendor.getName(), vendor);
                 }
             }
@@ -267,6 +272,16 @@ public class ServiceProvider {
 
     public Collection<Vendor> getAllVendors() {
         return vendors.values();
+    }
+
+    public void saveEventDetailsToFile(String event) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/events.txt", true))) {
+            bw.write(event);
+            bw.newLine();
+            System.out.println("Event added to events.txt successfully.");
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to events.txt: " + e.getMessage());
+        }
     }
 
 

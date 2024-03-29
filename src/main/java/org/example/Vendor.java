@@ -1,23 +1,24 @@
 package org.example;
-
 public class Vendor {
     private String name;
     private String serviceType;
+    private String email;
+    private int time;
+    private int date;
 
-    private double pricing;
-
-    public Vendor(){
+    public Vendor() {
 
     }
-    public Vendor( String name, String serviceType, double pricing) {
+
+    public Vendor(String name, String serviceType, String email, int time, int date) {
         this.name = name;
         this.serviceType = serviceType;
-        this.pricing = pricing;
-
+        this.email = email;
+        this.time = time;
+        this.date = date;
     }
 
     // Getters and setters
-
 
     public String getName() {
         return name;
@@ -35,25 +36,38 @@ public class Vendor {
         this.serviceType = serviceType;
     }
 
-
-
-    public double getPricing() {
-        return pricing;
+    public String getEmail() {
+        return email;
     }
 
-    public void setPricing(double pricing) {
-        this.pricing = pricing;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
+    public int getTime() {
+        return time;
+    }
 
+    public void setTime(int time) {
+        this.time = time;
+    }
+
+    public int getDate() {
+        return date;
+    }
+
+    public void setDate(int date) {
+        this.date = date;
+    }
 
     @Override
     public String toString() {
         return "Vendor{" +
-
-                ", name='" + name + '\'' +
+                "name='" + name + '\'' +
                 ", serviceType='" + serviceType + '\'' +
-                ", pricing=" + pricing +
+                ", email='" + email + '\'' +
+                ", time=" + time +
+                ", date=" + date +
                 '}';
     }
 }
