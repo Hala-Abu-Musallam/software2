@@ -108,7 +108,7 @@ public class ServiceProvider {
         }
     }
 
-    public boolean modifyEventDetails(String eventName, String newDate,double newprice, String newServices) {
+    public boolean modifyEventDetails(String eventName, String newDate,String newtime,double newprice, String newServices) {
         if (savedEvents.containsKey(eventName)) {
             Event eventToUpdate = savedEvents.get(eventName);
             eventToUpdate.setDate(newDate);
@@ -283,6 +283,44 @@ public class ServiceProvider {
             System.out.println("An error occurred while writing to events.txt: " + e.getMessage());
         }
     }
+
+    public void editEventInFile(String eventName, Scanner scanner) {
+        Path path = Paths.get("src/events.txt");
+        try {
+            List<String> lines = Files.readAllLines(path);
+            int index = -1;
+            for (int i = 0; i < lines.size(); i++) {
+                if (lines.get(i).contains(eventName)) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index != -1) {
+                System.out.println("Editing Event: " + lines.get(index));
+                System.out.println("Enter new details (eventName,date,time,price,vendorName):");
+                String newDetails = scanner.nextLine();
+                lines.set(index, newDetails);
+                Files.write(path, lines);
+                System.out.println("Event updated successfully.");
+            } else {
+                System.out.println("Event not found.");
+            }
+        } catch (IOException e) {
+            System.err.println("Error when editing an event: " + e.getMessage());
+        }
+    }
+    public void deleteEventFromFile(String eventName) {
+        Path path = Paths.get("src/events.txt");
+        try {
+            List<String> lines = Files.readAllLines(path);
+            lines.removeIf(line -> line.contains(eventName));
+            Files.write(path, lines);
+            System.out.println("Event deleted successfully, if it existed.");
+        } catch (IOException e) {
+            System.err.println("Error when deleting an event: " + e.getMessage());
+        }
+    }
+
 
 
 

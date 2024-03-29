@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -314,44 +316,179 @@ public class Main {
     private static void eventManagementMenu(Scanner scanner, ServiceProvider serviceProvider) {
         boolean running = true;
         while (running) {
-            try {
-                List<String> waitListEvents = Files.readAllLines(Paths.get("src/waitList.txt"));
-                if (waitListEvents.isEmpty()) {
-                    System.out.println("No events in waitlist.");
+            System.out.println("\nEvent Management Menu:");
+            System.out.println("1. Accept/Refuse Events from Waitlist");
+            System.out.println("2. Edit Event");
+            System.out.println("3. Delete Event");
+            System.out.println("4. Return to Main Menu");
+            System.out.print("Select an option: ");
+            int option = scanner.nextInt();
+            scanner.nextLine();
 
+            switch (option) {
+                case 1:
+                    acceptOrRefuseEvents(scanner, serviceProvider);
                     break;
-                }
-
-                System.out.println("Pending Events:");
-                for (int i = 0; i < waitListEvents.size(); i++) {
-                    System.out.println((i + 1) + ". " + waitListEvents.get(i));
-                }
-
-                System.out.println("Enter the number of the event to accept, 0 to skip, -1 to return to the main menu:");
-                int choice = scanner.nextInt();
-                scanner.nextLine();
-
-                if (choice == -1) {
+                case 2:
+                    editEvent(scanner, serviceProvider);
+                    break;
+                case 3:
+                    deleteEvent(scanner, serviceProvider);
+                    break;
+                case 4:
                     running = false;
-
-                } else if (choice > 0 && choice <= waitListEvents.size()) {
-
-                    String selectedEvent = waitListEvents.get(choice - 1);
-                    serviceProvider.saveEventDetailsToFile(selectedEvent);
-                    waitListEvents.remove(choice - 1);
-                    Files.write(Paths.get("src/waitList.txt"), waitListEvents);
-                    System.out.println("Event accepted and moved to events.txt.");
-
-                } else {
-                    System.out.println("Invalid selection. Please try again.");
-                }
-
-            } catch (IOException e) {
-                System.out.println("An error occurred: " + e.getMessage());
-                running = false;
+                    break;
+                default:
+                    System.out.println("Invalid selection. Please select a valid option.");
+                    break;
             }
         }
     }
+
+    private static void acceptOrRefuseEvents(Scanner scanner, ServiceProvider serviceProvider) {
+
+        List<String> waitListEvents;
+        try {
+            waitListEvents = Files.readAllLines(Paths.get("src/waitList.txt"));
+        } catch (IOException e) {
+            System.out.println("Error reading waitList.txt: " + e.getMessage());
+            return;
+        }
+
+        if (waitListEvents.isEmpty()) {
+            System.out.println("No events in waitlist.");
+            return;
+        }
+
+
+        Iterator<String> iterator = waitListEvents.iterator();
+        while (iterator.hasNext()) {
+            String event = iterator.next();
+            System.out.println("Event: " + event);
+            System.out.println("Do you want to accept this event? (yes/no)");
+            String decision = scanner.nextLine().trim();
+
+            if ("yes".equalsIgnoreCase(decision)) {
+
+                try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("src/events.txt"), StandardOpenOption.APPEND)) {
+                    writer.write(event);
+                    writer.newLine();
+                    System.out.println("Event accepted and added to events.txt.");
+                } catch (IOException e) {
+                    System.out.println("Error writing to events.txt: " + e.getMessage());
+                }
+
+
+                iterator.remove();
+            } else if ("no".equalsIgnoreCase(decision)) {
+
+                System.out.println("Event refused.");
+                ((Iterator<?>) iterator).remove();
+            } else {
+                System.out.println("Invalid response. Skipping...");
+            }
+        }
+
+
+        try {
+            Files.write(Paths.get("src/waitList.txt"), waitListEvents);
+        } catch (IOException e) {
+            System.out.println("Error updating waitList.txt: " + e.getMessage());
+        }
+    }
+
+    private static void editEvent(Scanner scanner, ServiceProvider serviceProvider) {
+        List<String> events;
+        try {
+            events = Files.readAllLines(Paths.get("src/events.txt"));
+        } catch (IOException e) {
+            System.out.println("Error reading events.txt: " + e.getMessage());
+            return;
+        }
+
+        if (events.isEmpty()) {
+            System.out.println("No events to edit.");
+            return;
+        }
+
+        System.out.println("Select an event to edit:");
+        for (int i = 0; i < events.size(); i++) {
+            System.out.println((i + 1) + ": " + events.get(i));
+        }
+
+        int eventChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        if (eventChoice < 1 || eventChoice > events.size()) {
+            System.out.println("Invalid event selection.");
+            return;
+        }
+
+        String selectedEventStr = events.get(eventChoice - 1);
+        System.out.println("Editing event: " + selectedEventStr);
+
+
+        System.out.println("Enter new date (dd/MM/yyyy):");
+        String newDate = scanner.nextLine();
+        System.out.println("Enter new time (HH:mm):");
+        String newTime = scanner.nextLine();
+
+
+        String[] parts = selectedEventStr.split(",");
+        if (parts.length >= 3) {
+            String newName = parts[0];
+            String newEventStr = newName + "," + newDate + "," + newTime;
+            events.set(eventChoice - 1, newEventStr);
+        }
+
+
+        try {
+            Files.write(Paths.get("src/events.txt"), events);
+            System.out.println("Event updated successfully.");
+        } catch (IOException e) {
+            System.out.println("Error updating events.txt: " + e.getMessage());
+        }
+    }
+    private static void deleteEvent(Scanner scanner, ServiceProvider serviceProvider) {
+        List<String> events;
+        try {
+            events = Files.readAllLines(Paths.get("src/events.txt"));
+        } catch (IOException e) {
+            System.out.println("Error reading events.txt: " + e.getMessage());
+            return;
+        }
+
+        if (events.isEmpty()) {
+            System.out.println("No events to delete.");
+            return;
+        }
+
+        System.out.println("Select an event to delete:");
+        for (int i = 0; i < events.size(); i++) {
+            System.out.println((i + 1) + ": " + events.get(i));
+        }
+
+        int eventChoice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        if (eventChoice < 1 || eventChoice > events.size()) {
+            System.out.println("Invalid event selection.");
+            return;
+        }
+
+
+        events.remove(eventChoice - 1);
+
+
+        try {
+            Files.write(Paths.get("src/events.txt"), events);
+            System.out.println("Event deleted successfully.");
+        } catch (IOException e) {
+            System.out.println("Error updating events.txt: " + e.getMessage());
+        }
+    }
+
+
 
     public void saveEventDetailsToFile(String event) {
         try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/events.txt", true))) {
@@ -367,10 +504,10 @@ public class Main {
             List<String> lines = Files.readAllLines(path);
             System.out.println("Available Venues:");
             for (String line : lines) {
-                String[] parts = line.split(","); // Assuming the file is structured in a comma-separated format
-                if (parts.length > 1) { // Ensure there's at least two parts (name and pricing)
-                    String venueName = parts[0]; // The first part is the venue name
-                    String pricing = parts[parts.length - 1]; // Assuming the last part is the pricing
+                String[] parts = line.split(",");
+                if (parts.length > 1) {
+                    String venueName = parts[0];
+                    String pricing = parts[parts.length - 1];
                     System.out.println("- venueName: " + venueName + ", - Pricing: " + pricing);
                 }
             }
@@ -384,7 +521,7 @@ public class Main {
         while (!isAuthenticated) {
             System.out.println("Choose 1 for login, 2 for sign up:");
             int userInput = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            scanner.nextLine();
 
             if (userInput == 1) {
                 System.out.println("Enter username:");
