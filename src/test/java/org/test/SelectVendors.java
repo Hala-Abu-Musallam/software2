@@ -10,21 +10,25 @@ import static org.junit.Assert.assertTrue;
 public class SelectVendors {
     String date;
     String time;
+    String username;
 
 
     @Given("date is {string} and time is'{int}-{int}'")
-    public void dateIsAndTimeIs(String string, Integer int1, Integer int2) {
+    public void dateIsAndTimeIs(String string, int int1, int int2) {
         // Write code here that turns the phrase above into concrete actions
+      username="Hala@user.com";
         date=string;
-        time=String.valueOf(int1)+'-'+String.valueOf(int2);
+    //    time=String.valueOf(int1)+'-'+String.valueOf(int2);
+        time=Integer.toString(int1)+'-'+Integer.toString(int2);
+
 
     }
-    @When("user choose vendors  {string}")
-    public void userChooseVendors(String string) {
-        // Write code here that turns the phrase above into concrete actions
 
+    @When("user choose vendors  {string}{string}")
+    public void user_choose_vendors(String string, String string2) {
+        // Write code here that turns the phrase above into concrete actions
         VendorsByUser vendor =new VendorsByUser();
-        vendor.addvendor(string);
+        vendor.addvendor(username,string,date,time,string2);
     }
 
     @Then("book vendor to the event")

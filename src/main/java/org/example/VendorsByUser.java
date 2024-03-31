@@ -11,8 +11,8 @@ public class VendorsByUser{
 
     public static String username;
 
-    public static int date;
-    public static int time;
+    public static String date;
+    public static String time;
     public static boolean addSuccess;
 
     public static int vendor_type;
@@ -22,7 +22,7 @@ public class VendorsByUser{
         try {
 
             vendors.clear();
-            File file = new File("src/vendor.txt");
+            File file = new File("src/vendors.txt");
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
                 String EmailPriceType;
                 while ((EmailPriceType = bufferedReader.readLine()) != null) {
@@ -39,12 +39,12 @@ public class VendorsByUser{
     }
 
 
-    public void writeVendors(String username, int date, int time,String email,String type) {
+    public void writeVendors(String username, String date, String time,String email,String type) {
         try {
             File file = new File("src/waitList.txt");
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
                 String vendor = username + "," + date + "," + time + ","+email + "," + type+"\n";
-
+                System.out.println(vendor);
                 bufferedWriter.write(vendor);
                 System.out.println(vendor);
                 addSuccess = true;
@@ -57,19 +57,29 @@ public class VendorsByUser{
 
     }
 
-    public void addvendor (String type){
+    public void addvendor (String usernamee,String typee ,String datee,String timee,String email){
+        date=datee;
+        type=typee;
+        time=timee;
+        username=usernamee;
+        System.out.println(type);
+        System.out.println(date);
+        System.out.println(time);
+
         getVendorsfromFile();
-        if ( type.contains ( "decoration" ) ){
+        if ( typee.equals ( "decoration" ) ){
             vendor_type = 1;
-            writeVendors (username , date , time ,email,type );
+
+            writeVendors (username , date , time ,email,typee );
+
         }
-        else if (type.contains("DJ")){
+        else if (typee.equals("DJ")){
             vendor_type = 2 ;
-            writeVendors (username , date , time ,email,type );
+            writeVendors (username , date , time ,email,typee );
         }
-        else if (type.contains("photographer")){
+        else if (typee.equals("photographer")){
             vendor_type = 3 ;
-            writeVendors (username , date , time ,email,type);
+            writeVendors (username , date , time ,email,typee);
         }
         else{
             vendor_type=-1;

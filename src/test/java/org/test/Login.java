@@ -10,6 +10,10 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class Login {
+
+    public void setUp() {
+        User.user_type = 0; // Reset user_type to a default state
+    }
     @When("username and password are true {string} {string}")
 public void username_and_password_are_true(String string, String string2) {
     // Write code here that turns the phrase above into concrete actions
