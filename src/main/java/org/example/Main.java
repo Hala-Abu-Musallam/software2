@@ -29,8 +29,7 @@ public class Main {
                     break;
                 case 2:
                     performAuthentication( scanner,  user);
-                    displayVenueNames();
-                    addEventMenu(scanner);
+
                     break;
                 case 3:
                     performAuthentication( scanner,  user);
@@ -253,66 +252,7 @@ public class Main {
             }
         }
 
-    private static void addEventMenu(Scanner scanner) {
-        boolean continueAdding = true;
 
-        while (continueAdding) {
-            System.out.println("Enter Name:");
-            String name = scanner.nextLine();
-            System.out.println("Choose Venue:");
-            String venueName = scanner.nextLine();
-            System.out.println("Enter Date (dd/MM/yyyy):");
-            String date = scanner.nextLine();
-            System.out.println("Enter Time (HH:mm):");
-            String time = scanner.nextLine();
-            System.out.println("Enter Price:");
-            double price = scanner.nextDouble();
-            scanner.nextLine();
-            System.out.println("Enter Vendor Name:");
-            String vendorName = scanner.nextLine();
-
-
-            Event event = new Event(name, date, time, price, vendorName);
-            saveEventToWaitList(event);
-            System.out.println("Event added successfully.");
-
-
-            System.out.println("What would you like to do next?");
-            System.out.println("1. Add another event");
-            System.out.println("2. Log out");
-
-            System.out.println("Please enter your choice:");
-
-            int userChoice = scanner.nextInt();
-            scanner.nextLine();
-
-            switch (userChoice) {
-                case 1:
-
-                    break;
-                case 2:
-                    User.loginFlag = false;
-                    continueAdding = false;
-                    break;
-
-                default:
-                    System.out.println("Invalid choice. Please select a valid option.");
-
-                    continueAdding = false;
-                    break;
-            }
-        }
-    }
-
-    private static void saveEventToWaitList(Event event) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/waitList.txt", true))) {
-            bw.write(event.toString());
-            bw.newLine();
-            System.out.println("Event added to wait list successfully.");
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to waitList.txt: " + e.getMessage());
-        }
-    }
     private static void eventManagementMenu(Scanner scanner, ServiceProvider serviceProvider) {
         boolean running = true;
         while (running) {
@@ -498,23 +438,7 @@ public class Main {
             System.out.println("An error occurred while writing to events.txt: " + e.getMessage());
         }
     }
-    public static void displayVenueNames() {
-        Path path = Paths.get("src/Venues.txt");
-        try {
-            List<String> lines = Files.readAllLines(path);
-            System.out.println("Available Venues:");
-            for (String line : lines) {
-                String[] parts = line.split(",");
-                if (parts.length > 1) {
-                    String venueName = parts[0];
-                    String pricing = parts[parts.length - 1];
-                    System.out.println("- venueName: " + venueName + ", - Pricing: " + pricing);
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Could not read Venues.txt: " + e.getMessage());
-        }
-    }
+
 
     private static boolean performAuthentication(Scanner scanner, User user) {
         boolean isAuthenticated = false;
