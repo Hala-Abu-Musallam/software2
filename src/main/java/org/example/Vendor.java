@@ -62,12 +62,12 @@ public class Vendor {
 
     @Override
     public String toString() {
-        return "Vendor{" +
+        return
                 "name='" + name + '\'' +
                 ", serviceType='" + serviceType + '\'' +
                 ", email='" + email + '\'' +
                 ", time=" + time +
-                ", date=" + date +
-                '}';
+                ", date=" + date ;
+
     }
 }

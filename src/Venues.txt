@@ -1,2 +1,1 @@
-valhala,mohammed,nablus,500,100.0
-lilaty,mahmod.nablus,400,100
+lilaty,mohammed,nablus,500,1000

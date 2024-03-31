@@ -49,6 +49,7 @@ public class eventmanegement {
     }
 
 
+
     @When("the service provider chooses to delete the event.")
     public void theServiceProviderChoosesToDeleteTheEvent() {
         serviceProvider.saveEventDetails("Birthday", "2024-06-15", "10:00-15:00", 500.0, "Catering, DJ");
@@ -82,7 +83,10 @@ public class eventmanegement {
         assertEquals(600.0, modifiedEvent.getPrice(), 0.01);
         assertEquals("Catering, DJ, Entertainment", modifiedEvent.getVendorName());
     }
+    @Then("the system should allow the service provider to modify event details such as event name, date, location, and services required.")
+    public void theSystemShouldAllowTheServiceProviderToModifyEventDetailsSuchAsEventNameDateLocationAndServicesRequired() {
 
+    }
 
 
 }
