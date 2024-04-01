@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ServiceProvider {
-    private Map<String, Vendor> vendors = new HashMap<>();
+    private final Map<String, Vendor> vendors = new HashMap<>();
     public static final String VENDORS_FILE_PATH = "src/vendor.txt";
 
     public static final String VENUES_FILE_PATH = "src/Venues.txt";
@@ -25,7 +25,7 @@ public class ServiceProvider {
 
 
     private boolean choosingToCreateEvent;
-    private List<Venue> venues;
+    private final List<Venue> venues;
 
     public ServiceProvider() {
         this.venues = new ArrayList<>();
@@ -174,8 +174,7 @@ public class ServiceProvider {
     }
     public void displayVenuesFromFile() {
         try {
-            Files.lines(Paths.get(VENUES_FILE_PATH))
-                    .forEach(System.out::println);
+            Files.lines(Paths.get(VENUES_FILE_PATH)).forEach(System.out::println);
         } catch (IOException e) {
             System.err.println("Error displaying venues from file: " + e.getMessage());
         }

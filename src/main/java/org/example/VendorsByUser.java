@@ -31,6 +31,7 @@ public class VendorsByUser{
                     email=data[0];
                    // price=Integer.parseInt(data[1]);
                     type=data[2];
+
                     vendors.add(this);
                 }
             }
@@ -64,9 +65,11 @@ public class VendorsByUser{
         type=typee;
         time=timee;
         username=usernamee;
-       // System.out.println(type);
-        //System.out.println(date);
-        //System.out.println(time);
+
+        System.out.println(typee);
+        System.out.println(date);
+        System.out.println(time);
+
 
         getVendorsfromFile();
         if ( typee.equals ( "decoration" ) ){

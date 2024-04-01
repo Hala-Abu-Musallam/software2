@@ -72,7 +72,7 @@ public class CheckEvent {
     }
 
     public void checkEvent(String date, String time, String username) {
-
+        getEventfromFile();
         if (!checkDate(date)) {
             return;
         }
@@ -86,15 +86,16 @@ public class CheckEvent {
 
 
             if (events.get(i).equals(date)) {
-                if (events.get(i + 1).equals((time)))
+                if (events.get(i + 1).equals((time))){
                     addSuccess = false;
+                return;}
             } else {
-                //writeUsers(username, date, time);
+
                 i++;
                 addSuccess=true;
             }
         }
-
+if (addSuccess)
         writeUsers(username, date, time);
 
 
