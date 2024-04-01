@@ -15,14 +15,14 @@ public class Main {
 
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);//hi
         User user = new User();
         ServiceProvider serviceProvider = new ServiceProvider();
 
         while (true) {
 
             System.out.println(" Please choose your role: 1-admin 2-user 3-service provider");
-            int role = scanner.nextInt();
+            int role = scanner.nextInt();//hi
             scanner.nextLine();
 
             switch (role) {
