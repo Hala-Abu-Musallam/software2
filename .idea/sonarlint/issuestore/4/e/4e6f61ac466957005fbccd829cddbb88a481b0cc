@@ -1,0 +1,54 @@
+
+‘
+java:S1192–"ODefine a constant instead of duplicating this literal "src/events.txt" 3 times.(½´–şÿÿÿÿJ$f365ede6-4337-4f7f-b7d2-aab7fd88b30e
+
+java:S2095±"DUse try-with-resources or close this "Stream" in a "finally" clause.(ü³¬ëJ$3a982c35-73ec-420a-b734-cd5b03daedd3
+Š
+java:S3824p"IReplace this "Map.containsKey()" with a call to "Map.computeIfPresent()".(šş°—ıÿÿÿÿJ$c2a2d7f6-200e-43d4-a9c3-1a49ae5e9499
+˜
+java:S1450"WRemove the "password" field and declare it as a local variable in the relevant methods.(œãë­úÿÿÿÿJ$99739b1e-c96f-4f8b-8afe-48fab8b04442
+“
+java:S1450"WRemove the "username" field and declare it as a local variable in the relevant methods.(‘ó¹²J$7169f448-d8bd-4914-b476-7836b0929a58
+f	java:S1066"+Replace this use of System.out by a logger.(¿ÉèˆJ$ece8e863-62fc-439a-b9a7-7ef1ffa07edb
+k	java:S1067"+Replace this use of System.out by a logger.(ÀõË†üÿÿÿÿJ$652f1487-a171-4983-b610-eaa399a9cfc9
+f	java:S1069"+Replace this use of System.out by a logger.(‚ç™øJ$d7f2e43b-b058-4d1a-90f5-9650b91ebd44
+k	java:S106;"+Replace this use of System.out by a logger.(ãôÿ«ùÿÿÿÿJ$1856339c-b4b6-47ad-8356-008718cd5acb
+f	java:S106="+Replace this use of System.out by a logger.(õ‹ƒJ$245ddce2-2d81-43d8-afe2-985b94903fec
+k	java:S106@"+Replace this use of System.out by a logger.(»Ë¹úÿÿÿÿJ$9ee245d1-050c-471b-bc80-e926b4ff5b48
+z
+java:S1117G"9Rename "event" which hides the field declared at line 24.(œ”ƒÔşÿÿÿÿJ$4eed8dc4-dbad-400f-8629-4a4b4af6f35f
+e	java:S106I"+Replace this use of System.out by a logger.(öùô:J$4960aeed-ed7d-4921-9327-e6b3804097f9
+f	java:S106R"+Replace this use of System.out by a logger.(ÈäÎÆJ$fb6cdf3f-e34c-474e-a3ce-f014fa561056
+f	java:S106V"+Replace this use of System.out by a logger.(Ù½§ÈJ$1216093c-1fc4-4a0b-861b-b50098d26bd0
+k	java:S106W"+Replace this use of System.out by a logger.(‹½˜‘úÿÿÿÿJ$554044d9-0ad4-483a-817c-ee3c91ac9f98
+f	java:S106Y"+Replace this use of System.out by a logger.(ö£’ŒJ$0d956e64-3140-4838-9f7e-ad205fd6f384
+f	java:S106]"+Replace this use of System.out by a logger.(•½®…J$a30d7e08-72ea-4273-ae8a-6f617696ca23
+f	java:S106_"+Replace this use of System.out by a logger.(ÌµÍÅJ$0cad49cd-dd49-43e0-94bf-1d1dccf1906c
+k	java:S106g"+Replace this use of System.out by a logger.(ÚÆÙøÿÿÿÿJ$44db9151-35a9-4b9a-975a-d43fa8b70fbc
+f	java:S106j"+Replace this use of System.out by a logger.(ÌµÍÅJ$0c3d0d30-4f02-4414-8471-abd05bde0477
+x
+java:S1172o"<Remove these unused method parameters "newtime", "newprice".(£„ÁèJ$cb0e1598-4949-48f0-b1c5-aa661673fd7b
+l	java:S106"+Replace this use of System.out by a logger.(¦ÏÌ˜øÿÿÿÿJ$f0a9bfbe-eca9-41ee-b233-9aa0fbbdf2f7
+f	java:S106ƒ"+Replace this use of System.out by a logger.(¦Ó¬CJ$38411f32-542f-42b0-802d-00dac3b31946
+g	java:S106…"+Replace this use of System.out by a logger.(şø¹‰J$c4e04d63-f4b1-457b-bfba-ab97381254d0
+l	java:S106²"+Replace this use of System.out by a logger.(¹¦…‡úÿÿÿÿJ$77ae7dda-0830-441b-87ad-6737b7f4fc7d
+l	java:S106´"+Replace this use of System.err by a logger.(Ó¥¶ŠıÿÿÿÿJ$27279a0d-7b4b-4854-a88c-f5e123622326
+l	java:S106Æ"+Replace this use of System.err by a logger.(â”ççÿÿÿÿÿJ$83bdf788-5ac8-410b-860e-514d07b591ef
+
+java:S6204Ğ"RReplace this usage of 'Stream.collect(Collectors.toList())' with 'Stream.toList()'(ª™¨¹J$2043785f-c724-4663-83f8-777e03ca8abf
+g	java:S106Ó"+Replace this use of System.err by a logger.(ü½¡õJ$b78fa09e-b5cb-42d7-93b2-2994872f3e71
+g	java:S106û"+Replace this use of System.err by a logger.(Ë·¢úJ$62688de9-6d03-4a4a-b079-87a0a58bdfe6
+g	java:S106Œ"+Replace this use of System.err by a logger.(í²£½J$a4bf905c-f8a6-488a-9191-b4c1492ae1a9
+l	java:S106™"+Replace this use of System.out by a logger.(—ñÓôÿÿÿÿÿJ$a20c0cd1-5bbc-476f-9f03-d6c645cab8ff
+l	java:S106›"+Replace this use of System.out by a logger.(í®¦ĞùÿÿÿÿJ$73e84fcd-3fb2-4e24-b824-bd9bc07182ad
+l	java:S106«"+Replace this use of System.out by a logger.(¶·šæøÿÿÿÿJ$8b1ee482-7c0f-45b3-8df5-16fe002e6aaa
+g	java:S106¬"+Replace this use of System.out by a logger.(ıéêäJ$34d1ebea-57ff-4179-9d67-25ec8c35c0df
+g	java:S106°"+Replace this use of System.out by a logger.(ö§ŠJ$1afa1da8-9f1e-476e-af86-53e727657fdd
+f	java:S106²"+Replace this use of System.out by a logger.(ïÖË	J$e85877ad-c11f-46ad-8059-70040d218b3b
+l	java:S106µ"+Replace this use of System.err by a logger.(ê›â–şÿÿÿÿJ$c13725c4-0b3c-4bbc-b486-6a950392fb92
+g	java:S106¾"+Replace this use of System.out by a logger.(•–ÉJ$30d7c37a-9e12-4c16-bd74-2da8d346004b
+g	java:S106À"+Replace this use of System.err by a logger.(˜Ôı‰J$ac179320-ced7-4480-b98d-1a765a61d8da
+h
+java:S1068",Remove this unused "username" private field.(‘ó¹²J$4d0b224a-d105-46f4-9850-4c6b92057d00
+m
+java:S1068",Remove this unused "password" private field.(œãë­úÿÿÿÿJ$8991b3e1-a16e-4f75-9552-7e02d8200b7a
