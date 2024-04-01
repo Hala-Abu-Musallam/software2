@@ -79,7 +79,6 @@ public class CheckEvent {
             addSuccess = false;
             return;
         }
-        getEventfromFile();
         for (int i = 0; i < events.size(); i++) {
 
 

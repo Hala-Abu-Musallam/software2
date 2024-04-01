@@ -1,1 +1,1 @@
-lilaty,mohammed,nablus,500,1000
+lilaty,mohammed@serviceprovider.com,nablus,500,1000

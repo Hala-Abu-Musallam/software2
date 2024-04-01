@@ -26,31 +26,25 @@ public class User {
     }
 
 
-    public void login(String username, String password) {
-        if(password.equals(users.get(username))){
-            if(username.contains("@admin.com")) {
+    public boolean login(String username, String password) {
+        if (users.containsKey(username) && password.equals(users.get(username))) {
+            this.username = username;
+            if (username.contains("@admin.com")) {
                 user_type = 1;
-                System.out.println("welcome Admin :)");
-            }
-
-            else if (username.contains("@user.com")){
+                System.out.println("Welcome Admin :)");
+            } else if (username.contains("@user.com")) {
                 user_type = 2;
-                System.out.println("welcome User :)");
-            }
-            else if(username.contains("@serviceprovider.com")){
+                System.out.println("Welcome User :)");
+            } else if (username.contains("@serviceprovider.com")) {
                 user_type = 3;
-                System.out.println("welcome service provider :)");
-
+                System.out.println("Welcome Service Provider :)");
             }
-            else{
-                user_type=-1;
-                System.out.println("check your username  :(");
-            }
-
+            loginFlag = true;
+        } else {
+            System.out.println("Check your username or password.");
+            loginFlag = false;
         }
-        else{
-            user_type=-1;
-            System.out.println("check your username or password:(");}
+        return loginFlag;
     }
 
 

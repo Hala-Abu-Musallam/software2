@@ -527,7 +527,7 @@ public class Main {
             isAuthenticated = User.loginFlag;
 
             if (isAuthenticated) {
-                System.out.println("Authentication failed. Please try again.");
+                System.out.println("");
             }
         }
         return isAuthenticated;
