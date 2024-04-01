@@ -11,10 +11,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import static org.example.VendorsByUser.date;
+import static org.example.VendorsByUser.time;
+
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private static final String EVENTS_FILE_PATH = "src/events.txt"; // Define a constant for the events file path
     private static final String WAITLIST_FILE_PATH = "src/waitList.txt";
+    public static boolean flag=true;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -23,7 +27,8 @@ public class Main {
         boolean isRunning = true;
 
         while (isRunning) {
-            logger.info("Please choose your role: 1-admin 2-user 3-service provider");
+            flag=true;
+            logger.info("\nPlease choose your role: 1-admin 2-user 3-service provider");
             int role = scanner.nextInt();
             scanner.nextLine();
 
@@ -38,35 +43,21 @@ public class Main {
                     logger.info("Here is the venues list please choose one by its name:");
                     String venue = scanner.nextLine();
 
-
-                    logger.info("please enter the date to check if it's available:");
-                    String date = scanner.nextLine();
-                    logger.info("please enter the time to check if it's available:");
-                    String time = scanner.nextLine();
-                    CheckEvent checker = new CheckEvent();
-
-                    checker.checkEvent(date, time,user.username);
-                    if (CheckEvent.addSuccess) {
-                        logger.info("Event has been successfully added to wait list!");
-
-                    }
-                    else if (!CheckEvent.addSuccess) {
-                        logger.info("Failed to add event. Would you like to try another date and time? (yes/no)");
-                        String tryAgain = scanner.nextLine();
-                        if (!tryAgain.equalsIgnoreCase("yes"))
-                            break;
-                    }
+                    chooseEvent(scanner, user);
 
 
-
-                    while (true) {
+                    while (flag) {
                         logger.info("Displaying vendors list:");
                         displayFile("src/vendor.txt");
                         logger.info("Please choose a vendor by typing its name:");
                         String selectedVendor = scanner.nextLine();
+                        logger.info("Please enter a vendor by typing its email");
+                        String selectedVendorEmail = scanner.nextLine();
+
 
                         VendorsByUser vendorByUser = new VendorsByUser();
-                        vendorByUser.addVendor(user.username, selectedVendor, date, time, VendorsByUser.email);
+                        vendorByUser.addVendor(user.username, selectedVendor, date, time, selectedVendorEmail);
+
                         logger.info("Vendor added to the wait list successfully!");
                         logger.info("Do you want to select another one? (yes/no)");
                         String chooseAnother = scanner.nextLine();
@@ -93,6 +84,28 @@ public class Main {
 
             if (!User.loginFlag) {
                 logger.info("Returning to login...");
+            }
+        }
+    }
+
+    private static void chooseEvent(Scanner scanner, User user) {
+        while(true) {
+            logger.info("please enter the date to check if it's available:");
+            String date = scanner.nextLine();
+            logger.info("please enter the time to check if it's available:");
+            String time = scanner.nextLine();
+            CheckEvent checker = new CheckEvent();
+
+            checker.checkEvent(date, time, user.username);
+            if (CheckEvent.addSuccess) {
+                logger.info("Event has been successfully added to wait list!");
+
+            } else if (!CheckEvent.addSuccess) {
+                logger.info("Failed to add event. Would you like to try another date and time? (yes/no)");
+                String tryAgain = scanner.nextLine();
+                if (!tryAgain.equalsIgnoreCase("yes"))
+                   flag=false;
+                    return;
             }
         }
     }
