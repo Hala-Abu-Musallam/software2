@@ -29,7 +29,7 @@ public class DisplayC {
                     date=Integer.parseInt(data[1]);
                     time=Integer.parseInt(data[2]);
                     price=Double.parseDouble(data[3]);
-                    display.add(this);
+                   // display.add(this);
                 }
             }
         } catch (IOException e) {
