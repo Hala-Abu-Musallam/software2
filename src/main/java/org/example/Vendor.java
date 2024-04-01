@@ -18,7 +18,7 @@ public class Vendor {
         this.date = date;
     }
 
-    // Getters and setters
+
 
     public String getName() {
         return name;

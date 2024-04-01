@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ServiceProvider {
-    private final Map<String, Vendor> vendors = new HashMap<>();
+    private Map<String, Vendor> vendors = new HashMap<>();
     public static final String VENDORS_FILE_PATH = "src/vendor.txt";
 
     public static final String VENUES_FILE_PATH = "src/Venues.txt";
@@ -25,7 +25,7 @@ public class ServiceProvider {
 
 
     private boolean choosingToCreateEvent;
-    private final List<Venue> venues;
+    private List<Venue> venues;
 
     public ServiceProvider() {
         this.venues = new ArrayList<>();
