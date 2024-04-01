@@ -29,7 +29,7 @@ public class VendorsByUser{
                 while ((EmailPriceType = bufferedReader.readLine()) != null) {
                     String[] data = EmailPriceType.split(",");
                     email=data[0];
-                    price=Integer.parseInt(data[1]);
+                   // price=Integer.parseInt(data[1]);
                     type=data[2];
                     vendors.add(this);
                 }
@@ -45,9 +45,10 @@ public class VendorsByUser{
             File file = new File("src/waitList.txt");
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
                 String vendor = username + "," + date + "," + time + ","+email + "," + type+"\n";
-                System.out.println(vendor);
                 bufferedWriter.write(vendor);
-                System.out.println(vendor);
+                //System.out.println(vendor);
+
+               // System.out.println(vendor);
                 addSuccess = true;
             }
         } catch (IOException e) {
@@ -58,14 +59,15 @@ public class VendorsByUser{
 
     }
 
-    public void addVendor (String usernamee,String typee ,String datee,String timee,String email){
+    public void addVendor (String usernamee ,String datee,String timee,String emaill,String typee){
         date=datee;
         type=typee;
         time=timee;
         username=usernamee;
-        System.out.println(type);
-        System.out.println(date);
-        System.out.println(time);
+        email=emaill;
+       // System.out.println(type);
+        //System.out.println(date);
+        //System.out.println(time);
 
         getVendorsfromFile();
         if ( typee.equals ( "decoration" ) ){

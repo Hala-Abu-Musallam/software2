@@ -17,6 +17,7 @@ public class CheckEvent {
             new SimpleDateFormat("d/M/yyyy")
     };
     public static boolean addSuccess;
+    public static String username;
 
     private static void checkIfDateValid(Date inputDate) {
         Calendar calendar = Calendar.getInstance();
@@ -79,6 +80,8 @@ public class CheckEvent {
             addSuccess = false;
             return;
         }
+
+
         for (int i = 0; i < events.size(); i++) {
 
 

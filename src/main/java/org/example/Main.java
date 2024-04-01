@@ -41,7 +41,8 @@ public class Main {
                         System.out.println("please enter the time to check if its available :");
                         String time = scanner.nextLine();
                         CheckEvent checker = new CheckEvent();
-                        checker.checkEvent(date, time, username);
+
+                    checker.checkEvent(date, time,user.username);
                         if (CheckEvent.addSuccess) {
                             System.out.println("Event has been successfully added to wait list!");
 
