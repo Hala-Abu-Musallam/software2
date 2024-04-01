@@ -40,11 +40,11 @@ public class VendorsByUser{
     }
 
 
-    public void writeVendors(String username, String date, String time,String email,String type) {
+    public void writeVendors(String username,String type, String date, String time, String email) {
         try {
             File file = new File("src/waitList.txt");
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
-                String vendor = username + "," + date + "," + time + ","+email + "," + type+"\n";
+                String vendor = username + ","  + type + "," + date + "," + time + ","+ email +"\n";
                 bufferedWriter.write(vendor);
                 //System.out.println(vendor);
 
@@ -59,12 +59,11 @@ public class VendorsByUser{
 
     }
 
-    public void addVendor (String usernamee ,String datee,String timee,String emaill,String typee){
+    public void addVendor (String usernamee,String typee ,String datee,String timee,String email){
         date=datee;
         type=typee;
         time=timee;
         username=usernamee;
-        email=emaill;
        // System.out.println(type);
         //System.out.println(date);
         //System.out.println(time);
@@ -73,16 +72,16 @@ public class VendorsByUser{
         if ( typee.equals ( "decoration" ) ){
             vendor_type = 1;
 
-            writeVendors (username , date , time ,email,typee );
+            writeVendors (username ,typee, date , time ,email);
 
         }
         else if (typee.equals("DJ")){
             vendor_type = 2 ;
-            writeVendors (username , date , time ,email,typee );
+            writeVendors (username ,typee, date , time ,email );
         }
         else if (typee.equals("photographer")){
             vendor_type = 3 ;
-            writeVendors (username , date , time ,email,typee);
+            writeVendors (username ,typee, date , time ,email);
         }
         else{
             vendor_type=-1;

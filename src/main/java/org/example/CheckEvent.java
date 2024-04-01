@@ -89,8 +89,9 @@ public class CheckEvent {
                 if (events.get(i + 1).equals((time)))
                     addSuccess = false;
             } else {
+                //writeUsers(username, date, time);
                 i++;
-
+                addSuccess=true;
             }
         }
 

@@ -47,7 +47,7 @@ public class Main {
                             System.out.println("Event has been successfully added to wait list!");
 
                         }
-                        else {
+                        else if (!CheckEvent.addSuccess) {
                             System.out.println("Failed to add event. Would you like to try another date and time? (yes/no)");
                             String tryAgain = scanner.nextLine();
                             if (!tryAgain.equalsIgnoreCase("yes"))
@@ -63,7 +63,7 @@ public class Main {
                         String selectedVendor = scanner.nextLine();
 
                         VendorsByUser vendorByUser = new VendorsByUser();
-                        vendorByUser.addVendor(user.username, date, time, VendorsByUser.email, selectedVendor);
+                        vendorByUser.addVendor(user.username, selectedVendor, date, time, VendorsByUser.email);
                         System.out.println("Vendor added to the wait list successfully!");
                         System.out.println("Do you want to select another one? (yes/no)");
                         String chooseAnother = scanner.nextLine();
