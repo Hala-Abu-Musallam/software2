@@ -1,71 +1,74 @@
 package org.example;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.example.VendorsByUser.*;
-
 public class Main {
-
+    private static final Logger logger = LoggerFactory.getLogger(Main.class);
+    private static final String EVENTS_FILE_PATH = "src/events.txt"; // Define a constant for the events file path
+    private static final String WAITLIST_FILE_PATH = "src/waitList.txt";
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         User user = new User();
         ServiceProvider serviceProvider = new ServiceProvider();
+        boolean isRunning = true;
 
-        while (true) {
-
-            System.out.println(" Please choose your role: 1-admin 2-user 3-service provider");
+        while (isRunning) {
+            logger.info("Please choose your role: 1-admin 2-user 3-service provider");
             int role = scanner.nextInt();
             scanner.nextLine();
 
             switch (role) {
                 case 1:
-                    System.out.println("Admin actions here.");
+                    logger.info("Admin actions here.");
+
                     break;
                 case 2:
                     performAuthentication( scanner,  user);
                     displayFile("src/Venues.txt");
-                    System.out.println("Here is the venues list please choose one by its name :");
+                    logger.info("Here is the venues list please choose one by its name:");
                     String venue = scanner.nextLine();
 
 
-                        System.out.println("please enter the date to check if its available :");
-                        String date = scanner.nextLine();
-                        System.out.println("please enter the time to check if its available :");
-                        String time = scanner.nextLine();
-                        CheckEvent checker = new CheckEvent();
+                    logger.info("please enter the date to check if it's available:");
+                    String date = scanner.nextLine();
+                    logger.info("please enter the time to check if it's available:");
+                    String time = scanner.nextLine();
+                    CheckEvent checker = new CheckEvent();
 
                     checker.checkEvent(date, time,user.username);
-                        if (CheckEvent.addSuccess) {
-                            System.out.println("Event has been successfully added to wait list!");
+                    if (CheckEvent.addSuccess) {
+                        logger.info("Event has been successfully added to wait list!");
 
-                        }
-                        else if (!CheckEvent.addSuccess) {
-                            System.out.println("Failed to add event. Would you like to try another date and time? (yes/no)");
-                            String tryAgain = scanner.nextLine();
-                            if (!tryAgain.equalsIgnoreCase("yes"))
-                                break;
-                        }
+                    }
+                    else if (!CheckEvent.addSuccess) {
+                        logger.info("Failed to add event. Would you like to try another date and time? (yes/no)");
+                        String tryAgain = scanner.nextLine();
+                        if (!tryAgain.equalsIgnoreCase("yes"))
+                            break;
+                    }
 
 
 
                     while (true) {
-                        System.out.println("Displaying vendors list:");
+                        logger.info("Displaying vendors list:");
                         displayFile("src/vendor.txt");
-                        System.out.println("Please choose a vendor by typing its name:");
+                        logger.info("Please choose a vendor by typing its name:");
                         String selectedVendor = scanner.nextLine();
 
                         VendorsByUser vendorByUser = new VendorsByUser();
                         vendorByUser.addVendor(user.username, selectedVendor, date, time, VendorsByUser.email);
-                        System.out.println("Vendor added to the wait list successfully!");
-                        System.out.println("Do you want to select another one? (yes/no)");
+                        logger.info("Vendor added to the wait list successfully!");
+                        logger.info("Do you want to select another one? (yes/no)");
                         String chooseAnother = scanner.nextLine();
                         if (!chooseAnother.equalsIgnoreCase("yes")) {
                             break;
@@ -78,29 +81,34 @@ public class Main {
                     performAuthentication( scanner,  user);
                     serviceManagementMenu(scanner, serviceProvider);
                     break;
+                case 4:
+                    isRunning = false;
+                    logger.info("Exiting program.");
+                    break;
+                default:
+                    logger.info("Invalid role selected. Please try again.");
+                    break;
             }
 
+
             if (!User.loginFlag) {
-                System.out.println("Returning to login...");
+                logger.info("Returning to login...");
             }
         }
     }
 
 
-        private static void displayFile(String fileName) {
-            try {
-
-                BufferedReader reader = new BufferedReader(new FileReader(fileName));
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
-                }
-                reader.close();
-            } catch (IOException e) {
-                System.out.println("There is an error happend while display list .");
-                e.printStackTrace();
+    private static void displayFile(String fileName) {
+        try (BufferedReader reader = new BufferedReader(new FileReader(fileName))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                logger.info(line);
             }
+        } catch (IOException e) {
+            logger.error("There is an error happened while displaying list.", e);
         }
+    }
+
 
 
 
@@ -108,11 +116,11 @@ public class Main {
         boolean running = true;
 
         while (running) {
-            System.out.println("Select a management option:");
-            System.out.println("1. Vendor Management");
-            System.out.println("2. Venue Management");
-            System.out.println("3. Event Management");
-            System.out.println("4. Log out");
+            logger.info("Select a management option:");
+            logger.info("1. Vendor Management");
+            logger.info("2. Venue Management");
+            logger.info("3. Event Management");
+            logger.info("4. Log out");
             int mainChoice = scanner.nextInt();
             scanner.nextLine();
 
@@ -124,420 +132,390 @@ public class Main {
                     venueManagementMenu(scanner, serviceProvider);
                     break;
                 case 3:
-                    eventManagementMenu(scanner, serviceProvider);
+                    eventManagementMenu(scanner);
                     break;
                 case 4:
                     User.loginFlag = false;
                     running = false;
-                    System.out.println("Logged out successfully.");
+                    logger.info("Logged out successfully.");
                     return;
                 default:
-                    System.out.println("Invalid choice. Please select a valid option.");
+                    logger.info("Invalid choice. Please select a valid option.");
                     break;
             }
         }
     }
 
-        private static void vendorManagementMenu (Scanner scanner, ServiceProvider serviceProvider){
-            boolean inVendorMenu = true;
-            while (inVendorMenu) {
-                System.out.println("\nVendor Management:");
-                System.out.println("1. Add Vendor");
-                System.out.println("2. Edit Vendor");
-                System.out.println("3. Delete Vendor");
-                System.out.println("4. Display Vendors");
-                System.out.println("5. Return to Main Menu");
-                System.out.print("Select an action: ");
-                int action = scanner.nextInt();
-                scanner.nextLine();
 
-                switch (action) {
-                    case 1:
-                        System.out.print("Enter Vendor Name: ");
-                        String name = scanner.nextLine();
-                        System.out.print("Enter Service Type: ");
-                        String serviceType = scanner.nextLine();
-                        System.out.print("Enter Pricing: ");
-                        double pricing = scanner.nextDouble();
-                        scanner.nextLine();
-                        System.out.print("Enter Email: ");
-                        String email = scanner.nextLine();
-                        System.out.print("Enter Time: ");
-                        int time = scanner.nextInt();
-                        System.out.print("Enter Date: ");
-                        int date = scanner.nextInt();
-                        scanner.nextLine();
+    private static void vendorManagementMenu(Scanner scanner, ServiceProvider serviceProvider) {
+        boolean inVendorMenu = true;
+        while (inVendorMenu) {
+            logger.info("\nVendor Management:");
+            logger.info("1. Add Vendor");
+            logger.info("2. Edit Vendor");
+            logger.info("3. Delete Vendor");
+            logger.info("4. Display Vendors");
+            logger.info("5. Return to Main Menu");
+            logger.info("Select an action: "); // Note: This will not pause the program for input.
+            int action = scanner.nextInt();
+            scanner.nextLine();
 
-                        Vendor vendor = new Vendor(name, serviceType, email, time, date );
+            switch (action) {
+                case 1:
+                    logger.info("Enter Vendor Name: ");
+                    String name = scanner.nextLine();
+                    logger.info("Enter Service Type: ");
+                    String serviceType = scanner.nextLine();
 
-                        serviceProvider.addVendor(vendor);
-                        serviceProvider.saveVendorsToFile();
-                        System.out.println("Vendor added successfully.");
-                        break;
-                    case 2:
-                        System.out.print("Enter the name of the vendor you wish to edit: ");
-                        String editName = scanner.nextLine();
-                        System.out.println("Enter new Service Type:");
-                        String newServiceType = scanner.nextLine();
-                        System.out.println("Enter new Email:");
-                        String newEmail = scanner.nextLine();
-                        System.out.println("Enter new Time:");
-                        int newTime = scanner.nextInt();
-                        System.out.println("Enter new Date:");
-                        int newDate = scanner.nextInt();
-                        scanner.nextLine();
-                        Vendor updatedVendor = new Vendor(editName, newServiceType, newEmail, newTime, newDate);
+                    scanner.nextLine();
+                    logger.info("Enter Email: ");
+                    String email = scanner.nextLine();
+                    logger.info("Enter Time: ");
+                    int time = scanner.nextInt();
+                    logger.info("Enter Date: ");
+                    int date = scanner.nextInt();
+                    scanner.nextLine();
 
-                        serviceProvider.updateVendor(updatedVendor);
-                        serviceProvider.saveVendorsToFile();
-                        System.out.println("Vendor updated successfully.");
-                        break;
-                    case 3:
-                        System.out.print("Enter the name of the vendor you wish to delete: ");
-                        String deleteName = scanner.nextLine();
-                        serviceProvider.deleteVendor(deleteName);
-                        serviceProvider.saveVendorsToFile();
-                        System.out.println("Vendor deleted successfully.");
-                        break;
-                    case 4:
-                        serviceProvider.loadVendorsFromFile();
-                        System.out.println("Vendors:");
-                        for (Vendor v : serviceProvider.getAllVendors()) {
-                            System.out.println(v);
-                        }
-                        break;
-                    case 5:
-                        inVendorMenu = false;
-                        break;
-                    default:
-                        System.out.println("Invalid action. Please select a valid option.");
-                        break;
-                }
+                    Vendor vendor = new Vendor(name, serviceType, email, time, date);
+
+                    serviceProvider.addVendor(vendor);
+                    serviceProvider.saveVendorsToFile();
+                    logger.info("Vendor added successfully.");
+                    break;
+                case 2:
+                    logger.info("Enter the name of the vendor you wish to edit: ");
+                    String editName = scanner.nextLine();
+                    logger.info("Enter new Service Type:");
+                    String newServiceType = scanner.nextLine();
+                    logger.info("Enter new Email:");
+                    String newEmail = scanner.nextLine();
+                    logger.info("Enter new Time:");
+                    int newTime = scanner.nextInt();
+                    logger.info("Enter new Date:");
+                    int newDate = scanner.nextInt();
+                    scanner.nextLine();
+                    Vendor updatedVendor = new Vendor(editName, newServiceType, newEmail, newTime, newDate);
+
+                    serviceProvider.updateVendor(updatedVendor);
+                    serviceProvider.saveVendorsToFile();
+                    logger.info("Vendor updated successfully.");
+                    break;
+                case 3:
+                    logger.info("Enter the name of the vendor you wish to delete: ");
+                    String deleteName = scanner.nextLine();
+                    serviceProvider.deleteVendor(deleteName);
+                    serviceProvider.saveVendorsToFile();
+                    logger.info("Vendor deleted successfully.");
+                    break;
+                case 4:
+                    serviceProvider.loadVendorsFromFile();
+                    logger.info("Vendors:");
+                    for (Vendor v : serviceProvider.getAllVendors()) {
+                        logger.info(v.toString()); // Assuming the Vendor class has a meaningful toString implementation.
+                    }
+                    break;
+                case 5:
+                    inVendorMenu = false;
+                    break;
+                default:
+                    logger.info("Invalid action. Please select a valid option.");
+                    break;
             }
         }
+    }
 
 
-        private static void venueManagementMenu (Scanner scanner, ServiceProvider serviceProvider){
-            boolean inVenueMenu = true;
-            while (inVenueMenu) {
-                System.out.println("Venue Management:");
-                System.out.println("1. Add Venue");
-                System.out.println("2. Edit Venue");
-                System.out.println("3. Delete Venue");
-                System.out.println("4. Display Venues");
-                System.out.println("5. Return to Main Menu");
-                int action = scanner.nextInt();
-                scanner.nextLine();
+    private static void venueManagementMenu(Scanner scanner, ServiceProvider serviceProvider) {
+        boolean inVenueMenu = true;
+        while (inVenueMenu) {
+            logger.info("Venue Management:");
+            logger.info("1. Add Venue");
+            logger.info("2. Edit Venue");
+            logger.info("3. Delete Venue");
+            logger.info("4. Display Venues");
+            logger.info("5. Return to Main Menu");
+            int action = scanner.nextInt();
+            scanner.nextLine();
 
-                switch (action) {
-                    case 1:
-                        System.out.println("Enter Venue Name:");
-                        String name = scanner.nextLine();
-                        System.out.println("Enter Owner Name:");
-                        String ownerName = scanner.nextLine();
-                        System.out.println("Enter Location:");
-                        String location = scanner.nextLine();
-                        System.out.println("Enter Capacity:");
-                        int capacity = scanner.nextInt();
-                        System.out.println("Enter Pricing:");
-                        double pricing = scanner.nextDouble();
-                        scanner.nextLine(); // Consume newline
-                        Venue venue = new Venue(name, ownerName, location, capacity, pricing);
-                        serviceProvider.addVenue(venue);
-                        serviceProvider.saveVenuesToFile();
-                        System.out.println("Venue added successfully.");
-                        break;
-                    case 2:
-                        System.out.println("Enter the name of the venue you wish to edit:");
-                        String editVenueName = scanner.nextLine();
-                        Venue venueToEdit = serviceProvider.findVenueByName(editVenueName);
-                        if (venueToEdit != null) {
-                            System.out.println("Editing Venue: " + venueToEdit.getName());
-                            System.out.println("Enter new owner name (or press Enter to skip):");
-                            String newOwnerName = scanner.nextLine();
-                            if (!newOwnerName.isEmpty()) {
-                                venueToEdit.setOwnerName(newOwnerName);
-                            }
-
-                            System.out.println("Enter new location (or press Enter to skip):");
-                            String newLocation = scanner.nextLine();
-                            if (!newLocation.isEmpty()) {
-                                venueToEdit.setLocation(newLocation);
-                            }
-
-                            System.out.println("Enter new capacity (or enter 0 to skip):");
-                            int newCapacity = scanner.nextInt();
-                            if (newCapacity > 0) {
-                                venueToEdit.setCapacity(newCapacity);
-                            }
-                            scanner.nextLine();
-
-                            System.out.println("Enter new pricing (or enter -1 to skip):");
-                            double newPricing = scanner.nextDouble();
-                            scanner.nextLine();
-                            if (newPricing >= 0) {
-                                venueToEdit.setPricing(newPricing);
-                            }
-
-
-                            if (serviceProvider.updateVenue(editVenueName, venueToEdit)) {
-                                System.out.println("Venue updated successfully.");
-                                serviceProvider.saveVenuesToFile();
-                            } else {
-                                System.out.println("Failed to update venue.");
-                            }
-                        } else {
-                            System.out.println("Venue not found.");
+            switch (action) {
+                case 1:
+                    logger.info("Enter Venue Name:");
+                    String name = scanner.nextLine();
+                    logger.info("Enter Owner Name:");
+                    String ownerName = scanner.nextLine();
+                    logger.info("Enter Location:");
+                    String location = scanner.nextLine();
+                    logger.info("Enter Capacity:");
+                    int capacity = scanner.nextInt();
+                    logger.info("Enter Pricing:");
+                    double pricing = scanner.nextDouble();
+                    scanner.nextLine(); // Consume newline
+                    Venue venue = new Venue(name, ownerName, location, capacity, pricing);
+                    serviceProvider.addVenue(venue);
+                    serviceProvider.saveVenuesToFile();
+                    logger.info("Venue added successfully.");
+                    break;
+                case 2:
+                    logger.info("Enter the name of the venue you wish to edit:");
+                    String editVenueName = scanner.nextLine();
+                    Venue venueToEdit = serviceProvider.findVenueByName(editVenueName);
+                    if (venueToEdit != null) {
+                        logger.info("Editing Venue: {}", venueToEdit.getName());
+                        logger.info("Enter new owner name (or press Enter to skip):");
+                        String newOwnerName = scanner.nextLine();
+                        if (!newOwnerName.isEmpty()) {
+                            venueToEdit.setOwnerName(newOwnerName);
                         }
-                        break;
 
-                    case 3:
-                        System.out.println("Enter Venue Name to Delete:");
-                        String venueNameToDelete = scanner.nextLine();
-                        Venue venueToDelete = serviceProvider.findVenueByName(venueNameToDelete);
-                        if (venueToDelete != null && serviceProvider.deleteVenue(venueToDelete)) {
-                            System.out.println("Venue deleted successfully.");
-                        } else {
-                            System.out.println("Venue not found or could not be deleted.");
+                        logger.info("Enter new location (or press Enter to skip):");
+                        String newLocation = scanner.nextLine();
+                        if (!newLocation.isEmpty()) {
+                            venueToEdit.setLocation(newLocation);
                         }
-                        break;
-                    case 4:
-                        serviceProvider.displayVenuesFromFile();
-                        break;
-                    case 5:
-                        inVenueMenu = false;
-                        break;
-                    default:
-                        System.out.println("Invalid action. Please select a valid option.");
-                        break;
-                }
+
+                        logger.info("Enter new capacity (or enter 0 to skip):");
+                        int newCapacity = scanner.nextInt();
+                        if (newCapacity > 0) {
+                            venueToEdit.setCapacity(newCapacity);
+                        }
+                        scanner.nextLine();
+
+                        logger.info("Enter new pricing (or enter -1 to skip):");
+                        double newPricing = scanner.nextDouble();
+                        scanner.nextLine();
+                        if (newPricing >= 0) {
+                            venueToEdit.setPricing(newPricing);
+                        }
+
+                        if (serviceProvider.updateVenue(editVenueName, venueToEdit)) {
+                            logger.info("Venue updated successfully.");
+                            serviceProvider.saveVenuesToFile();
+                        } else {
+                            logger.info("Failed to update venue.");
+                        }
+                    } else {
+                        logger.info("Venue not found.");
+                    }
+                    break;
+
+                case 3:
+                    logger.info("Enter Venue Name to Delete:");
+                    String venueNameToDelete = scanner.nextLine();
+                    Venue venueToDelete = serviceProvider.findVenueByName(venueNameToDelete);
+                    if (venueToDelete != null && serviceProvider.deleteVenue(venueToDelete)) {
+                        logger.info("Venue deleted successfully.");
+                    } else {
+                        logger.info("Venue not found or could not be deleted.");
+                    }
+                    break;
+                case 4:
+                    serviceProvider.displayVenuesFromFile();
+                    break;
+                case 5:
+                    inVenueMenu = false;
+                    break;
+                default:
+                    logger.info("Invalid action. Please select a valid option.");
+                    break;
             }
         }
+    }
 
 
-    private static void eventManagementMenu(Scanner scanner, ServiceProvider serviceProvider) {
+    private static void eventManagementMenu(Scanner scanner) {
         boolean running = true;
         while (running) {
-            System.out.println("\nEvent Management Menu:");
-            System.out.println("1. Accept/Refuse Events from Waitlist");
-            System.out.println("2. Edit Event");
-            System.out.println("3. Delete Event");
-            System.out.println("4. Return to Main Menu");
-            System.out.print("Select an option: ");
+            logger.info("\nEvent Management Menu:");
+            logger.info("1. Accept/Refuse Events from Waitlist");
+            logger.info("2. Edit Event");
+            logger.info("3. Delete Event");
+            logger.info("4. Return to Main Menu");
+            logger.info("Select an option: ");
             int option = scanner.nextInt();
             scanner.nextLine();
 
             switch (option) {
                 case 1:
-                    acceptOrRefuseEvents(scanner, serviceProvider);
+                    acceptOrRefuseEvents(scanner);
                     break;
                 case 2:
-                    editEvent(scanner, serviceProvider);
+                    editEvent(scanner);
                     break;
                 case 3:
-                    deleteEvent(scanner, serviceProvider);
+                    deleteEvent(scanner);
                     break;
                 case 4:
                     running = false;
                     break;
                 default:
-                    System.out.println("Invalid selection. Please select a valid option.");
+                    logger.info("Invalid selection. Please select a valid option.");
                     break;
             }
         }
     }
 
-    private static void acceptOrRefuseEvents(Scanner scanner, ServiceProvider serviceProvider) {
 
+    private static void acceptOrRefuseEvents(Scanner scanner) {
         List<String> waitListEvents;
         try {
-            waitListEvents = Files.readAllLines(Paths.get("src/waitList.txt"));
+            waitListEvents = Files.readAllLines(Paths.get(WAITLIST_FILE_PATH));
         } catch (IOException e) {
-            System.out.println("Error reading waitList.txt: " + e.getMessage());
+            logger.error("Error reading waitList.txt: {}", e.getMessage());
             return;
         }
 
         if (waitListEvents.isEmpty()) {
-            System.out.println("No events in waitlist.");
+            logger.info("No events in waitlist.");
             return;
         }
-
 
         Iterator<String> iterator = waitListEvents.iterator();
         while (iterator.hasNext()) {
             String event = iterator.next();
-            System.out.println("Event: " + event);
-            System.out.println("Do you want to accept this event? (yes/no)");
+            logger.info("Event: {}", event);
+            logger.info("Do you want to accept this event? (yes/no)");
             String decision = scanner.nextLine().trim();
 
             if ("yes".equalsIgnoreCase(decision)) {
-
-                try (BufferedWriter writer = Files.newBufferedWriter(Paths.get("src/events.txt"), StandardOpenOption.APPEND)) {
+                try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(EVENTS_FILE_PATH), StandardOpenOption.APPEND)) {
                     writer.write(event);
                     writer.newLine();
-                    System.out.println("Event accepted and added to events.txt.");
+                    logger.info("Event accepted and added to events.txt.");
                 } catch (IOException e) {
-                    System.out.println("Error writing to events.txt: " + e.getMessage());
+                    logger.error("Error writing to events.txt: {}", e.getMessage());
                 }
-
-
                 iterator.remove();
             } else if ("no".equalsIgnoreCase(decision)) {
-
-                System.out.println("Event refused.");
-                ((Iterator<?>) iterator).remove();
+                logger.info("Event refused.");
+                iterator.remove();
             } else {
-                System.out.println("Invalid response. Skipping...");
+                logger.info("Invalid response. Skipping...");
             }
         }
 
-
         try {
-            Files.write(Paths.get("src/waitList.txt"), waitListEvents);
+            Files.write(Paths.get(WAITLIST_FILE_PATH), waitListEvents);
         } catch (IOException e) {
-            System.out.println("Error updating waitList.txt: " + e.getMessage());
+            logger.error("Error updating waitList.txt: {}", e.getMessage());
         }
     }
 
-    private static void editEvent(Scanner scanner, ServiceProvider serviceProvider) {
+
+    private static void editEvent(Scanner scanner) {
         List<String> events;
         try {
-            events = Files.readAllLines(Paths.get("src/events.txt"));
+            events = Files.readAllLines(Paths.get(EVENTS_FILE_PATH));
         } catch (IOException e) {
-            System.out.println("Error reading events.txt: " + e.getMessage());
+            logger.error("Error reading events.txt: {}", e.getMessage());
             return;
         }
 
         if (events.isEmpty()) {
-            System.out.println("No events to edit.");
+            logger.info("No events to edit.");
             return;
         }
 
-        System.out.println("Select an event to edit:");
+        logger.info("Select an event to edit:");
         for (int i = 0; i < events.size(); i++) {
-            System.out.println((i + 1) + ": " + events.get(i));
+            logger.info("{}: {}", (i + 1), events.get(i));
         }
 
         int eventChoice = scanner.nextInt();
         scanner.nextLine();
 
         if (eventChoice < 1 || eventChoice > events.size()) {
-            System.out.println("Invalid event selection.");
+            logger.info("Invalid event selection.");
             return;
         }
 
         String selectedEventStr = events.get(eventChoice - 1);
-        System.out.println("Editing event: " + selectedEventStr);
+        logger.info("Editing event: {}", selectedEventStr);
 
-
-        System.out.println("Enter new date (dd/MM/yyyy):");
+        logger.info("Enter new date (dd/MM/yyyy):");
         String newDate = scanner.nextLine();
-        System.out.println("Enter new time (HH:mm):");
+        logger.info("Enter new time (HH:mm):");
         String newTime = scanner.nextLine();
 
-
+        // Assuming the format of the event string is consistent and includes at least three parts separated by commas
         String[] parts = selectedEventStr.split(",");
         if (parts.length >= 3) {
-            String newName = parts[0];
+            String newName = parts[0]; // Assuming the first part is the name
             String newEventStr = newName + "," + newDate + "," + newTime;
             events.set(eventChoice - 1, newEventStr);
         }
 
-
         try {
-            Files.write(Paths.get("src/events.txt"), events);
-            System.out.println("Event updated successfully.");
+            Files.write(Paths.get(EVENTS_FILE_PATH), events);
+            logger.info("Event updated successfully.");
         } catch (IOException e) {
-            System.out.println("Error updating events.txt: " + e.getMessage());
+            logger.error("Error updating events.txt: {}", e.getMessage());
         }
     }
-    private static void deleteEvent(Scanner scanner, ServiceProvider serviceProvider) {
+
+    private static void deleteEvent(Scanner scanner) {
         List<String> events;
         try {
-            events = Files.readAllLines(Paths.get("src/events.txt"));
+            events = Files.readAllLines(Paths.get(EVENTS_FILE_PATH));
         } catch (IOException e) {
-            System.out.println("Error reading events.txt: " + e.getMessage());
+            logger.error("Error reading events.txt: {}", e.getMessage());
             return;
         }
 
         if (events.isEmpty()) {
-            System.out.println("No events to delete.");
+            logger.info("No events to delete.");
             return;
         }
 
-        System.out.println("Select an event to delete:");
+        logger.info("Select an event to delete:");
         for (int i = 0; i < events.size(); i++) {
-            System.out.println((i + 1) + ": " + events.get(i));
+            logger.info("{}: {}", (i + 1), events.get(i));
         }
 
         int eventChoice = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
+        scanner.nextLine(); // Consume the leftover newline
 
         if (eventChoice < 1 || eventChoice > events.size()) {
-            System.out.println("Invalid event selection.");
+            logger.info("Invalid event selection.");
             return;
         }
 
-
         events.remove(eventChoice - 1);
 
-
         try {
-            Files.write(Paths.get("src/events.txt"), events);
-            System.out.println("Event deleted successfully.");
+            Files.write(Paths.get(EVENTS_FILE_PATH), events);
+            logger.info("Event deleted successfully.");
         } catch (IOException e) {
-            System.out.println("Error updating events.txt: " + e.getMessage());
+            logger.error("Error updating events.txt: {}", e.getMessage());
         }
     }
-
-
-
-    public void saveEventDetailsToFile(String event) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/events.txt", true))) {
-            bw.write(event);
-            bw.newLine();
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to events.txt: " + e.getMessage());
-        }
-    }
-
 
     private static boolean performAuthentication(Scanner scanner, User user) {
         boolean isAuthenticated = false;
         while (!isAuthenticated) {
-            System.out.println("Choose 1 for login, 2 for sign up:");
+            logger.info("Choose 1 for login, 2 for sign up:");
             int userInput = scanner.nextInt();
             scanner.nextLine();
-
             if (userInput == 1) {
-                System.out.println("Enter username:");
+                logger.info("Enter username:");
                 String username = scanner.nextLine();
-                System.out.println("Enter password:");
+                logger.info("Enter password:");
                 String password = scanner.nextLine();
                 user.login(username, password);
             } else if (userInput == 2) {
-                System.out.println("Enter email:");
+                logger.info("Enter email:");
                 String email = scanner.nextLine();
-                System.out.println("Enter password:");
+                logger.info("Enter password:");
                 String password = scanner.nextLine();
                 user.adduser(email, password);
             } else {
-                System.out.println("Invalid choice. Please try again.");
+                logger.info("Invalid choice. Please try again.");
             }
-
             isAuthenticated = User.loginFlag;
-
             if (isAuthenticated) {
-                System.out.println("");
+                logger.info("Authentication successful.");
             }
         }
         return isAuthenticated;
     }
 
-
-
-
 }
-
-
-
