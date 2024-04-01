@@ -1,8 +1,6 @@
 package org.example;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -11,7 +9,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
+import static org.example.VendorsByUser.*;
+
 public class Main {
+
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         User user = new User();
@@ -29,8 +31,48 @@ public class Main {
                     break;
                 case 2:
                     performAuthentication( scanner,  user);
+                    displayFile("src/Venues.txt");
+                    System.out.println("Here is the venues list please choose one by its name :");
+                    String venue = scanner.nextLine();
+
+
+                        System.out.println("please enter the date to check if its available :");
+                        String date = scanner.nextLine();
+                        System.out.println("please enter the time to check if its available :");
+                        String time = scanner.nextLine();
+                        CheckEvent checker = new CheckEvent();
+                        checker.checkEvent(date, time, username);
+                        if (CheckEvent.addSuccess) {
+                            System.out.println("Event has been successfully added to wait list!");
+
+                        }
+                        else {
+                            System.out.println("Failed to add event. Would you like to try another date and time? (yes/no)");
+                            String tryAgain = scanner.nextLine();
+                            if (!tryAgain.equalsIgnoreCase("yes"))
+                                break;
+                        }
+
+
+
+                    while (true) {
+                        System.out.println("Displaying vendors list:");
+                        displayFile("src/vendor.txt");
+                        System.out.println("Please choose a vendor by typing its name:");
+                        String selectedVendor = scanner.nextLine();
+
+                        VendorsByUser vendorByUser = new VendorsByUser();
+                        vendorByUser.addVendor(user.username, date, time, VendorsByUser.email, selectedVendor);
+                        System.out.println("Vendor added to the wait list successfully!");
+                        System.out.println("Do you want to select another one? (yes/no)");
+                        String chooseAnother = scanner.nextLine();
+                        if (!chooseAnother.equalsIgnoreCase("yes")) {
+                            break;
+                        }
+                    }
 
                     break;
+
                 case 3:
                     performAuthentication( scanner,  user);
                     serviceManagementMenu(scanner, serviceProvider);
@@ -42,6 +84,25 @@ public class Main {
             }
         }
     }
+
+
+        private static void displayFile(String fileName) {
+            try {
+
+                BufferedReader reader = new BufferedReader(new FileReader(fileName));
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+                reader.close();
+            } catch (IOException e) {
+                System.out.println("There is an error happend while display list .");
+                e.printStackTrace();
+            }
+        }
+
+
+
     private static void serviceManagementMenu(Scanner scanner, ServiceProvider serviceProvider) {
         boolean running = true;
 
@@ -465,12 +526,14 @@ public class Main {
 
             isAuthenticated = User.loginFlag;
 
-            if (!isAuthenticated) {
+            if (isAuthenticated) {
                 System.out.println("Authentication failed. Please try again.");
             }
         }
         return isAuthenticated;
     }
+
+
 
 
 }

@@ -1,88 +1,116 @@
+
 package org.example;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 
+
+
 public class User {
-    private Map<String, String> users = new HashMap<>();
-    public static boolean loginFlag = false;
-    public static int user_type; // 1: admin, 2: user, 3: service provider
+
+    public  Map< String, String > users = new HashMap<>();
+    public String  username;
+    public String  password;
+    public static boolean loginFlag;
+    public static int user_type; //1 admin , 2 user , 3 service provider
+    public String email;
+
+    public HashMap<String,User>userDatabase = new HashMap<>();
+
+
 
     public User() {
         getUsersFromFile();
+
     }
+
 
     public void login(String username, String password) {
-        // Reload users from file to get the most updated data
-        getUsersFromFile();
-        if (users.containsKey(username) && users.get(username).equals(password)) {
-            loginFlag = true;
-            setUserType(username);
-            System.out.println("Login successful!");
-        } else {
-            loginFlag = false;
-            System.out.println("Login failed: check your username or password.");
-        }
-    }
-
-    public void adduser(String email, String password) {
-        // Reload users from file to ensure we have the most updated data
-        getUsersFromFile();
-        if (users.containsKey(email)) {
-            System.out.println("User already exists.");
-            loginFlag = false;
-        } else {
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/users.txt", true))) {
-                bw.write(email + "," + password + System.lineSeparator());
-                // Immediately reflect changes in the current users map
-                users.put(email, password);
-                System.out.println("User registered successfully.");
-                loginFlag = true;
-            } catch (IOException e) {
-                System.out.println("Error writing to users file: " + e.getMessage());
-                loginFlag = false;
+        if(password.equals(users.get(username))){
+            if(username.contains("@admin.com")) {
+                user_type = 1;
+                System.out.println("welcome Admin :)");
             }
+
+            else if (username.contains("@user.com")){
+                user_type = 2;
+                System.out.println("welcome User :)");
+            }
+            else if(username.contains("@serviceprovider.com")){
+                user_type = 3;
+                System.out.println("welcome service provider :)");
+
+            }
+            else{
+                user_type=-1;
+                System.out.println("check your username  :(");
+            }
+
+        }
+        else{
+            user_type=-1;
+            System.out.println("check your username or password:(");}
+    }
+
+
+    public void adduser (String email, String password){
+        if ( users.containsKey ( email ) ){
+            loginFlag = false;
+            return ;
+        }
+
+        if ( email.contains ( "@admin" ) ){
+            user_type = 1;
+            writeUsers (  email , password , users );
+            loginFlag = true;}
+        else if (email.contains("@user")){
+            user_type = 2 ;
+            writeUsers (  email , password , users );
+            loginFlag = true;}
+        else if (email.contains("@serviceprovider")){
+            user_type = 3 ;
+            writeUsers (  email , password , users );
+            loginFlag = true;}
+        else{
+            user_type=-1;
+            loginFlag=false;
         }
     }
 
-    private void getUsersFromFile() {
-        users.clear();
-        try (BufferedReader br = new BufferedReader(new FileReader("src/users.txt"))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split(",", 2);
-                if (parts.length == 2) {
-                    users.put(parts[0], parts[1]);
+    void getUsersFromFile ( ) {
+        try {
+            users.clear ( );
+            File file = new File ( "src/users.txt" );
+            try (BufferedReader bufferedReader = new BufferedReader ( new FileReader( file ) )) {
+                String nameAndPass;
+                while ( (nameAndPass = bufferedReader.readLine ( )) != null ) {
+                    String[] data = nameAndPass.split ( "," );//يقسم السترينج من عند الفاصلة
+                    users.put ( data[ 0 ] , data[ 1 ] );
                 }
             }
-        } catch (IOException e) {
-            System.out.println("Error reading from users file: " + e.getMessage());
+        }
+        catch ( IOException e ) {
+            System.out.println(e.getMessage());
         }
     }
 
-    private void setUserType(String username) {
-        if (username.contains("@admin.com")) {
-            user_type = 1;
-            System.out.println("Welcome Admin :)");
-        } else if (username.contains("@user.com")) {
-            user_type = 2;
-            System.out.println("Welcome User :)");
-        } else if (username.contains("@serviceprovider.com")) {
-            user_type = 3;
-            System.out.println("Welcome Service Provider :)");
-        } else {
-            user_type = -1;
-            System.out.println("Unknown user type.");
+    public void writeUsers ( String username , String password , Map < String, String > users ) {
+        try {
+            users.clear ( );
+            File file = new File ( "src/users.txt" );
+            try (BufferedWriter bufferedWriter = new BufferedWriter ( new FileWriter ( file , true ) )) {
+                String nameAndPass = "\n"+ username + "," + password;
+                bufferedWriter.write ( nameAndPass+ "\n" );
+
+            }
+            getUsersFromFile ();
+        }
+        catch ( IOException e ) {
+            System.out.println(e.getMessage());
         }
     }
 
-    public void clearUsers() {
-        // Clear the users map and any other relevant state
-        users.clear();
-        loginFlag = false;
-        // Optionally, reset user_type or other static variables if needed
-        user_type = -1; // Resetting to default or initial state
-    }
+
 
 }

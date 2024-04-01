@@ -130,7 +130,7 @@ public class CheckEvent {
                 String event = username + "," + date + "," + time + "\n";
 
                 bufferedWriter.write(event);
-                System.out.println(event);
+                //System.out.println(event);
                 addSuccess = true;
             }
             } catch (IOException e) {
