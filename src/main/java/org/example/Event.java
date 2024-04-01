@@ -4,17 +4,21 @@ public class Event {
 
     private String name;
     private String date;
-    private String location;
-    private String services;
 
-    public Event(String name, String date, String location, String services) {
+    private String time;
+    private double price;
+    private String vendorName;
+
+    public Event(String name, String date, String time, double price, String vendorName) {
         this.name = name;
         this.date = date;
-        this.location = location;
-        this.services = services;
+        this.time = time;
+        this.price = price;
+        this.vendorName = vendorName;
     }
 
     // Getters and setters for event properties
+
     public String getName() {
         return name;
     }
@@ -31,28 +35,38 @@ public class Event {
         this.date = date;
     }
 
-    public String getLocation() {
-        return location;
+
+
+    public String getTime() {
+        return time;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setTime(String time) {
+        this.time = time;
     }
 
-    public String getServices() {
-        return services;
+
+
+
+
+    public double getPrice() {
+        return price;
     }
 
-    public void setServices(String services) {
-        this.services = services;
+    public void setPrice(double price) {
+        this.price = price;
     }
 
+    public String getVendorName() {
+        return vendorName;
+    }
+
+    public void setVendorName(String vendorName) {
+        this.vendorName = vendorName;
+    }
+
+    @Override
     public String toString() {
-        return "Event{" +
-                "name='" + name + '\'' +
-                ", date='" + date + '\'' +
-                ", location='" + location + '\'' +
-                ", services='" + services + '\'' +
-                '}';
+          return name + "," + date + "," + time + "," + price + "," + vendorName;
     }
 }

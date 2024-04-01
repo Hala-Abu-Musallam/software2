@@ -1,9 +1,10 @@
+
 Feature: add event by user
-Background: user
-  Given username is 'Hala@user.com'
+  Background: user
+    Given username is 'Hala@user.com'
   Scenario Outline:add succeed
 
-    When Date and Time are available '<Date>''<Time>
+    When Date and Time are available '<Date>''<Time>'
     Then add event to waiting list
     Examples:
       | Date    | Time |

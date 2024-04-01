@@ -1,3 +1,4 @@
+
 package org.example;
 
 import java.io.*;
@@ -5,15 +6,15 @@ import java.util.ArrayList;
 
 public class VendorsByUser{
 
-   public static String email;
-   public static String type;
-   public static int price;
+    public static String email;
+    public static String type;
+    public static int price;
 
-   public static String username;
+    public static String username;
 
-   public static int date;
-    public static int time;
-   public static boolean addSuccess;
+    public static String date;
+    public static String time;
+    public static boolean addSuccess;
 
     public static int vendor_type;
 
@@ -27,10 +28,10 @@ public class VendorsByUser{
                 String EmailPriceType;
                 while ((EmailPriceType = bufferedReader.readLine()) != null) {
                     String[] data = EmailPriceType.split(",");
-                   email=data[0];
-                   price=Integer.parseInt(data[1]);
-                   type=data[2];
-                   vendors.add(this);
+                    email=data[0];
+                   // price=Integer.parseInt(data[1]);
+                    type=data[2];
+                    vendors.add(this);
                 }
             }
         } catch (IOException e) {
@@ -39,14 +40,15 @@ public class VendorsByUser{
     }
 
 
-    public void writeVendors(String username, int date, int time,String email,String type) {
+    public void writeVendors(String username,String type, String date, String time, String email) {
         try {
             File file = new File("src/waitList.txt");
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
-                String vendor = username + "," + date + "," + time + "+"+email + "," + type+"\n";
-
+                String vendor = username + ","  + type + "," + date + "," + time + ","+ email +"\n";
                 bufferedWriter.write(vendor);
-                System.out.println(vendor);
+                //System.out.println(vendor);
+
+               // System.out.println(vendor);
                 addSuccess = true;
             }
         } catch (IOException e) {
@@ -57,19 +59,29 @@ public class VendorsByUser{
 
     }
 
-    public void addvendor   (String type){
+    public void addVendor (String usernamee,String typee ,String datee,String timee,String email){
+        date=datee;
+        type=typee;
+        time=timee;
+        username=usernamee;
+       // System.out.println(type);
+        //System.out.println(date);
+        //System.out.println(time);
+
         getVendorsfromFile();
-        if ( type.contains ( "decoration" ) ){
+        if ( typee.equals ( "decoration" ) ){
             vendor_type = 1;
-            writeVendors (username , date , time ,email,type );
-            }
-        else if (type.contains("DJ")){
+
+            writeVendors (username ,typee, date , time ,email);
+
+        }
+        else if (typee.equals("DJ")){
             vendor_type = 2 ;
-            writeVendors (username , date , time ,email,type );
-            }
-        else if (type.contains("photographer")){
+            writeVendors (username ,typee, date , time ,email );
+        }
+        else if (typee.equals("photographer")){
             vendor_type = 3 ;
-            writeVendors (username , date , time ,email,type);
+            writeVendors (username ,typee, date , time ,email);
         }
         else{
             vendor_type=-1;

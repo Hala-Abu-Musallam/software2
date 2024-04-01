@@ -1,13 +1,14 @@
+
 Feature: Select Vendors
 
-Background: vendors
-  Given date is '15/7/2024' and time is'6-8'
+  Background: vendors
+    Given  date is '15/7/2024' and time is'6-8'
 
   Scenario Outline: successfully add vendors
-    When user choose vendors  '<type>'
+    When user choose vendors  '<type>''<email>'
     Then book vendor to the event
     Examples:
-      | type       |
-      |decoration  |
-      |DJ          |
-      |photographer|
+      | type       |email|
+      |decoration  |decoration@serviceprovider|
+      |DJ          |DJ@serviceprovider.com    |
+      |photographer|photographer@serviceprovider.com|

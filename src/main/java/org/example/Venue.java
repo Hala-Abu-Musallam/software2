@@ -73,12 +73,7 @@ public class Venue {
     // toString method to represent the Venue details
     @Override
     public String toString() {
-        return "Venue{" +
-                "name='" + name + '\'' +
-                ", ownerName='" + ownerName + '\'' +
-                ", location='" + location + '\'' +
-                ", capacity=" + capacity +
-                ", pricing=" + pricing +
-                '}';
+        return   name + "," + ownerName + "," + location + "," + capacity + "," + pricing;
+
     }
 }

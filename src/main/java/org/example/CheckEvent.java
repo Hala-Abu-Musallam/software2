@@ -17,6 +17,7 @@ public class CheckEvent {
             new SimpleDateFormat("d/M/yyyy")
     };
     public static boolean addSuccess;
+    public static String username;
 
     private static void checkIfDateValid(Date inputDate) {
         Calendar calendar = Calendar.getInstance();
@@ -79,7 +80,8 @@ public class CheckEvent {
             addSuccess = false;
             return;
         }
-        getEventfromFile();
+
+
         for (int i = 0; i < events.size(); i++) {
 
 
@@ -87,8 +89,9 @@ public class CheckEvent {
                 if (events.get(i + 1).equals((time)))
                     addSuccess = false;
             } else {
+                //writeUsers(username, date, time);
                 i++;
-
+                addSuccess=true;
             }
         }
 
@@ -130,7 +133,7 @@ public class CheckEvent {
                 String event = username + "," + date + "," + time + "\n";
 
                 bufferedWriter.write(event);
-                System.out.println(event);
+                //System.out.println(event);
                 addSuccess = true;
             }
             } catch (IOException e) {

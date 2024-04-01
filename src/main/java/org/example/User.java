@@ -1,3 +1,4 @@
+
 package org.example;
 
 import java.io.*;
@@ -6,7 +7,7 @@ import java.util.Map;
 
 
 
-public class User   {
+public class User {
 
     public  Map< String, String > users = new HashMap<>();
     public String  username;
@@ -25,56 +26,50 @@ public class User   {
     }
 
 
-    public void login(String username, String password) {
-        if(password.equals(users.get(username))){
-            if(username.contains("@admin.com")) {
+    public boolean login(String username, String password) {
+        if (users.containsKey(username) && password.equals(users.get(username))) {
+            this.username = username;
+            if (username.contains("@admin.com")) {
                 user_type = 1;
-                System.out.println("welcome Admin :)");
-            }
-
-            else if (username.contains("@user.com")){
+                System.out.println("Welcome Admin :)");
+            } else if (username.contains("@user.com")) {
                 user_type = 2;
-                System.out.println("welcome User :)");
-            }
-            else if(username.contains("@serviceprovider.com")){
+                System.out.println("Welcome User :)");
+            } else if (username.contains("@serviceprovider.com")) {
                 user_type = 3;
-                System.out.println("welcome service provider :)");
-
+                System.out.println("Welcome Service Provider :)");
             }
-            else{
-                user_type=-1;
-                System.out.println("check your username  :(");
-            }
-
+            loginFlag = true;
+        } else {
+            System.out.println("Check your username or password.");
+            loginFlag = false;
         }
-        else{
-            user_type=-1;
-            System.out.println("check your username or password:(");}
+        return loginFlag;
     }
 
 
     public void adduser (String email, String password){
-    if ( users.containsKey ( email ) ){
-        loginFlag = false;
-        return ;
-    }
+        if ( users.containsKey ( email ) ){
+            loginFlag = false;
+            return ;
+        }
 
-    if ( email.contains ( "@admin" ) ){
+        if ( email.contains ( "@admin" ) ){
             user_type = 1;
-        writeUsers (  email , password , users );
-        loginFlag = true;}
-    else if (email.contains("@user")){
+            writeUsers (  email , password , users );
+            loginFlag = true;}
+        else if (email.contains("@user")){
             user_type = 2 ;
-        writeUsers (  email , password , users );
-        loginFlag = true;}
-    else if (email.contains("@serviceprovider")){
+            writeUsers (  email , password , users );
+            loginFlag = true;}
+        else if (email.contains("@serviceprovider")){
             user_type = 3 ;
-        writeUsers (  email , password , users );
-        loginFlag = true;}
-    else{
-        user_type=-1;
-    loginFlag=false;
-    }
+            writeUsers (  email , password , users );
+            loginFlag = true;}
+        else{
+            user_type=-1;
+            loginFlag=false;
+        }
     }
 
     void getUsersFromFile ( ) {
@@ -94,7 +89,7 @@ public class User   {
         }
     }
 
-   public void writeUsers ( String username , String password , Map < String, String > users ) {
+    public void writeUsers ( String username , String password , Map < String, String > users ) {
         try {
             users.clear ( );
             File file = new File ( "src/users.txt" );
@@ -112,8 +107,4 @@ public class User   {
 
 
 
-    }
-
-
-
-
+}
