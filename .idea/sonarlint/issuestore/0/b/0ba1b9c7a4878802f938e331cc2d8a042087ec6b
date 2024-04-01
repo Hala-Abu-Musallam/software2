@@ -1,0 +1,21 @@
+
+h
+java:S2629Ö"$Invoke method(s) only conditionally.(ù²¤²8Ìô«Ûé1J$e1bb9239-dc77-4e03-a75d-d432e4196f93
+h
+java:S2629¤"$Invoke method(s) only conditionally.(–ÇÕ¬8Îô«Ûé1J$2b235c36-25b3-4ecb-9633-5baa7e0a27d8
+h
+java:S2629×"$Invoke method(s) only conditionally.(–ÇÕ¬8Îô«Ûé1J$4989b409-1403-43d5-b314-7390415fdc13
+z
+java:S2589v"7Remove this expression which always evaluates to "true"(›ûÅò8Ïû«Ûé1J$dd8bc384-cdd4-4c86-ae08-50945e11857e
+•
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 20 to the 15 allowed.(Çµí‘8Ùû«Ûé1J$04697438-bdeb-47b1-8f2e-05f34c65476d
+
+java:S1854'"9Remove this useless assignment to local variable "venue".(ëÕ¡…ÿÿÿÿÿ8Ûû«Ûé1J$fd9df97e-7b56-431f-87a2-d28fd9317f0e
+r
+java:S1481'"*Remove this unused "venue" local variable.(ëÕ¡…ÿÿÿÿÿ8åû«Ûé1J$bf8c0fe3-547d-4513-a40d-939be3fd058d
+
+java:S1854‹";Remove this useless assignment to local variable "running".(¡µ‚ 8‘…­Ûé1J$b29d609c-091f-498a-86e7-77793a5a4d14
+›
+java:S3776ä"RRefactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.(›¾â’øÿÿÿÿ8ü«Ûé1J$cf63264e-bf63-4b07-b95d-d4c065fe1fb3
+
+java:S6541ä"ÅA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 89 to 64, Complexity from 15 to 14, Nesting Level from 4 to 2, Number of Variables from 18 to 6.(›¾â’øÿÿÿÿ8­ü«Ûé1J$81df0200-9530-47e4-a3a6-b4b3266c41dd

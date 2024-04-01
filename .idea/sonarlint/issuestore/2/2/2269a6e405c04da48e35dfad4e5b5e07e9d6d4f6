@@ -1,0 +1,26 @@
+
+m	java:S127]"XRefactor the code in order to not assign to this loop counter from within the loop body.(Ì‚ˆÌ
+q
+java:S1104"VMake addSuccess a static final constant or non-public and provide accessors if needed.(¼‚²’þÿÿÿÿ
+j
+java:S1104"TMake username a static final constant or non-public and provide accessors if needed.(Ÿ’—î
+K
+java:S1444"0Make this "public static addSuccess" field final(¼‚²’þÿÿÿÿ
+D
+java:S1444".Make this "public static username" field final(Ÿ’—î
+E	java:S106="+Replace this use of System.out by a logger.(°¹Àˆÿÿÿÿÿ
+@	java:S106B"+Replace this use of System.out by a logger.(¿íÚ 
+K
+java:S2696P"6Make the enclosing method "static" or remove this set.(Ë÷»C
+K
+java:S2696Z"6Make the enclosing method "static" or remove this set.(Ë÷»C
+V	java:S125\"<This block of commented-out lines of code should be removed.(µÐ¬’ùÿÿÿÿ
+Q
+java:S2696^"6Make the enclosing method "static" or remove this set.(ä‹„âýÿÿÿÿ
+W
+java:S1126k"AReplace this if-then-else statement by a single return statement.(±ùóø
+E	java:S106}"+Replace this use of System.out by a logger.(©þêÜúÿÿÿÿ
+R
+java:S2696‰"6Make the enclosing method "static" or remove this set.(ä‹„âýÿÿÿÿ
+W	java:S125ˆ"<This block of commented-out lines of code should be removed.(ç•¨•üÿÿÿÿ
+F	java:S106Œ"+Replace this use of System.out by a logger.(©þêÜúÿÿÿÿ

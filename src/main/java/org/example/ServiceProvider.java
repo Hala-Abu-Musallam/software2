@@ -20,7 +20,7 @@ public class ServiceProvider {
     private String username;
     private String password;
     private boolean isLoggedIn;
-    private boolean choosingToCreateVenue;
+
     private Event event;
 
 

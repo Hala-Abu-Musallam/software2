@@ -17,7 +17,6 @@ public class Event {
         this.vendorName = vendorName;
     }
 
-    // Getters and setters for event properties
 
     public String getName() {
         return name;
