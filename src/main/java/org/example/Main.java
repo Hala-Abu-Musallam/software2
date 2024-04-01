@@ -22,7 +22,7 @@ public class Main {
         while (true) {
 
             System.out.println(" Please choose your role: 1-admin 2-user 3-service provider");
-            int role = scanner.nextInt();
+            int role = scanner.nextInt();//hi
             scanner.nextLine();
 
             switch (role) {
