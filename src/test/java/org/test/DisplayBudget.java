@@ -14,18 +14,17 @@ public class DisplayBudget {
     @Given("user name is {string}")
     public void user_name_is(String string) {
         // Write code here that turns the phrase above into concrete actions
-       username=string;
+        username=string;
     }
     @When("admin choose display budget planner {string}")
     public void admin_choose_display_budget_planner(String string) {
         // Write code here that turns the phrase above into concrete actions
-       DisplayB display=new DisplayB();
-       display.BudgetDisplay(BudgCalen);
+        DisplayB display=new DisplayB();
+        display.BudgetDisplay(string);
     }
-    @Then("display budget file")
+    @Then("display budget file|")
     public void display_budget_file() {
         // Write code here that turns the phrase above into concrete actions
         assertTrue(DisplayB.addToBudget);
     }
-
 }
