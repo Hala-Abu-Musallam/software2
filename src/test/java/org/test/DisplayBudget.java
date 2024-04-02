@@ -20,7 +20,7 @@ public class DisplayBudget {
     public void admin_choose_display_budget_planner(String string) {
         // Write code here that turns the phrase above into concrete actions
        DisplayB display=new DisplayB();
-       display.BudgetDisplay(BudgCalen);
+       display.BudgetDisplay(string);
     }
     @Then("display budget file")
     public void display_budget_file() {

@@ -2,34 +2,124 @@ package org.example;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Comparator;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+import java.util.Collections;
+import java.util.Date;
 
 public class DisplayC {
-    public static int date;
-    public static int time;
-    public static double price;
-    public static double price1;
-    public static double price2;
-    public static double adminBudg;
-    public static double serviceBudg;
+
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH-HH");
+
+    public static String date;
+    public static String time;
     public static String username;
-    public static boolean  addToBudget;
+    public static boolean addToCalen;
 
-    public static String BudgCalen;
-    ArrayList<DisplayB> display = new ArrayList<>();
-    public void getInformationfromFile() {
+    ArrayList<DisplayC> displayC = new ArrayList<>();
+
+    public void sorting(String date,String time) {
+        fromFile();
+
+        Collections.sort(displayC, new Comparator<DisplayC>() {
+            @Override
+            public int compare(DisplayC o1, DisplayC o2) {
+                try {
+                    Date date1 = dateFormat.parse(o1.date);
+                    Date date2 = dateFormat.parse(o2.date);
+                    Date time1 = timeFormat.parse(o1.time);
+                    Date time2 = timeFormat.parse(o2.time);
+
+                    int dateComparison = date1.compareTo(date2);
+                    if (dateComparison != 0) {
+                        return dateComparison;
+                    }
+
+                    return time1.compareTo(time2);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                    return 0;
+                }
+            }
+        });
+
+        for (int i = 0; i < displayC.size(); i++) {
+            DisplayC event = displayC.get(i);
+          //  System.out.println(event.username + ", " + event.date + ", " + event.time);
+
+            saveToFile(username,date,time);
+            addToCalen=true;
+        }
+
+       saveToFile(username,date,time);
+        addToCalen=true;
+    }
+
+    private void saveToFile(String username,String date ,String time) {
+
         try {
+            File file = new File("src/calender.txt");
 
-            display.clear();
+            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
+                for (DisplayC event : displayC) {
+                  event.username=username;
+                  event.date=date;
+                  event.time=time;
+                    String Calen = username + ", " +date + ", " + time + "\n";
+                    bufferedWriter.write(Calen);
+                }
+           }
+            System.out.println("Information stored successfully.");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void fromFile() {
+        try {
+            displayC.clear();
             File file = new File("src/eventList.txt");
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
-                String information;
-                while ((information = bufferedReader.readLine()) != null) {
-                    String[] data = information.split(",");
+                String info;
+                while ((info = bufferedReader.readLine()) != null) {
+                    String[] data = info.split(",");
+                    username = data[0];
+                    date = data[1];
+                    time = data[2];
+                    displayC.add(this);
+                }
+            }
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+}
+
+/*public class DisplayC {
+
+    public static String date;
+    public static String time;
+    public static String username;
+    public static boolean  addToCalen;
+
+    ArrayList<DisplayC> displayC = new ArrayList<>();
+    public void fromFile() {
+        try {
+
+            displayC.clear();
+            File file = new File("src/eventList.txt");
+            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {
+                String info;
+                while ((info = bufferedReader.readLine()) != null) {
+                    String[] data = info.split(",");
                     username=data[0];
-                    date=Integer.parseInt(data[1]);
-                    time=Integer.parseInt(data[2]);
-                    price=Double.parseDouble(data[3]);
-                   // display.add(this);
+                    date=data[1];
+                    time=data[2];
+                    displayC.add(this);
                 }
             }
         } catch (IOException e) {
@@ -38,38 +128,17 @@ public class DisplayC {
     }
 
 
-    public void BudgetDisplay(String BudgCalen){
-        getInformationfromFile();
-        if(BudgCalen.contains("budget")){
-            price1=price;
-            price2=price;
-            serviceBudg = price1 *0.8;
-            adminBudg = price2*0.2;
-            writeInformation( username,date, time, price,serviceBudg, adminBudg);
-            addToBudget = true;
-        }
-        else
-            addToBudget=false;
-        return;
-    }
 
 
-    public void writeInformation(String username, int date, int time, double price,double serviceBudg, double adminBudg) {
+    public void toFile(String username, String date, String time) {
         try {
-            File file = new File("src/budget.txt");
+            File file = new File("src/calender.txt");
 
             try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
-                bufferedWriter.write("Username: " + username);
-                bufferedWriter.newLine();
-                bufferedWriter.write("Date: " + date);
-                bufferedWriter.newLine();
-                bufferedWriter.write("Time: " + time);
-                bufferedWriter.newLine();
-                bufferedWriter.write("Price: " + price);
-                bufferedWriter.newLine();
-                bufferedWriter.write("Service Budget: " + serviceBudg);
-                bufferedWriter.newLine();
-                bufferedWriter.write("Admin Budget: " + adminBudg);
+                String Calen = username + "  ,  "  + date + "  ,  " + time + "\n";
+                bufferedWriter.write(Calen);
+                addToCalen = true;
+
             }
             System.out.println("Information stored successfully.");
         } catch (IOException e) {
@@ -77,4 +146,10 @@ public class DisplayC {
         }
     }
 
-}
+
+    public void sorting(String date, String time){
+        fromFile();
+        displayC.sort(Comparator.comparing(o -> o.date));
+    }
+
+}*/

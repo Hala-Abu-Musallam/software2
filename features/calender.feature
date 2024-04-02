@@ -1,8 +1,8 @@
-Feature: show calender
+Feature: Show Calender
 
   Background: Admin
     Given Admin name is 'halakhaled@admin.com'
 
   Scenario: display calender
-    When admin choose display calender 'calender'
-    Then display calender file
+    When the event is earlier according to time and date '<date>' '<time>'
+    Then sorting events in calender file
