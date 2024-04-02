@@ -1,6 +1,9 @@
 package org.example;
 import java.io.*;
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class DisplayB {
 
@@ -13,6 +16,7 @@ public class DisplayB {
     public static double serviceBudg;
     public static String username;
     public static boolean  addToBudget;
+    private static final Logger logger = LoggerFactory.getLogger(DisplayB.class);
 
     public static String BudgCalen;
     ArrayList<DisplayB> display = new ArrayList<>();
@@ -33,7 +37,7 @@ public class DisplayB {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -64,9 +68,9 @@ public class DisplayB {
                 addToBudget = true;
 
             }
-            System.out.println("Information stored successfully.");
+            logger.info("Information stored successfully.");
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 

@@ -8,6 +8,8 @@ import java.text.SimpleDateFormat;
 
 import java.util.Collections;
 import java.util.Date;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 public class DisplayC {
@@ -19,7 +21,7 @@ public class DisplayC {
     public static String time;
     public static String username;
     public static boolean addToCalen;
-
+    private static final Logger logger = LoggerFactory.getLogger(DisplayC.class);
     ArrayList<DisplayC> displayC = new ArrayList<>();
 
     public void sorting(String date,String time) {
@@ -49,7 +51,7 @@ public class DisplayC {
 
         for (int i = 0; i < displayC.size(); i++) {
             DisplayC event = displayC.get(i);
-            //  System.out.println(event.username + ", " + event.date + ", " + event.time);
+            logger.info(event.username + ", " + event.date + ", " + event.time);
 
             saveToFile(username,date,time);
             addToCalen=true;
@@ -73,9 +75,9 @@ public class DisplayC {
                     bufferedWriter.write(Calen);
                 }
             }
-            System.out.println("Information stored successfully.");
+            logger.info("Information stored successfully.");
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -94,7 +96,7 @@ public class DisplayC {
                 }
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 }
