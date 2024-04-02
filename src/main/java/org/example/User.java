@@ -1,6 +1,9 @@
 
 package org.example;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,13 +14,12 @@ public class User {
 
     public  Map< String, String > users = new HashMap<>();
     public String  username;
-    public String  password;
+
     public static boolean loginFlag;
     public static int user_type; //1 admin , 2 user , 3 service provider
-    public String email;
 
     public HashMap<String,User>userDatabase = new HashMap<>();
-
+    private static final Logger logger = LoggerFactory.getLogger(User.class);
 
 
     public User() {
@@ -31,17 +33,17 @@ public class User {
             this.username = username;
             if (username.contains("@admin.com")) {
                 user_type = 1;
-                System.out.println("Welcome Admin :)");
+                logger.info("Welcome Admin :)");
             } else if (username.contains("@user.com")) {
                 user_type = 2;
-                System.out.println("Welcome User :)");
+                logger.info("Welcome User :)");
             } else if (username.contains("@serviceprovider.com")) {
                 user_type = 3;
-                System.out.println("Welcome Service Provider :)");
+                logger.info("Welcome Service Provider :)");
             }
             loginFlag = true;
         } else {
-            System.out.println("Check your username or password.");
+            logger.info("Check your username or password.");
             loginFlag = false;
         }
         return loginFlag;
@@ -85,7 +87,7 @@ public class User {
             }
         }
         catch ( IOException e ) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -101,7 +103,7 @@ public class User {
             getUsersFromFile ();
         }
         catch ( IOException e ) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 

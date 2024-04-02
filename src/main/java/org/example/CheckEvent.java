@@ -1,5 +1,8 @@
 package org.example;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -7,7 +10,7 @@ import java.util.*;
 
 
 public class CheckEvent {
-
+    private static final Logger logger = LoggerFactory.getLogger(CheckEvent.class);
 
     ArrayList<String> events = new ArrayList<>();
     static SimpleDateFormat[] simpleDateFormats = {
@@ -58,12 +61,12 @@ public class CheckEvent {
                     addSuccess = true;
                     return true;
                 } else {
-                    System.out.println("You cant make an appointment in passed days :/");
+                    logger.info("You cant make an appointment in passed days :/");
                     addSuccess = false;
                     return false;
                 }
             } catch (ParseException | IllegalArgumentException e) {
-                System.out.println("Date Format Wrong or Try another date ;)");
+                logger.info("Date Format Wrong or Try another date ;)");
                 addSuccess = false;
                 return false;
             }
@@ -123,7 +126,7 @@ if (addSuccess)
                 }
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -138,7 +141,7 @@ if (addSuccess)
                 addSuccess = true;
             }
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+            logger.info(e.getMessage());
             }
 
 

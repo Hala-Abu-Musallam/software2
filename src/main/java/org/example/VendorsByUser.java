@@ -1,6 +1,9 @@
 
 package org.example;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -8,7 +11,6 @@ public class VendorsByUser{
 
     public static String email;
     public static String type;
-    public static int price;
 
     public static String username;
 
@@ -17,6 +19,7 @@ public class VendorsByUser{
     public static boolean addSuccess;
 
     public static int vendor_type;
+    private static final Logger logger = LoggerFactory.getLogger(VendorsByUser.class);
 
     ArrayList<VendorsByUser> vendors = new ArrayList<>();
     public void getVendorsfromFile() {
@@ -29,14 +32,13 @@ public class VendorsByUser{
                 while ((EmailPriceType = bufferedReader.readLine()) != null) {
                     String[] data = EmailPriceType.split(",");
                     email=data[0];
-                   // price=Integer.parseInt(data[1]);
                     type=data[2];
 
                     vendors.add(this);
                 }
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -47,13 +49,10 @@ public class VendorsByUser{
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
                 String vendor = username + ","  + type + "," + date + "," + time + ","+ email +"\n";
                 bufferedWriter.write(vendor);
-                //System.out.println(vendor);
-
-               // System.out.println(vendor);
                 addSuccess = true;
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
 
 
@@ -65,10 +64,6 @@ public class VendorsByUser{
         type=typee;
         time=timee;
         username=usernamee;
-
-        System.out.println(typee);
-        System.out.println(date);
-        System.out.println(time);
 
 
         getVendorsfromFile();
