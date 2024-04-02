@@ -1,13 +1,10 @@
 package org.example;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -15,6 +12,7 @@ import java.util.Scanner;
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
     private static final String EVENTS_FILE_PATH = "src/events.txt";
+    private static final String VENDORLIST_FILE_PATH = "src/vendorList.txt";
     private static final String WAITLIST_FILE_PATH = "src/waitList.txt";
     public static boolean flag=true;
 
@@ -48,6 +46,14 @@ public class Main {
                         String date = scanner.nextLine();
                         logger.info("please enter the time to check if it's available:");
                         String time = scanner.nextLine();
+
+                        logger.info("Type 'logout' to log out or any other key to continue:");
+                        String logoutInput = scanner.nextLine();
+                        if ("logout".equalsIgnoreCase(logoutInput)) {
+                            tryAgain = false;
+                            break;
+                        }
+
                         CheckEvent checker = new CheckEvent();
 
                         checker.checkEvent(date, time, user.username);
@@ -71,23 +77,28 @@ public class Main {
                             logger.info("Please enter a vendor by typing its email");
                             String selectedVendorEmail = scanner.nextLine();
 
+                            logger.info("Type 'logout' to log out or any other key to continue:");
+                            logoutInput = scanner.nextLine();
+                            if ("logout".equalsIgnoreCase(logoutInput)) {
+                                tryAgain = false; // User chose to log out
+                                chooseAnotherVendor = false; // Exit the inner loop
+                                break; // Exit the outer loop
+                            }
+
                             VendorsByUser vendorByUser = new VendorsByUser();
                             vendorByUser.addVendor(user.username, selectedVendor, date, time, selectedVendorEmail);
-                            if (VendorsByUser.vendor_type>0 && VendorsByUser.vendor_type<4) {
+                            if (VendorsByUser.vendor_type > 0 && VendorsByUser.vendor_type < 4) {
                                 logger.info("Vendor added to the wait list successfully!");
-                            }
-                            else{
-
-                                logger.info(" Sorry can't add vendor its not available in list :( ");
+                            } else {
+                                logger.info("Sorry, can't add vendor, it's not available in the list :(");
                                 logger.info("Do you want to select another one? (yes/no)");
                                 String chooseAnother = scanner.nextLine();
                                 if (!chooseAnother.equalsIgnoreCase("yes"))
                                     chooseAnotherVendor = false;
-
                             }
-
                         }
                     }
+
                     break;
 
 
@@ -247,7 +258,7 @@ public class Main {
             logger.info("2. Edit Venue");
             logger.info("3. Delete Venue");
             logger.info("4. Display Venues");
-            logger.info("5. Return to Main Menu");
+            logger.info("5- Return to Main Menu ");
             int action = scanner.nextInt();
             scanner.nextLine();
 
@@ -343,7 +354,8 @@ public class Main {
             logger.info("1. Accept/Refuse Events from Waitlist");
             logger.info("2. Edit Event");
             logger.info("3. Delete Event");
-            logger.info("4. Return to Main Menu");
+            logger.info("4. Accept/Refuse vendor event from Waitlist");
+            logger.info("5. Return to Main Menu");
             logger.info("Select an option: ");
             int option = scanner.nextInt();
             scanner.nextLine();
@@ -358,13 +370,63 @@ public class Main {
                 case 3:
                     deleteEvent(scanner);
                     break;
+
                 case 4:
+                    acceptOrRefuseVendorevent( scanner);
+                    break;
+                case 5:
                     running = false;
                     break;
                 default:
                     logger.info("Invalid selection. Please select a valid option.");
                     break;
             }
+        }
+    }
+
+
+    private static void acceptOrRefuseVendorevent(Scanner scanner) {
+        List<String> waitListEvents;
+        try {
+            waitListEvents = Files.readAllLines(Paths.get(WAITLIST_FILE_PATH));
+        } catch (IOException e) {
+            logger.error("Error reading waitList.txt: {}", e.getMessage());
+            return;
+        }
+
+        if (waitListEvents.isEmpty()) {
+            logger.info("No events in waitlist.");
+            return;
+        }
+
+        for (int i = 0; i < waitListEvents.size(); i++) {
+            logger.info("{}. {}", i + 1, waitListEvents.get(i));
+        }
+
+        logger.info("Enter the number of the event you want to accept (or 0 to cancel):");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        if (choice == 0 || choice > waitListEvents.size()) {
+            logger.info("Invalid choice or cancelled.");
+            return;
+        }
+
+        String chosenEvent = waitListEvents.get(choice - 1);
+
+        try {
+            Files.write(Paths.get(VENDORLIST_FILE_PATH), chosenEvent.getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get(VENDORLIST_FILE_PATH), System.lineSeparator().getBytes(), StandardOpenOption.APPEND);
+            logger.info("Event accepted and added to events.txt.");
+        } catch (IOException e) {
+            logger.error("Error writing to events.txt: {}", e.getMessage());
+        }
+        waitListEvents.remove(choice - 1);
+
+        try {
+            Files.write(Paths.get(WAITLIST_FILE_PATH), waitListEvents);
+        } catch (IOException e) {
+            logger.error("Error updating waitList.txt: {}", e.getMessage());
         }
     }
 
@@ -383,29 +445,30 @@ public class Main {
             return;
         }
 
-        Iterator<String> iterator = waitListEvents.iterator();
-        while (iterator.hasNext()) {
-            String event = iterator.next();
-            logger.info("Event: {}", event);
-            logger.info("Do you want to accept this event? (yes/no)");
-            String decision = scanner.nextLine().trim();
-
-            if ("yes".equalsIgnoreCase(decision)) {
-                try (BufferedWriter writer = Files.newBufferedWriter(Paths.get(EVENTS_FILE_PATH), StandardOpenOption.APPEND)) {
-                    writer.write(event);
-                    writer.newLine();
-                    logger.info("Event accepted and added to events.txt.");
-                } catch (IOException e) {
-                    logger.error("Error writing to events.txt: {}", e.getMessage());
-                }
-                iterator.remove();
-            } else if ("no".equalsIgnoreCase(decision)) {
-                logger.info("Event refused.");
-                iterator.remove();
-            } else {
-                logger.info("Invalid response. Skipping...");
-            }
+        // Display waitlist events with numbers
+        for (int i = 0; i < waitListEvents.size(); i++) {
+            logger.info("{}. {}", i + 1, waitListEvents.get(i));
         }
+
+        logger.info("Enter the number of the event you want to accept (or 0 to cancel):");
+        int choice = scanner.nextInt();
+        scanner.nextLine(); // Consume newline character
+
+        if (choice == 0 || choice > waitListEvents.size()) {
+            logger.info("Invalid choice or cancelled.");
+            return;
+        }
+
+        String chosenEvent = waitListEvents.get(choice - 1);
+
+        try {
+            Files.write(Paths.get(EVENTS_FILE_PATH), chosenEvent.getBytes(), StandardOpenOption.APPEND);
+            Files.write(Paths.get(EVENTS_FILE_PATH), System.lineSeparator().getBytes(), StandardOpenOption.APPEND);
+            logger.info("Event accepted and added to vendorList.txt.");
+        } catch (IOException e) {
+            logger.error("Error writing to vendorList.txt: {}", e.getMessage());
+        }
+        waitListEvents.remove(choice - 1);
 
         try {
             Files.write(Paths.get(WAITLIST_FILE_PATH), waitListEvents);
@@ -450,10 +513,10 @@ public class Main {
         logger.info("Enter new time (HH:mm):");
         String newTime = scanner.nextLine();
 
-        // Assuming the format of the event string is consistent and includes at least three parts separated by commas
+
         String[] parts = selectedEventStr.split(",");
         if (parts.length >= 3) {
-            String newName = parts[0]; // Assuming the first part is the name
+            String newName = parts[0];
             String newEventStr = newName + "," + newDate + "," + newTime;
             events.set(eventChoice - 1, newEventStr);
         }
