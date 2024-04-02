@@ -38,35 +38,60 @@ public class Main {
 
                     break;
                 case 2:
-                    performAuthentication( scanner,  user);
-                    displayFile("src/Venues.txt");
-                    logger.info("Here is the venues list please choose one by its name:");
-                    String venue = scanner.nextLine();
 
-                    chooseEvent(scanner, user);
+                    performAuthentication(scanner, user);
+                    boolean tryAgain = true;
+                    while (tryAgain) {
+                        displayFile("src/Venues.txt");
+                        logger.info("Here is the venues list please choose one by its name:");
+                        String venue = scanner.nextLine();
 
+                        logger.info("please enter the date to check if it's available:");
+                        String date = scanner.nextLine();
+                        logger.info("please enter the time to check if it's available:");
+                        String time = scanner.nextLine();
+                        CheckEvent checker = new CheckEvent();
 
-                    while (flag) {
-                        logger.info("Displaying vendors list:");
-                        displayFile("src/vendor.txt");
-                        logger.info("Please choose a vendor by typing its name:");
-                        String selectedVendor = scanner.nextLine();
-                        logger.info("Please enter a vendor by typing its email");
-                        String selectedVendorEmail = scanner.nextLine();
+                        checker.checkEvent(date, time, user.username);
+                        if (CheckEvent.addSuccess) {
+                            logger.info("Event has been successfully added to wait list!\n");
+                        } else {
+                            logger.info("Failed to add event. Would you like to try another date and time? (yes/no)");
+                            String tryAnother = scanner.nextLine();
+                            if (!tryAnother.equalsIgnoreCase("yes")) {
+                                tryAgain = false;
+                            }
+                            continue; // Continue to the next iteration of the loop
+                        }
 
+                        boolean chooseAnotherVendor = true;
+                        while (chooseAnotherVendor) {
+                            logger.info("Displaying vendors list:");
+                            displayFile("src/vendor.txt");
+                            logger.info("Please choose a vendor by typing its name:");
+                            String selectedVendor = scanner.nextLine();
+                            logger.info("Please enter a vendor by typing its email");
+                            String selectedVendorEmail = scanner.nextLine();
 
-                        VendorsByUser vendorByUser = new VendorsByUser();
-                        vendorByUser.addVendor(user.username, selectedVendor, date, time, selectedVendorEmail);
+                            VendorsByUser vendorByUser = new VendorsByUser();
+                            vendorByUser.addVendor(user.username, selectedVendor, date, time, selectedVendorEmail);
+                            if (VendorsByUser.vendor_type>0 && VendorsByUser.vendor_type<4) {
+                                logger.info("Vendor added to the wait list successfully!");
+                            }
+                            else{
 
-                        logger.info("Vendor added to the wait list successfully!");
-                        logger.info("Do you want to select another one? (yes/no)");
-                        String chooseAnother = scanner.nextLine();
-                        if (!chooseAnother.equalsIgnoreCase("yes")) {
-                            break;
+                                logger.info(" Sorry can't add vendor its not available in list :( ");
+                                logger.info("Do you want to select another one? (yes/no)");
+                                String chooseAnother = scanner.nextLine();
+                                if (!chooseAnother.equalsIgnoreCase("yes"))
+                                    chooseAnotherVendor = false;
+
+                            }
+
                         }
                     }
-
                     break;
+
 
                 case 3:
                     performAuthentication( scanner,  user);
@@ -84,28 +109,6 @@ public class Main {
 
             if (!User.loginFlag) {
                 logger.info("Returning to login...");
-            }
-        }
-    }
-
-    private static void chooseEvent(Scanner scanner, User user) {
-        while(true) {
-            logger.info("please enter the date to check if it's available:");
-            String date = scanner.nextLine();
-            logger.info("please enter the time to check if it's available:");
-            String time = scanner.nextLine();
-            CheckEvent checker = new CheckEvent();
-
-            checker.checkEvent(date, time, user.username);
-            if (CheckEvent.addSuccess) {
-                logger.info("Event has been successfully added to wait list!");
-
-            } else if (!CheckEvent.addSuccess) {
-                logger.info("Failed to add event. Would you like to try another date and time? (yes/no)");
-                String tryAgain = scanner.nextLine();
-                if (!tryAgain.equalsIgnoreCase("yes"))
-                   flag=false;
-                    return;
             }
         }
     }

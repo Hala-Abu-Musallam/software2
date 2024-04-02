@@ -88,6 +88,7 @@ public class VendorsByUser{
         }
         else{
             vendor_type=-1;
+
         }
     }
 }
