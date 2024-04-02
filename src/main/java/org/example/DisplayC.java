@@ -10,8 +10,9 @@ import java.util.Date;
 
 public class DisplayC {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+    private final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
     public static String username;
     public static boolean addToCalen;

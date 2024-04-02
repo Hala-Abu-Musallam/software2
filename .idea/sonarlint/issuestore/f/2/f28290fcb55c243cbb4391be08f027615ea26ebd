@@ -1,72 +1,72 @@
 
-‘	java:S117)"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Çö¨—üÿÿÿÿJ$7f6e74e2-54c5-4f01-8592-def039cbd269
-‘
-java:S1104"PMake date a static final constant or non-public and provide accessors if needed.(ÂÎÁ§ûÿÿÿÿJ$7da870a3-3ce5-4132-a726-af1c2ecb67b8
-Œ
-java:S1104"PMake time a static final constant or non-public and provide accessors if needed.(±Ûö…J$6d4bfc02-2535-45a3-b4ed-5ff22cf484ab
-
-java:S1104	"QMake price a static final constant or non-public and provide accessors if needed.(ŒËå“J$597b7278-13c7-4087-a8a6-9497ddaa5cc4
-
+‘	java:S117-"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Çö¨—üÿÿÿÿJ$7f6e74e2-54c5-4f01-8592-def039cbd269
+r	java:S117B"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ÇùÑşùÿÿÿÿ8ÁùŸ„ê1
+r
 java:S1104
-"RMake price1 a static final constant or non-public and provide accessors if needed.(Õ«­ÚJ$55c45e69-b599-43fd-a85b-76da3d55554c
+"PMake date a static final constant or non-public and provide accessors if needed.(ïÄåâÿÿÿÿÿ8ÄùŸ„ê1
+m
+java:S1104"PMake time a static final constant or non-public and provide accessors if needed.(ÑÆœĞ8ÆùŸ„ê1
+
+java:S1104"QMake price a static final constant or non-public and provide accessors if needed.(ŒËå“J$597b7278-13c7-4087-a8a6-9497ddaa5cc4
+
+java:S1104"RMake price1 a static final constant or non-public and provide accessors if needed.(Õ«­ÚJ$55c45e69-b599-43fd-a85b-76da3d55554c
 “
-java:S1104"RMake price2 a static final constant or non-public and provide accessors if needed.(ê®À³ÿÿÿÿÿJ$fafe5750-deee-481c-ae86-13c6aa69b739
+java:S1104"RMake price2 a static final constant or non-public and provide accessors if needed.(ê®À³ÿÿÿÿÿJ$fafe5750-deee-481c-ae86-13c6aa69b739
 –
-java:S1104"UMake adminBudg a static final constant or non-public and provide accessors if needed.(¬“öıÿÿÿÿJ$ea1df6f5-a013-4a3d-b390-85503407cb70
+java:S1104"UMake adminBudg a static final constant or non-public and provide accessors if needed.(¬“öıÿÿÿÿJ$ea1df6f5-a013-4a3d-b390-85503407cb70
 “
-java:S1104"WMake serviceBudg a static final constant or non-public and provide accessors if needed.(ŞĞıºJ$1f218b25-ddd1-4067-98a3-e2a697476a6e
+java:S1104"WMake serviceBudg a static final constant or non-public and provide accessors if needed.(ŞĞıºJ$1f218b25-ddd1-4067-98a3-e2a697476a6e
 
-java:S1104"TMake username a static final constant or non-public and provide accessors if needed.(Ÿ’—îJ$97c5aa0d-feb8-4773-9b9a-3f968fd2d246
+java:S1104"TMake username a static final constant or non-public and provide accessors if needed.(Ÿ’—îJ$97c5aa0d-feb8-4773-9b9a-3f968fd2d246
 “
-java:S1104"WMake addToBudget a static final constant or non-public and provide accessors if needed.(‡ÆŒĞJ$ae0f0ef3-d7a3-4979-8844-7dcafef6151d
+java:S1104"WMake addToBudget a static final constant or non-public and provide accessors if needed.(‡ÆŒĞJ$ae0f0ef3-d7a3-4979-8844-7dcafef6151d
 –
-java:S1104"UMake BudgCalen a static final constant or non-public and provide accessors if needed.(çŠ®ÈúÿÿÿÿJ$840e2681-e164-4313-9bc3-a5efe1dfd55a
-k
-java:S1444"*Make this "public static date" field final(ÂÎÁ§ûÿÿÿÿJ$43663679-aad9-4c09-8488-04a55e025f6f
-f
-java:S1444"*Make this "public static time" field final(±Ûö…J$1545440e-6046-4d07-8546-ffd5065c6501
-g
-java:S1444	"+Make this "public static price" field final(ŒËå“J$6202b355-f758-4d39-8f32-874fcacc28fb
-h
+java:S1104"UMake BudgCalen a static final constant or non-public and provide accessors if needed.(çŠ®ÈúÿÿÿÿJ$840e2681-e164-4313-9bc3-a5efe1dfd55a
+L
 java:S1444
-",Make this "public static price1" field final(Õ«­ÚJ$56579b9a-b681-429a-897f-c6dd5aabced1
+"*Make this "public static date" field final(ïÄåâÿÿÿÿÿ8ÍùŸ„ê1
+G
+java:S1444"*Make this "public static time" field final(ÑÆœĞ8ÍùŸ„ê1
+g
+java:S1444"+Make this "public static price" field final(ŒËå“J$6202b355-f758-4d39-8f32-874fcacc28fb
+h
+java:S1444",Make this "public static price1" field final(Õ«­ÚJ$56579b9a-b681-429a-897f-c6dd5aabced1
 m
-java:S1444",Make this "public static price2" field final(ê®À³ÿÿÿÿÿJ$05040fad-b218-467a-9f7e-fb58752fa6c8
+java:S1444",Make this "public static price2" field final(ê®À³ÿÿÿÿÿJ$05040fad-b218-467a-9f7e-fb58752fa6c8
 p
-java:S1444"/Make this "public static adminBudg" field final(¬“öıÿÿÿÿJ$6e5ea29a-9159-4049-bce4-69815d68cca2
+java:S1444"/Make this "public static adminBudg" field final(¬“öıÿÿÿÿJ$6e5ea29a-9159-4049-bce4-69815d68cca2
 m
-java:S1444"1Make this "public static serviceBudg" field final(ŞĞıºJ$52e92953-5957-48f0-a83a-73ec06f0ea16
+java:S1444"1Make this "public static serviceBudg" field final(ŞĞıºJ$52e92953-5957-48f0-a83a-73ec06f0ea16
 j
-java:S1444".Make this "public static username" field final(Ÿ’—îJ$d90c62c8-849e-4831-b3ba-190780ee59f4
+java:S1444".Make this "public static username" field final(Ÿ’—îJ$d90c62c8-849e-4831-b3ba-190780ee59f4
 m
-java:S1444"1Make this "public static addToBudget" field final(‡ÆŒĞJ$27291898-0e98-4a1d-a70f-61a57878bf29
+java:S1444"1Make this "public static addToBudget" field final(‡ÆŒĞJ$27291898-0e98-4a1d-a70f-61a57878bf29
 p
-java:S1444"/Make this "public static BudgCalen" field final(çŠ®ÈúÿÿÿÿJ$00ee6d55-284c-4d71-9b05-12aa8a0e054a
+java:S1444"/Make this "public static BudgCalen" field final(çŠ®ÈúÿÿÿÿJ$00ee6d55-284c-4d71-9b05-12aa8a0e054a
 •
-java:S3008"TRename this field "BudgCalen" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(çŠ®ÈúÿÿÿÿJ$1134a3cc-62d3-44ed-a9f6-12f213c20506
+java:S3008"TRename this field "BudgCalen" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(çŠ®ÈúÿÿÿÿJ$1134a3cc-62d3-44ed-a9f6-12f213c20506
 q
-java:S2696"6Make the enclosing method "static" or remove this set.(‰€œ{J$4b0d15f8-edb5-4f57-8abf-5a8e7ed78fdf
+java:S2696 "6Make the enclosing method "static" or remove this set.(‰€œ{J$4b0d15f8-edb5-4f57-8abf-5a8e7ed78fdf
+X
+java:S2696!"6Make the enclosing method "static" or remove this set.(¿ÌÑÍùÿÿÿÿ8úŸ„ê1
+S
+java:S2696""6Make the enclosing method "static" or remove this set.(º”š8úŸ„ê1
 w
-java:S2696"6Make the enclosing method "static" or remove this set.(«­¥ûÿÿÿÿÿJ$cbaf024a-cd94-4e0d-b765-5e95227bd0c1
-w
-java:S2696"6Make the enclosing method "static" or remove this set.(Ş¸İ©ÿÿÿÿÿJ$4ac6c454-91ce-42fd-aa45-c1a1574b888b
-w
-java:S2696"6Make the enclosing method "static" or remove this set.(Òåé‰ùÿÿÿÿJ$4d8f6fa4-f888-4662-bbdf-b3fd2d808cc4
-k	java:S106$"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿJ$26e367c2-81c2-4b8f-a3a7-82256c12f391
-	java:S100)"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Çö¨—üÿÿÿÿJ$f00f7448-2049-4334-8446-f315e186c4a4
+java:S2696#"6Make the enclosing method "static" or remove this set.(Òåé‰ùÿÿÿÿJ$4d8f6fa4-f888-4662-bbdf-b3fd2d808cc4
+	java:S100-"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Çö¨—üÿÿÿÿJ$f00f7448-2049-4334-8446-f315e186c4a4
 8
-java:S36265"Remove this redundant jump.(ûÁİ…8¥¿˜şé1
+java:S36269"Remove this redundant jump.(ûÁİ…8¥¿˜şé1
 r
-java:S2696,"6Make the enclosing method "static" or remove this set.(¢Í­J$eec992dc-2d56-4f61-bc98-00ebd9110a34
+java:S26960"6Make the enclosing method "static" or remove this set.(¢Í­J$eec992dc-2d56-4f61-bc98-00ebd9110a34
 r
-java:S2696-"6Make the enclosing method "static" or remove this set.(§¥¢J$ea80bafc-45e4-4111-9b11-1d4c7a9915b2
+java:S26961"6Make the enclosing method "static" or remove this set.(§¥¢J$9cab457c-563f-4816-b4ad-dfd216ecf4f8
 r
-java:S2696."6Make the enclosing method "static" or remove this set.(ßŸ˜°J$648fedb8-a33f-43a8-9dab-dfd3baee2d0c
+java:S26962"6Make the enclosing method "static" or remove this set.(ßŸ˜°J$648fedb8-a33f-43a8-9dab-dfd3baee2d0c
 w
-java:S2696/"6Make the enclosing method "static" or remove this set.(›şÌÅúÿÿÿÿJ$747bd4ed-692b-4ec4-8605-355ad3794e3d
+java:S26963"6Make the enclosing method "static" or remove this set.(›şÌÅúÿÿÿÿJ$747bd4ed-692b-4ec4-8605-355ad3794e3d
+S
+java:S26965"6Make the enclosing method "static" or remove this set.(»˜Á·8ŸúŸ„ê1
 r
-java:S26961"6Make the enclosing method "static" or remove this set.(»˜Á·J$9cab457c-563f-4816-b4ad-dfd216ecf4f8
-r
-java:S26964"6Make the enclosing method "static" or remove this set.(ÔúÈ·J$b1d8dba6-55a3-4b5e-9731-8c3ff2298db0
-k	java:S106J"+Replace this use of System.out by a logger.(ÿ¶ê¨ûÿÿÿÿJ$4136ca01-c5bf-492b-bbfc-eeee670e31b7
-k	java:S106L"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿJ$7cfd0533-ecb1-4c92-9922-e0cda40a472a
+java:S26968"6Make the enclosing method "static" or remove this set.(ÔúÈ·J$b1d8dba6-55a3-4b5e-9731-8c3ff2298db0
+S
+java:S2696D"6Make the enclosing method "static" or remove this set.(»˜Á·8¦úŸ„ê1

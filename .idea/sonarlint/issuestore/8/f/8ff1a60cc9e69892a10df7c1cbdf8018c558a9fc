@@ -1,73 +1,37 @@
 
-k	java:S117)"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Çö¨—üÿÿÿÿ
+˜	java:S117<"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(À€¡Ñÿÿÿÿÿ8Äñ „ê1J$47ea13fb-d2fe-40e5-8e51-09f2f6206942
 k
-java:S1104"PMake date a static final constant or non-public and provide accessors if needed.(ÂÎÁ§ûÿÿÿÿ
-f
-java:S1104"PMake time a static final constant or non-public and provide accessors if needed.(±Ûö…
-g
-java:S1104	"QMake price a static final constant or non-public and provide accessors if needed.(ŒËå“
-h
-java:S1104
-"RMake price1 a static final constant or non-public and provide accessors if needed.(Õ«­Ú
-m
-java:S1104"RMake price2 a static final constant or non-public and provide accessors if needed.(ê®À³ÿÿÿÿÿ
-p
-java:S1104"UMake adminBudg a static final constant or non-public and provide accessors if needed.(¬“öŽýÿÿÿÿ
-m
-java:S1104"WMake serviceBudg a static final constant or non-public and provide accessors if needed.(ÞÐýº
+java:S1604"(Make this anonymous inner class a lambda(¡ÀßÙ8Ûñ „ê1J$1d7b339a-51be-4f9b-a799-d7370044d68f
+
+java:S1104"TMake username a static final constant or non-public and provide accessors if needed.(Ÿ’—îJ$3041f760-092f-4c1e-b32b-9a138c2bf0e4
+ž
+java:S1104"VMake addToCalen a static final constant or non-public and provide accessors if needed.(½àã–ûÿÿÿÿ8èñ „ê1J$ff4cc1ac-84cc-45ad-8c06-21ae215caf8a
 j
-java:S1104"TMake username a static final constant or non-public and provide accessors if needed.(Ÿ’—î
-m
-java:S1104"WMake addToBudget a static final constant or non-public and provide accessors if needed.(‡ÆŒÐ
-p
-java:S1104"UMake BudgCalen a static final constant or non-public and provide accessors if needed.(çŠ®Èúÿÿÿÿ
-E
-java:S1444"*Make this "public static date" field final(ÂÎÁ§ûÿÿÿÿ
-@
-java:S1444"*Make this "public static time" field final(±Ûö…
-A
-java:S1444	"+Make this "public static price" field final(ŒËå“
-B
-java:S1444
-",Make this "public static price1" field final(Õ«­Ú
-G
-java:S1444",Make this "public static price2" field final(ê®À³ÿÿÿÿÿ
-J
-java:S1444"/Make this "public static adminBudg" field final(¬“öŽýÿÿÿÿ
-G
-java:S1444"1Make this "public static serviceBudg" field final(ÞÐýº
-D
-java:S1444".Make this "public static username" field final(Ÿ’—î
-G
-java:S1444"1Make this "public static addToBudget" field final(‡ÆŒÐ
-J
-java:S1444"/Make this "public static BudgCalen" field final(çŠ®Èúÿÿÿÿ
-o
-java:S3008"TRename this field "BudgCalen" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(çŠ®Èúÿÿÿÿ
-K
-java:S2696"6Make the enclosing method "static" or remove this set.(‰€œ{
-Q
-java:S2696"6Make the enclosing method "static" or remove this set.(«­¥ûÿÿÿÿÿ
-Q
-java:S2696"6Make the enclosing method "static" or remove this set.(Þ¸Ý©ÿÿÿÿÿ
-Q
-java:S2696"6Make the enclosing method "static" or remove this set.(Òåé‰ùÿÿÿÿ
-Q	java:S125 "<This block of commented-out lines of code should be removed.(Ü­ ‘
-E	java:S106$"+Replace this use of System.out by a logger.(©þêÜúÿÿÿÿ
-h	java:S100)"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Çö¨—üÿÿÿÿ
-1
-java:S36265"Remove this redundant jump.(ûÁÝ…
-L
-java:S2696,"6Make the enclosing method "static" or remove this set.(¢Í­
-L
-java:S2696-"6Make the enclosing method "static" or remove this set.(§¥ž¢
-L
-java:S2696."6Make the enclosing method "static" or remove this set.(ßŸ˜°
-Q
-java:S2696/"6Make the enclosing method "static" or remove this set.(›þÌÅúÿÿÿÿ
-L
-java:S26961"6Make the enclosing method "static" or remove this set.(»˜Á·
-L
-java:S26964"6Make the enclosing method "static" or remove this set.(ÔúÈ·
-E	java:S106J"+Replace this use of System.out by a logger.(ÿ¶ê¨ûÿÿÿÿ
-E	java:S106L"+Replace this use of System.out by a logger.(©þêÜúÿÿÿÿ
+java:S1444".Make this "public static username" field final(Ÿ’—îJ$b67e28b5-83b7-4304-983f-b00bef9bff6c
+x
+java:S1444"0Make this "public static addToCalen" field final(½àã–ûÿÿÿÿ8îñ „ê1J$5c6ce83d-997d-49c7-aec0-fd18e55c8e37
+Z
+java:S1700"Rename field "displayC"(ä÷Š„8ññ „ê1J$3c6946dd-2c65-4f21-9567-f703ef205dc1
+r
+java:S26960"6Make the enclosing method "static" or remove this set.(ÚÝÍ–J$1fd46e8d-a81a-444f-b991-c34873ca2d64
+y
+java:S26969"6Make the enclosing method "static" or remove this set.(Ô¦Ž8‘ó „ê1J$c510a65e-107e-4727-ba36-35311d16f0a1
+x
+java:S22099"5Change this instance-reference to a static reference.(Ô¦Ž8™ó „ê1J$b2bef152-9270-4fb3-940d-b397408378f3
+k	java:S106@"+Replace this use of System.out by a logger.(ÿ¶ê¨ûÿÿÿÿJ$3f2161e6-2969-4269-b7ae-8f9d71dd56a2
+k	java:S106B"+Replace this use of System.out by a logger.(©þêÜúÿÿÿÿJ$e538941a-b240-4c3d-86fb-088b34539f19
+q
+java:S2696N"6Make the enclosing method "static" or remove this set.(‰€œ{J$8555f21d-b8a7-4a35-9241-2feac1fe8785
+€
+java:S1117O"8Rename "date" which hides the field declared at line 94.(Àðå ûÿÿÿÿ8Òó „ê1J$8477c225-25b2-4bb5-a1f6-5058b4e85844
+€
+java:S1117P"8Rename "time" which hides the field declared at line 95.(ä¤§ìúÿÿÿÿ8Óó „ê1J$2a23ca44-1de9-437d-aff5-1faaebeae986
+y
+java:S2696R"6Make the enclosing method "static" or remove this set.(Ô¦Ž8Ôó „ê1J$ac45c281-70b1-41be-8252-f458c811fc7b
+x
+java:S2209R"5Change this instance-reference to a static reference.(Ô¦Ž8Õó „ê1J$4f927e78-8fd1-4d4e-a24d-2ea404226e44
+k	java:S106Y"+Replace this use of System.out by a logger.(©þêÜúÿÿÿÿJ$83b43529-9085-4534-ab84-9546e30b9844
+~
+java:S2696f"6Make the enclosing method "static" or remove this set.(ðž„ªýÿÿÿÿ8Üó „ê1J$f78bbe42-8008-48c2-98e3-411a1e3ac41d
+}
+java:S2209f"5Change this instance-reference to a static reference.(ðž„ªýÿÿÿÿ8Ýó „ê1J$a8d17256-d0e1-43d4-922f-58d098951a48

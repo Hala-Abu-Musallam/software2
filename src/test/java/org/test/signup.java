@@ -20,7 +20,6 @@ public class signup {
     public void user_succesfully_signs_up() {
         // Write code here that turns the phrase above into concrete actions
         assertTrue(User.loginFlag);
-
     }
 
     @When("user provides invalid information {string} {string}")
