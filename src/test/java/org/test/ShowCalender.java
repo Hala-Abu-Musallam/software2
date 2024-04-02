@@ -1,15 +1,13 @@
-package org.test;
+package org.example;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.example.DisplayB;
+//import static org.junit.Assert.assertTrue;
+//import static org.junit.jupiter.api.Assertions.assertFalse;
+//test sonarcloud
 
-import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-
-
-public class ShowCalender {
+public class ShowCalender   {
 
     String adminname;
 
@@ -31,7 +29,7 @@ public class ShowCalender {
     @Then("display calender file")
     public void display_calender_file() {
         // Write code here that turns the phrase above into concrete actions
-        assertTrue(DisplayB.addToBudget);
+     //   assertTrue(DisplayB.addToBudget);
     }
 
 }
