@@ -1,0 +1,36 @@
+
+ 	java:S135("YReduce the total number of break and continue statements in this loop to use at most one.(Œ²˜…ûÿÿÿÿ8Ç¸©ıé1J$47a41ead-e331-4772-91c4-889ba8ae2acc
+“
+java:S1104"PMake flag a static final constant or non-public and provide accessors if needed.(É’ã8Ò¸©ıé1J$563e59da-58c3-4208-b6ce-5bdfbce8cf59
+m
+java:S1444"*Make this "public static flag" field final(É’ã8Õ¸©ıé1J$524d5269-18dd-46c6-aa6d-ca3a9a37ce8a
+h
+java:S2629ï"$Invoke method(s) only conditionally.(ù²¤²8Û¸©ıé1J$a24c8d19-5a2a-48ec-abf0-a934b2353a5f
+g
+java:S2629“"$Invoke method(s) only conditionally.(…úİ8Ü¸©ıé1J$c226766b-93cf-44d6-8cc4-a58504625916
+g
+java:S2629Â"$Invoke method(s) only conditionally.(…úİ8Ş¸©ıé1J$2b172467-cc37-4656-997c-866fb6ce68df
+h
+java:S2629ñ"$Invoke method(s) only conditionally.(–ÇÕ¬8à¸©ıé1J$ed4de08d-d69a-462c-a6c9-8e9753530fc3
+h
+java:S2629¤"$Invoke method(s) only conditionally.(–ÇÕ¬8ã¸©ıé1J$4352c461-6f4b-492c-abc8-d996a4a7d758
+{
+java:S2589"7Remove this expression which always evaluates to "true"(›ûÅò8»Ì©ıé1J$e1c861eb-449c-46fb-a75c-bd1f03de3dc1
+•
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 44 to the 15 allowed.(Çµí‘8ÍÌ©ıé1J$46c718ec-fe0c-40cb-b9ca-38dc218b4093
+
+java:S1854+"9Remove this useless assignment to local variable "venue".(ëÕ¡…ÿÿÿÿÿ8ÒÌ©ıé1J$fb794975-b8b0-4728-89d0-75ed0f8d934b
+„
+java:S18545"<Remove this useless assignment to local variable "tryAgain".(ºù…Ïùÿÿÿÿ8ÒÌ©ıé1J$461d7930-7f76-4afe-9526-f22d11d34705
+
+java:S1854T"GRemove this useless assignment to local variable "chooseAnotherVendor".(şÉ§‚ûÿÿÿÿ8ÓÌ©ıé1J$2a9756dc-3d2d-4818-a999-336b3726d3bf
+r
+java:S1481+"*Remove this unused "venue" local variable.(ëÕ¡…ÿÿÿÿÿ8áÌ©ıé1J$0ea4de0f-9cbd-4a37-9202-62c2597edcfe
+
+java:S1854¤";Remove this useless assignment to local variable "running".(¡µ‚ 8ôÌ©ıé1J$23196c8b-09fb-49ff-a526-55b01d011211
+›
+java:S3776ı"RRefactor this method to reduce its Cognitive Complexity from 33 to the 15 allowed.(›¾â’øÿÿÿÿ8›Í©ıé1J$d1b3b7a2-1e2f-451d-a1a4-de981e671395
+‰
+java:S6541"ÅA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 89 to 64, Complexity from 16 to 14, Nesting Level from 6 to 2, Number of Variables from 18 to 6.(Çµí‘8“Î©ıé1J$052a4078-80a1-454c-b4a8-47d8db88cecd
+
+java:S6541ı"ÅA "Brain Method" was detected. Refactor it to reduce at least one of the following metrics: LOC from 89 to 64, Complexity from 15 to 14, Nesting Level from 4 to 2, Number of Variables from 18 to 6.(›¾â’øÿÿÿÿ8”Î©ıé1J$2587cfec-686c-4634-971a-d1033307642f

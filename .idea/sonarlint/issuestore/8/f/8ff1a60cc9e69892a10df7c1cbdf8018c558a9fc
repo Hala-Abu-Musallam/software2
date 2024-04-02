@@ -1,0 +1,73 @@
+
+k	java:S117)"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Çö¨—üÿÿÿÿ
+k
+java:S1104"PMake date a static final constant or non-public and provide accessors if needed.(ÂÎÁ§ûÿÿÿÿ
+f
+java:S1104"PMake time a static final constant or non-public and provide accessors if needed.(±Ûö…
+g
+java:S1104	"QMake price a static final constant or non-public and provide accessors if needed.(ŒËå“
+h
+java:S1104
+"RMake price1 a static final constant or non-public and provide accessors if needed.(Õ«­Ú
+m
+java:S1104"RMake price2 a static final constant or non-public and provide accessors if needed.(ê®À³ÿÿÿÿÿ
+p
+java:S1104"UMake adminBudg a static final constant or non-public and provide accessors if needed.(¬“öŽýÿÿÿÿ
+m
+java:S1104"WMake serviceBudg a static final constant or non-public and provide accessors if needed.(ÞÐýº
+j
+java:S1104"TMake username a static final constant or non-public and provide accessors if needed.(Ÿ’—î
+m
+java:S1104"WMake addToBudget a static final constant or non-public and provide accessors if needed.(‡ÆŒÐ
+p
+java:S1104"UMake BudgCalen a static final constant or non-public and provide accessors if needed.(çŠ®Èúÿÿÿÿ
+E
+java:S1444"*Make this "public static date" field final(ÂÎÁ§ûÿÿÿÿ
+@
+java:S1444"*Make this "public static time" field final(±Ûö…
+A
+java:S1444	"+Make this "public static price" field final(ŒËå“
+B
+java:S1444
+",Make this "public static price1" field final(Õ«­Ú
+G
+java:S1444",Make this "public static price2" field final(ê®À³ÿÿÿÿÿ
+J
+java:S1444"/Make this "public static adminBudg" field final(¬“öŽýÿÿÿÿ
+G
+java:S1444"1Make this "public static serviceBudg" field final(ÞÐýº
+D
+java:S1444".Make this "public static username" field final(Ÿ’—î
+G
+java:S1444"1Make this "public static addToBudget" field final(‡ÆŒÐ
+J
+java:S1444"/Make this "public static BudgCalen" field final(çŠ®Èúÿÿÿÿ
+o
+java:S3008"TRename this field "BudgCalen" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(çŠ®Èúÿÿÿÿ
+K
+java:S2696"6Make the enclosing method "static" or remove this set.(‰€œ{
+Q
+java:S2696"6Make the enclosing method "static" or remove this set.(«­¥ûÿÿÿÿÿ
+Q
+java:S2696"6Make the enclosing method "static" or remove this set.(Þ¸Ý©ÿÿÿÿÿ
+Q
+java:S2696"6Make the enclosing method "static" or remove this set.(Òåé‰ùÿÿÿÿ
+Q	java:S125 "<This block of commented-out lines of code should be removed.(Ü­ ‘
+E	java:S106$"+Replace this use of System.out by a logger.(©þêÜúÿÿÿÿ
+h	java:S100)"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(Çö¨—üÿÿÿÿ
+1
+java:S36265"Remove this redundant jump.(ûÁÝ…
+L
+java:S2696,"6Make the enclosing method "static" or remove this set.(¢Í­
+L
+java:S2696-"6Make the enclosing method "static" or remove this set.(§¥ž¢
+L
+java:S2696."6Make the enclosing method "static" or remove this set.(ßŸ˜°
+Q
+java:S2696/"6Make the enclosing method "static" or remove this set.(›þÌÅúÿÿÿÿ
+L
+java:S26961"6Make the enclosing method "static" or remove this set.(»˜Á·
+L
+java:S26964"6Make the enclosing method "static" or remove this set.(ÔúÈ·
+E	java:S106J"+Replace this use of System.out by a logger.(ÿ¶ê¨ûÿÿÿÿ
+E	java:S106L"+Replace this use of System.out by a logger.(©þêÜúÿÿÿÿ
