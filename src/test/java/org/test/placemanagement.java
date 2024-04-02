@@ -33,7 +33,7 @@ public class placemanagement {
 
     @Then("I should be able to specify the venue's name, my name \\(as the owner), the location, and the asking price")
     public void iShouldBeAbleToSpecifyTheVenueSNameMyNameAsTheOwnerTheLocationAndTheAskingPrice() {
-        // Here, you would set the details for the venue
+
         venue.setName("Grand Hall");
         venue.setOwnerName("Alice");
         venue.setLocation("Downtown");
@@ -53,8 +53,7 @@ public class placemanagement {
 
     @When("I choose to edit this venue")
     public void iChooseToEditThisVenue() {
-        // Here, you might simulate selecting the venue to edit
-        // The actual update happens in the next step
+
     }
 
 
@@ -77,7 +76,6 @@ public class placemanagement {
 
     @Then("the venue should be removed from the system")
     public void theVenueShouldBeRemovedFromTheSystem() {
-        // Verify the venue was removed
         assertFalse(serviceProvider.containsVenue(venue)); // As before, you'll need a method to check if the venue is present
     }
 }

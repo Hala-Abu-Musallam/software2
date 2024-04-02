@@ -1,20 +1,19 @@
 package org.example;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.logging.Logger;
 
 
 
 public class ServiceProvider {
+
     private Map<String, Vendor> vendors = new HashMap<>();
     public static final String VENDORS_FILE_PATH = "src/vendor.txt";
 
@@ -84,45 +83,50 @@ public class ServiceProvider {
     }
 
 
-    public void editEvent(String eventName){
+    public void editEvent(String eventName) {
         logger.info("Keys in savedEvents: " + savedEvents.keySet());
 
         if (savedEvents.containsKey(eventName)) {
             event = savedEvents.get(eventName);
-            System.out.println("Current event details:");
-            System.out.println(event);
+            logger.info("Current event details: " + event);
 
-            System.out.println("Enter new event details:");
+            logger.info("Enter new event details:");
             promptForEventDetails();
             savedEvents.put(eventName, event);
 
-            System.out.println("Event details updated successfully!");
+            logger.info("Event details updated successfully!");
         } else {
-            System.out.println("Event not found!");
+            logger.warning("Event not found!");
         }
     }
+
 
 
     public boolean deleteEvent(String eventName) {
         if (savedEvents.containsKey(eventName)) {
             savedEvents.remove(eventName);
-            System.out.println("Event deleted successfully!");
+            logger.info("Event deleted successfully!");
             return true;
         } else {
-            System.out.println("Event not found!");
+            logger.warning("Event not found!"); // Logging a warning when the event is not found
             return false;
         }
     }
 
-    public boolean modifyEventDetails(String eventName, String newDate,String newtime,double newprice, String newServices) {
-        if (savedEvents.containsKey(eventName)) {
-            Event eventToUpdate = savedEvents.get(eventName);
+
+    public boolean modifyEventDetails(String eventName, String newDate, String newTime, double newPrice, String newVendorName) {
+        boolean[] modified = {false};
+
+        savedEvents.computeIfPresent(eventName, (key, eventToUpdate) -> {
             eventToUpdate.setDate(newDate);
-            eventToUpdate.setVendorName(newServices);
-            savedEvents.put(eventName, eventToUpdate);
-            return true;
-        }
-        return false;
+            eventToUpdate.setTime(newTime);
+            eventToUpdate.setPrice(newPrice);
+            eventToUpdate.setVendorName(newVendorName);
+            modified[0] = true;
+            return eventToUpdate;
+        });
+
+        return modified[0];
     }
 
 
@@ -130,16 +134,7 @@ public class ServiceProvider {
         return savedEvents.get(eventName);
     }
 
-    public void displayAllEvents() {
-        if (savedEvents.isEmpty()) {
-            System.out.println("No events found.");
-        } else {
-            System.out.println("All Events:");
-            for (Map.Entry<String, Event> entry : savedEvents.entrySet()) {
-                System.out.println(entry.getValue());
-            }
-        }
-    }
+
 
 
     public void addVenue(Venue venue) {
@@ -180,29 +175,12 @@ public class ServiceProvider {
     }
     public void displayVenuesFromFile() {
         try (Stream<String> lines = Files.lines(Paths.get(VENUES_FILE_PATH))) {
-            lines.forEach(System.out::println);
+            lines.forEach(logger::info);
         } catch (IOException e) {
-            System.err.println("Error displaying venues from file: " + e.getMessage());
-        }
+            logger.severe("Error displaying venues from file: " + e.getMessage());        }
     }
 
-    public void loadVenuesFromFile() {
-        try {
-            venues.clear();
-            Path path = Paths.get(VENUES_FILE_PATH);
-            List<String> lines = Files.readAllLines(path);
-            for (String line : lines) {
-                String[] details = line.split(",");
-                if (details.length == 5) {
-                    Venue venue = new Venue(details[0], details[1], details[2],
-                            Integer.parseInt(details[3]), Double.parseDouble(details[4]));
-                    venues.add(venue);
-                }
-            }
-        } catch (IOException e) {
-            System.err.println("Error loading venues from file: " + e.getMessage());
-        }
-    }
+
 
     public void saveVenuesToFile() {
         try {
@@ -210,12 +188,13 @@ public class ServiceProvider {
             List<String> lines = venues.stream()
                     .map(v -> String.join(",", v.getName(), v.getOwnerName(), v.getLocation(),
                             String.valueOf(v.getCapacity()), String.valueOf(v.getPricing())))
-                    .collect(Collectors.toList());
+                    .toList();
             Files.write(path, lines);
         } catch (IOException e) {
-            System.err.println("Error saving venues to file: " + e.getMessage());
+            logger.severe("Error saving venues to file: " + e.getMessage());
         }
     }
+
 
     public void addVendor(Vendor vendor) {
         vendors.put(vendor.getName(), vendor);
@@ -253,7 +232,7 @@ public class ServiceProvider {
         try {
             Files.write(Paths.get(VENDORS_FILE_PATH), lines);
         } catch (IOException e) {
-            System.err.println("Error saving vendors to file: " + e.getMessage());
+            logger.severe("Error saving vendors to file: " + e.getMessage());
         }
     }
 
@@ -270,7 +249,7 @@ public class ServiceProvider {
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error loading vendors from file: " + e.getMessage());
+            logger.severe("Error loading vendors from file: " + e.getMessage());
         }
     }
 
@@ -279,52 +258,8 @@ public class ServiceProvider {
         return vendors.values();
     }
 
-    public void saveEventDetailsToFile(String event) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("src/events.txt", true))) {
-            bw.write(event);
-            bw.newLine();
-            System.out.println("Event added to events.txt successfully.");
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to events.txt: " + e.getMessage());
-        }
-    }
 
-    public void editEventInFile(String eventName, Scanner scanner) {
-        Path path = Paths.get("src/events.txt");
-        try {
-            List<String> lines = Files.readAllLines(path);
-            int index = -1;
-            for (int i = 0; i < lines.size(); i++) {
-                if (lines.get(i).contains(eventName)) {
-                    index = i;
-                    break;
-                }
-            }
-            if (index != -1) {
-                System.out.println("Editing Event: " + lines.get(index));
-                System.out.println("Enter new details (eventName,date,time,price,vendorName):");
-                String newDetails = scanner.nextLine();
-                lines.set(index, newDetails);
-                Files.write(path, lines);
-                System.out.println("Event updated successfully.");
-            } else {
-                System.out.println("Event not found.");
-            }
-        } catch (IOException e) {
-            System.err.println("Error when editing an event: " + e.getMessage());
-        }
-    }
-    public void deleteEventFromFile(String eventName) {
-        Path path = Paths.get("src/events.txt");
-        try {
-            List<String> lines = Files.readAllLines(path);
-            lines.removeIf(line -> line.contains(eventName));
-            Files.write(path, lines);
-            System.out.println("Event deleted successfully, if it existed.");
-        } catch (IOException e) {
-            System.err.println("Error when deleting an event: " + e.getMessage());
-        }
-    }
+
 
 
 

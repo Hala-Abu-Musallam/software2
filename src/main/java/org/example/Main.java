@@ -11,12 +11,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 
-import static org.example.VendorsByUser.date;
-import static org.example.VendorsByUser.time;
 
 public class Main {
     private static final Logger logger = LoggerFactory.getLogger(Main.class);
-    private static final String EVENTS_FILE_PATH = "src/events.txt"; // Define a constant for the events file path
+    private static final String EVENTS_FILE_PATH = "src/events.txt";
     private static final String WAITLIST_FILE_PATH = "src/waitList.txt";
     public static boolean flag=true;
 
@@ -61,7 +59,7 @@ public class Main {
                             if (!tryAnother.equalsIgnoreCase("yes")) {
                                 tryAgain = false;
                             }
-                            continue; // Continue to the next iteration of the loop
+                            continue;
                         }
 
                         boolean chooseAnotherVendor = true;

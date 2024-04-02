@@ -44,7 +44,7 @@ public class eventmanegement {
         assertEquals("Wedding", savedEvent.getName());
         assertEquals("2024-05-20", savedEvent.getDate());
         assertEquals("10:00-12:00", savedEvent.getTime());
-        assertEquals(5000.0, savedEvent.getPrice(), 0.01); // Adjust tolerance for double comparison
+        assertEquals(5000.0, savedEvent.getPrice(), 0.01);
         assertEquals("VendorName", savedEvent.getVendorName());
     }
 
@@ -59,7 +59,7 @@ public class eventmanegement {
 
     @Then("the system should remove the event from the database.")
     public void theSystemShouldRemoveTheEventFromTheDatabase() {
-        assertNull(ServiceProvider.getEventFromDatabase("Birthday"));;  // Pass event.getName() as the parameter
+        assertNull(ServiceProvider.getEventFromDatabase("Birthday"));
     }
 
     @When("the service provider chooses to edit the event.")
@@ -76,7 +76,7 @@ public class eventmanegement {
 
         assertTrue(serviceProvider.modifyEventDetails("Birthday", "2024-06-16", "10:00-15:00", 600.0, "Catering, DJ, Entertainment"));
 
-        Event modifiedEvent = serviceProvider.getEventFromDatabase("Birthday");
+        Event modifiedEvent = ServiceProvider.getEventFromDatabase("Birthday");
         assertNotNull(modifiedEvent);
         assertEquals("2024-06-16", modifiedEvent.getDate());
         assertEquals("10:00-15:00", modifiedEvent.getTime());
