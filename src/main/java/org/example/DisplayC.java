@@ -1,30 +1,24 @@
 package org.example;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-
 import java.util.Collections;
 import java.util.Date;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 
 public class DisplayC {
 
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH-HH");
+    private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
-    public static String date;
-    public static String time;
     public static String username;
     public static boolean addToCalen;
-    private static final Logger logger = LoggerFactory.getLogger(DisplayC.class);
+
     ArrayList<DisplayC> displayC = new ArrayList<>();
 
-    public void sorting(String date,String time) {
+    public void sorting(String date, String time) {
         fromFile();
 
         Collections.sort(displayC, new Comparator<DisplayC>() {
@@ -49,35 +43,26 @@ public class DisplayC {
             }
         });
 
-        for (int i = 0; i < displayC.size(); i++) {
-            DisplayC event = displayC.get(i);
-            logger.info(event.username + ", " + event.date + ", " + event.time);
-
-            saveToFile(username,date,time);
-            addToCalen=true;
-        }
-
-        saveToFile(username,date,time);
-        addToCalen=true;
+        saveToFile(date, time);
+        addToCalen = true;
     }
 
-    private void saveToFile(String username,String date ,String time) {
-
+    private void saveToFile(String date, String time) {
         try {
             File file = new File("src/calender.txt");
 
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
                 for (DisplayC event : displayC) {
-                    event.username=username;
-                    event.date=date;
-                    event.time=time;
-                    String Calen = username + ", " +date + ", " + time + "\n";
+                    event.username = username;
+                    event.date = date;
+                    event.time = time;
+                    String Calen = username + ", " + date + ", " + time + "\n";
                     bufferedWriter.write(Calen);
                 }
             }
-            logger.info("Information stored successfully.");
+            System.out.println("Information stored successfully.");
         } catch (IOException e) {
-            logger.info(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
 
@@ -90,14 +75,45 @@ public class DisplayC {
                 while ((info = bufferedReader.readLine()) != null) {
                     String[] data = info.split(",");
                     username = data[0];
-                    date = data[1];
-                    time = data[2];
-                    displayC.add(this);
+                    String date = data[1];
+                    String time = data[2];
+                    DisplayC event = new DisplayC();
+                    event.username = username;
+                    event.date = date;
+                    event.time = time;
+                    displayC.add(event);
                 }
             }
         } catch (IOException e) {
-            logger.info(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }
-}
 
+    // Add getters and setters for username, date, and time if needed
+    private String date;
+    private String time;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+}
