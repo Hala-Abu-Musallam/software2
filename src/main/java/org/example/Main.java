@@ -549,7 +549,7 @@ public class Main {
         }
 
         int eventChoice = scanner.nextInt();
-        scanner.nextLine(); // Consume the leftover newline
+        scanner.nextLine();
 
         if (eventChoice < 1 || eventChoice > events.size()) {
             logger.info("Invalid event selection.");
