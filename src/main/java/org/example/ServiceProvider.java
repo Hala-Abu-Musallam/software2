@@ -9,6 +9,10 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.logging.Logger;
+
+
 
 public class ServiceProvider {
     private Map<String, Vendor> vendors = new HashMap<>();
@@ -16,6 +20,7 @@ public class ServiceProvider {
 
     public static final String VENUES_FILE_PATH = "src/Venues.txt";
     private static final Map<String, Event> savedEvents = new HashMap<>();
+    private static final Logger logger = Logger.getLogger(ServiceProvider.class.getName());
 
     private String username;
     private String password;
@@ -51,18 +56,19 @@ public class ServiceProvider {
 
     public void promptForEventDetails() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Please enter event details:");
-        System.out.print("Event Name: ");
+        logger.info("Please enter event details:");
+        logger.info("Event Name: ");
         String eventName = scanner.nextLine();
-        System.out.print("Date: ");
+        logger.info("Date: ");
         String date = scanner.nextLine();
-        System.out.print("Time: ");
+        logger.info("Time: ");
         String time = scanner.nextLine();
-        System.out.print("Price: ");
+        logger.info("Price: ");
         double price = scanner.nextDouble();
         scanner.nextLine();
-        System.out.print("Vendor Name: ");
+        logger.info("Vendor Name: ");
         String vendorName = scanner.nextLine();
+
         event = new Event(eventName, date, time, price, vendorName);
     }
 
@@ -70,7 +76,7 @@ public class ServiceProvider {
     public void saveEventDetails(String eventName, String date, String time, double price, String vendorName) {
         Event event = new Event(eventName, date, time, price, vendorName);
         savedEvents.put(eventName, event);
-        System.out.println("Event saved successfully!");
+        logger.info("Event saved successfully!");
     }
 
     public Event getEvent() {
@@ -79,7 +85,7 @@ public class ServiceProvider {
 
 
     public void editEvent(String eventName){
-        System.out.println("Keys in savedEvents: " + savedEvents.keySet());
+        logger.info("Keys in savedEvents: " + savedEvents.keySet());
 
         if (savedEvents.containsKey(eventName)) {
             event = savedEvents.get(eventName);
@@ -173,8 +179,8 @@ public class ServiceProvider {
         return venues.contains(venue);
     }
     public void displayVenuesFromFile() {
-        try {
-            Files.lines(Paths.get(VENUES_FILE_PATH)).forEach(System.out::println);
+        try (Stream<String> lines = Files.lines(Paths.get(VENUES_FILE_PATH))) {
+            lines.forEach(System.out::println);
         } catch (IOException e) {
             System.err.println("Error displaying venues from file: " + e.getMessage());
         }
