@@ -1,4 +1,5 @@
 package org.example;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,8 +13,12 @@ public class DisplayC {
     private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
     private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
-    public static String username;
-    public static boolean addToCalen;
+    private String username;
+    private String date;
+    private String startTime;
+    private String endTime;
+
+    public static boolean addToCalendar;
 
     ArrayList<DisplayC> displayC = new ArrayList<>();
 
@@ -26,8 +31,8 @@ public class DisplayC {
                 try {
                     Date date1 = dateFormat.parse(o1.date);
                     Date date2 = dateFormat.parse(o2.date);
-                    Date time1 = timeFormat.parse(o1.time);
-                    Date time2 = timeFormat.parse(o2.time);
+                    Date time1 = timeFormat.parse(o1.startTime);
+                    Date time2 = timeFormat.parse(o2.startTime);
 
                     int dateComparison = date1.compareTo(date2);
                     if (dateComparison != 0) {
@@ -43,19 +48,20 @@ public class DisplayC {
         });
 
         saveToFile(date, time);
-        addToCalen = true;
+        addToCalendar = true;
     }
 
     private void saveToFile(String date, String time) {
         try {
-            File file = new File("src/calender.txt");
+            File file = new File("src/calendr.txt");
 
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
                 for (DisplayC event : displayC) {
                     event.username = username;
                     event.date = date;
-                    event.time = time;
-                    String Calen = username + ", " + date + ", " + time + "\n";
+                    event.startTime = time;
+                    event.endTime = time; // Assuming the end time is the same as start time
+                    String Calen = username + ", " + date + ", " + event.startTime + "-" + event.endTime + "\n";
                     bufferedWriter.write(Calen);
                 }
             }
@@ -74,12 +80,15 @@ public class DisplayC {
                 while ((info = bufferedReader.readLine()) != null) {
                     String[] data = info.split(",");
                     username = data[0];
-                    String date = data[1];
-                    String time = data[2];
+                    date = data[1];
+                    String[] times = data[2].split("-");
+                    startTime = times[0];
+                    endTime = times[1];
                     DisplayC event = new DisplayC();
                     event.username = username;
                     event.date = date;
-                    event.time = time;
+                    event.startTime = startTime;
+                    event.endTime = endTime;
                     displayC.add(event);
                 }
             }
@@ -88,31 +97,5 @@ public class DisplayC {
         }
     }
 
-    // Add getters and setters for username, date, and time if needed
-    private String date;
-    private String time;
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getTime() {
-        return time;
-    }
-
-    public void setTime(String time) {
-        this.time = time;
-    }
+    // Add getters and setters for username, date, startTime, and endTime if needed
 }

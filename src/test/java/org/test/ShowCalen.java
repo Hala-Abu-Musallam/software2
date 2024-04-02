@@ -26,7 +26,7 @@ public class ShowCalen {
     @Then("sorting events in calender file")
     public void sortingEventsInCalenderFile() {
         // Write code here that turns the phrase above into concrete actions
-        assertTrue(DisplayC.addToCalen);
+        assertTrue(DisplayC.addToCalendar);
     }
 
 }
