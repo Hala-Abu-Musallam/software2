@@ -1,11 +1,14 @@
 package org.example;
 import java.io.*;
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 public class DisplayB {
 
-    public static int date;
-    public static int time;
+    public static String date;
+    public static String time;
     public static double price;
     public static double price1;
     public static double price2;
@@ -13,6 +16,7 @@ public class DisplayB {
     public static double serviceBudg;
     public static String username;
     public static boolean  addToBudget;
+    private static final Logger logger = LoggerFactory.getLogger(DisplayB.class);
 
     public static String BudgCalen;
     ArrayList<DisplayB> display = new ArrayList<>();
@@ -26,14 +30,14 @@ public class DisplayB {
                 while ((information = bufferedReader.readLine()) != null) {
                     String[] data = information.split(",");
                     username=data[0];
-                    date=Integer.parseInt(data[1]);
-                    time=Integer.parseInt(data[2]);
+                    date=data[1];
+                    time=data[2];
                     price=Double.parseDouble(data[3]);
                     display.add(this);
                 }
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 
@@ -54,26 +58,19 @@ public class DisplayB {
     }
 
 
-    public void writeInformation(String username, int date, int time, double price,double serviceBudg, double adminBudg) {
+    public void writeInformation(String username, String date, String time, double price,double serviceBudg, double adminBudg) {
         try {
             File file = new File("src/budget.txt");
 
             try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {
-                bufferedWriter.write("Username: " + username);
-                bufferedWriter.newLine();
-                bufferedWriter.write("Date: " + date);
-                bufferedWriter.newLine();
-                bufferedWriter.write("Time: " + time);
-                bufferedWriter.newLine();
-                bufferedWriter.write("Price: " + price);
-                bufferedWriter.newLine();
-                bufferedWriter.write("Service Budget: " + serviceBudg);
-                bufferedWriter.newLine();
-                bufferedWriter.write("Admin Budget: " + adminBudg);
+                String Bud = username + "  ,  "  + date + "  ,  " + time + ",  Price:" + price + ",  ServiceBudget:"+ serviceBudg + ",  AdmainBudget:"+adminBudg+"\n";
+                bufferedWriter.write(Bud);
+                addToBudget = true;
+
             }
-            System.out.println("Information stored successfully.");
+            logger.info("Information stored successfully.");
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.info(e.getMessage());
         }
     }
 

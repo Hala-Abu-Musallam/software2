@@ -1,35 +1,31 @@
+
 package org.test;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-//import static org.junit.Assert.assertTrue;
-//import static org.junit.jupiter.api.Assertions.assertFalse;
+import org.example.DisplayC;
+
+import static org.junit.Assert.assertTrue;
 //test sonarcloud
-
-public class ShowCalender   {
-
-    String adminname;
-
+public class ShowCalender {
+    String username;
     @Given("Admin name is {string}")
     public void admin_name_is(String string) {
-        // Write code here that turns the phrase above into concrete actions\
-        adminname=string;
+
+        username=string;
     }
+    @When("the event is earlier according to time and date {string} {string}")
+    public void the_event_is_earlier_according_to_time_and_date(String string, String string2) {
 
-
-    @When("admin choose display calender {string}")
-    public void admin_choose_display_calender(String string) {
-        // Write code here that turns the phrase above into concrete actions
+        DisplayC displayC=new DisplayC();
+        displayC.sorting(string,string2);
 
     }
+    @Then("sorting events in calender file")
+    public void sorting_events_in_calender_file() {
 
-
-
-    @Then("display calender file")
-    public void display_calender_file() {
-        // Write code here that turns the phrase above into concrete actions
-     //   assertTrue(DisplayB.addToBudget);
+        assertTrue(DisplayC.addToCalen);
     }
 
 }
