@@ -1,0 +1,54 @@
+
+f	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(š¡Ş‹
+l
+java:S1104"QMake email a static final constant or non-public and provide accessors if needed.(¿ÿÒíÿÿÿÿÿ
+f
+java:S1104"PMake type a static final constant or non-public and provide accessors if needed.(ÅÉÀÚ
+j
+java:S1104"TMake username a static final constant or non-public and provide accessors if needed.(Ÿ’—î
+k
+java:S1104"PMake date a static final constant or non-public and provide accessors if needed.(ïÄåâÿÿÿÿÿ
+f
+java:S1104"PMake time a static final constant or non-public and provide accessors if needed.(ÑÆœĞ
+q
+java:S1104"VMake addSuccess a static final constant or non-public and provide accessors if needed.(¼‚²’şÿÿÿÿ
+m
+java:S1104"WMake vendor_type a static final constant or non-public and provide accessors if needed.(ú…ş‘
+F
+java:S1444"+Make this "public static email" field final(¿ÿÒíÿÿÿÿÿ
+@
+java:S1444"*Make this "public static type" field final(ÅÉÀÚ
+D
+java:S1444".Make this "public static username" field final(Ÿ’—î
+E
+java:S1444"*Make this "public static date" field final(ïÄåâÿÿÿÿÿ
+@
+java:S1444"*Make this "public static time" field final(ÑÆœĞ
+K
+java:S1444"0Make this "public static addSuccess" field final(¼‚²’şÿÿÿÿ
+G
+java:S1444"1Make this "public static vendor_type" field final(ú…ş‘
+l
+java:S3008"VRename this field "vendor_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(ú…ş‘
+Q
+java:S2696""6Make the enclosing method "static" or remove this set.(ïåÉ£üÿÿÿÿ
+Q
+java:S2696#"6Make the enclosing method "static" or remove this set.(ôìÿùùÿÿÿÿ
+Q
+java:S26964"6Make the enclosing method "static" or remove this set.(ä‹„âıÿÿÿÿ
+L
+java:S2696?"6Make the enclosing method "static" or remove this set.(†âí­
+Q
+java:S2696@"6Make the enclosing method "static" or remove this set.(¸ƒªºıÿÿÿÿ
+L
+java:S2696A"6Make the enclosing method "static" or remove this set.(¶¢´¿
+L
+java:S2696B"6Make the enclosing method "static" or remove this set.(®¨ëã
+Q
+java:S2696G"6Make the enclosing method "static" or remove this set.(Î¡‰½ûÿÿÿÿ
+L
+java:S2696M"6Make the enclosing method "static" or remove this set.(£¡êŠ
+Q
+java:S2696Q"6Make the enclosing method "static" or remove this set.(ÔˆŒúÿÿÿÿ
+L
+java:S2696U"6Make the enclosing method "static" or remove this set.(½ìá€

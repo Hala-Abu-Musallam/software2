@@ -1,0 +1,37 @@
+
+˜	java:S117@"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(À€¡Ñÿÿÿÿÿ8ÂùÒ„ê1J$41b775fe-e988-4e4d-8da5-87753e082155
+k
+java:S1604"(Make this anonymous inner class a lambda(¡ÀßÙ8¾”Ş„ê1J$6c223d61-8002-4681-9512-455ce8cfe062
+—
+java:S1104"TMake username a static final constant or non-public and provide accessors if needed.(Ÿ’—î8ÄùÒ„ê1J$57078bc6-28bb-43eb-b878-e4700405e8b0
+
+java:S1104"VMake addToCalen a static final constant or non-public and provide accessors if needed.(½àã–ûÿÿÿÿ8ÅùÒ„ê1J$30180bea-044b-4aa5-aab4-e98f391fbc5e
+q
+java:S1444".Make this "public static username" field final(Ÿ’—î8ÅùÒ„ê1J$a6eb19d6-4a35-403c-933d-ba9af8953a23
+x
+java:S1444"0Make this "public static addToCalen" field final(½àã–ûÿÿÿÿ8ÆùÒ„ê1J$a6dda50f-3a73-4262-97a6-2a12538bc7ff
+Z
+java:S1700"Rename field "displayC"(ä÷Š„8ÇùÒ„ê1J$59d4fb0b-cc27-4bc5-be5a-87ba19c5ab5e
+y
+java:S26964"6Make the enclosing method "static" or remove this set.(ÚİÍ–8ìùÒ„ê1J$30dbf845-1f40-4866-a47c-2dabb7e1546b
+y
+java:S2696="6Make the enclosing method "static" or remove this set.(Ô¦8òùÒ„ê1J$ad5c3f2b-9eef-40bb-ad70-34780f7df561
+x
+java:S2209="5Change this instance-reference to a static reference.(Ô¦8óùÒ„ê1J$34b86c92-b6ae-4e91-8f79-4b2f3c4e55de
+r	java:S106D"+Replace this use of System.out by a logger.(ÿ¶ê¨ûÿÿÿÿ8öùÒ„ê1J$fd24be69-3414-41c3-a023-cadd06181f23
+r	java:S106F"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿ8÷ùÒ„ê1J$4b972de6-f2ed-4011-b8c1-ca02a262b382
+x
+java:S2696R"6Make the enclosing method "static" or remove this set.(‰€œ{8ûùÒ„ê1J$d6933d51-05b2-4e98-8d33-1af2641f12a3
+€
+java:S1117S"8Rename "date" which hides the field declared at line 97.(Àğå ûÿÿÿÿ8üùÒ„ê1J$5270efba-30a0-42ef-af8c-28ad2c4ccb1f
+€
+java:S1117T"8Rename "time" which hides the field declared at line 98.(ä¤§ìúÿÿÿÿ8üùÒ„ê1J$56de3f08-2919-4d43-8989-4cbeb23f8a52
+y
+java:S2696V"6Make the enclosing method "static" or remove this set.(Ô¦8ıùÒ„ê1J$b03ce4a3-5db1-430c-8ba5-09cf0b5454ce
+x
+java:S2209V"5Change this instance-reference to a static reference.(Ô¦8ıùÒ„ê1J$9196c2f3-c88a-451c-aed8-7781bb24c23d
+r	java:S106]"+Replace this use of System.out by a logger.(©şêÜúÿÿÿÿ8ÿùÒ„ê1J$d136a680-d8a3-4bc2-a7e3-9bf6b604ec1a
+~
+java:S2696i"6Make the enclosing method "static" or remove this set.(ğ„ªıÿÿÿÿ8€úÒ„ê1J$1c3b7e33-2027-4205-9cdc-d5b5ce57892e
+}
+java:S2209i"5Change this instance-reference to a static reference.(ğ„ªıÿÿÿÿ8úÒ„ê1J$b38b8829-1cf0-4c86-90f2-b015015293bf

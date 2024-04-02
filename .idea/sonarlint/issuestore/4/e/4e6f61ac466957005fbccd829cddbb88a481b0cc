@@ -1,0 +1,17 @@
+
+¤
+java:S2629W"\Invoke method(s) only conditionally. Use the built-in formatting to construct this argument.(îÇ¡ôùÿÿÿÿ8§éÛòé1J$5499555b-069e-41e7-9168-f56ffce086e5
+
+java:S2629["7Use the built-in formatting to construct this argument.(¤ùæãøÿÿÿÿ8¨éÛòé1J$a9165724-004d-48d5-85ac-37b945aba216
+Ÿ
+java:S1450"WRemove the "password" field and declare it as a local variable in the relevant methods.(œãë­úÿÿÿÿ8ËÈÜïé1J$15108e5c-98b1-44c8-b421-814a02ebb4e4
+š
+java:S1450"WRemove the "username" field and declare it as a local variable in the relevant methods.(‘ó¹²8ÎÈÜïé1J$73543b2a-745c-46d8-8fe9-d3943ec4408e
+
+java:S1117L"9Rename "event" which hides the field declared at line 28.(œ”ƒÔşÿÿÿÿ8ÈÄ‰óé1J$42c3996e-13a2-4332-b243-1ddb34e5ebb8
+o
+java:S1068",Remove this unused "username" private field.(‘ó¹²8ßÑÜïé1J$b70b5716-67a0-4892-b433-9957930f394b
+t
+java:S1068",Remove this unused "password" private field.(œãë­úÿÿÿÿ8âÑÜïé1J$b9f5b25b-8c09-4479-a369-37eb6fbc2e7d
+
+java:S1068"9Remove this unused "choosingToCreateVenue" private field.(÷ûÖšüÿÿÿÿ8åÑÜïé1J$e3aeb36e-41bd-4f7b-b45d-059a19bccbc6

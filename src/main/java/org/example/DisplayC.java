@@ -1,4 +1,6 @@
 package org.example;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -10,8 +12,10 @@ import java.util.Date;
 
 public class DisplayC {
 
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private static final Logger LOGGER = Logger.getLogger(DisplayC.class.getName());
+
+    private final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm");
 
     public static String username;
     public static boolean addToCalen;
@@ -37,11 +41,12 @@ public class DisplayC {
 
                     return time1.compareTo(time2);
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    LOGGER.log(Level.SEVERE, e.getMessage(), e);
                     return 0;
                 }
             }
         });
+
 
         saveToFile(date, time);
         addToCalen = true;
@@ -89,7 +94,6 @@ public class DisplayC {
         }
     }
 
-    // Add getters and setters for username, date, and time if needed
     private String date;
     private String time;
 
@@ -100,6 +104,7 @@ public class DisplayC {
     public void setUsername(String username) {
         this.username = username;
     }
+
 
     public String getDate() {
         return date;

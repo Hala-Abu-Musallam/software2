@@ -1,0 +1,47 @@
+
+†
+java:S1319"iThe type of "userDatabase" should be an interface such as "Map" rather than the implementation "HashMap".(ÏÆ 8à·Øƒê1
+’
+java:S1104"QMake users a static final constant or non-public and provide accessors if needed.(ğ¸§öøÿÿÿÿJ$161a255e-1519-4261-a4f2-7f26016f5778
+
+java:S1104"TMake username a static final constant or non-public and provide accessors if needed.(Ü±›ÔJ$fb232d11-14ae-49b1-bf0a-36525aa2abd3
+–
+java:S1104"UMake loginFlag a static final constant or non-public and provide accessors if needed.(­›õŞşÿÿÿÿJ$2716ccb0-7cb5-4903-a9f6-333d88c3976f
+‘
+java:S1104"UMake user_type a static final constant or non-public and provide accessors if needed.(½âõÏJ$d1116a11-2e83-403b-b2ab-84ad70bb26d1
+u
+java:S1104"XMake userDatabase a static final constant or non-public and provide accessors if needed.(ÏÆ 8ı·Øƒê1
+p
+java:S1444"/Make this "public static loginFlag" field final(­›õŞşÿÿÿÿJ$967cd7b4-e4b5-4081-8f2e-27a9d72ae586
+L
+java:S1444"/Make this "public static user_type" field final(½âõÏ8ø’‘şé1
+q
+java:S3008"TRename this field "user_type" to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½âõÏ8”“‘şé1
+R
+java:S2696#"6Make the enclosing method "static" or remove this set.(Êë¸8¦“‘şé1
+S
+java:S2696&"6Make the enclosing method "static" or remove this set.(âÆš³8¨“‘şé1
+S
+java:S2696)"6Make the enclosing method "static" or remove this set.(ñ›ÿÛ8ª“‘şé1
+~
+java:S2696,"6Make the enclosing method "static" or remove this set.(ñ«Õƒúÿÿÿÿ8Şíüıé1J$09ff6728-01a6-4207-bb87-9b44c2c7614e
+~
+java:S2696/"6Make the enclosing method "static" or remove this set.(¤•µ¸üÿÿÿÿ8âíüıé1J$36740541-78ea-4d94-8972-07d85634d825
+~
+java:S26967"6Make the enclosing method "static" or remove this set.(¤•µ¸üÿÿÿÿ8åíüıé1J$a2f905c2-beb2-49c7-91d7-c09ea7c914b2
+R
+java:S2696<"6Make the enclosing method "static" or remove this set.(Êë¸8°“‘şé1
+~
+java:S2696>"6Make the enclosing method "static" or remove this set.(âª´ùÿÿÿÿ8èíüıé1J$4f28156e-b09f-49e5-b4d6-c31a161320bd
+S
+java:S2696@"6Make the enclosing method "static" or remove this set.(âÆš³8³“‘şé1
+~
+java:S2696B"6Make the enclosing method "static" or remove this set.(âª´ùÿÿÿÿ8êíüıé1J$23696d26-67bb-491f-a68d-5d311b666008
+S
+java:S2696D"6Make the enclosing method "static" or remove this set.(ñ›ÿÛ8¶“‘şé1
+~
+java:S2696F"6Make the enclosing method "static" or remove this set.(âª´ùÿÿÿÿ8Ù÷Œşé1J$d8495942-5a48-4c5c-bc5c-b0f980c355b3
+X
+java:S2696H"6Make the enclosing method "static" or remove this set.(Ÿá èüÿÿÿÿ8·“‘şé1
+~
+java:S2696I"6Make the enclosing method "static" or remove this set.(¤•µ¸üÿÿÿÿ8Ú÷Œşé1J$95b87d21-e775-442f-a007-9da3504b83ae
