@@ -10,6 +10,7 @@ import static org.junit.Assert.assertTrue;
 public class AddByUser {
     CheckEvent checkEvent=new CheckEvent();
     String username;
+    String name;
     @Given("username is {string}")
     public void username_is(String string) {
         // Write code here that turns the phrase above into concrete actions
@@ -19,7 +20,7 @@ public class AddByUser {
     @When("Date and Time are available {string}{string}")
     public void dateAndTimeAreAvailableDateTime(String string, String string2) {
 
-        checkEvent.checkEvent(string,string2,username);
+        checkEvent.checkEvent(username,string,string2,name);
 
     }
 
@@ -31,7 +32,7 @@ public class AddByUser {
 
     @When("Date or Time is unavailable or wrong {string}{string}")
     public void dateOrTimeIsUnavailableOrWrongDateTime(String string, String string2) {
-        checkEvent.checkEvent(string,string2,username);
+        checkEvent.checkEvent(username,string,string2,name);
     }
 
     @Then("failed to add event")

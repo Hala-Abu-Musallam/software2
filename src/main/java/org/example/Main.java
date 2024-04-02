@@ -56,7 +56,7 @@ public class Main {
 
                         CheckEvent checker = new CheckEvent();
 
-                        checker.checkEvent(date, time, user.username);
+                        checker.checkEvent(user.username,date, time,venue );
                         if (CheckEvent.addSuccess) {
                             logger.info("Event has been successfully added to wait list!\n");
                         } else {

@@ -22,7 +22,7 @@ public class VendorsByUser{
     private static final Logger logger = LoggerFactory.getLogger(VendorsByUser.class);
 
     ArrayList<VendorsByUser> vendors = new ArrayList<>();
-    public void getVendorsfromFile() {
+    public void getVendorsFromFile() {
         try {
 
             vendors.clear();
@@ -43,11 +43,11 @@ public class VendorsByUser{
     }
 
 
-    public void writeVendors(String username,String type, String date, String time, String email) {
+    public void writeVendors(String username, String date, String time, String email,String type) {
         try {
             File file = new File("src/waitList.txt");
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
-                String vendor = username + ","  + type + "," + date + "," + time + ","+ email +"\n";
+                String vendor = username +  "," + date + "," + time + ","+ email +"," + type +"\n";
                 bufferedWriter.write(vendor);
                 addSuccess = true;
             }
@@ -59,27 +59,27 @@ public class VendorsByUser{
 
     }
 
-    public void addVendor (String usernamee,String typee ,String datee,String timee,String email){
+    public void addVendor (String usernamee,String datee,String timee,String email,String typee ){
         date=datee;
         type=typee;
         time=timee;
         username=usernamee;
 
 
-        getVendorsfromFile();
+        getVendorsFromFile();
         if ( typee.equals ( "decoration" ) ){
             vendor_type = 1;
 
-            writeVendors (username ,typee, date , time ,email);
+            writeVendors (username , date , time ,email,typee);
 
         }
         else if (typee.equals("DJ")){
             vendor_type = 2 ;
-            writeVendors (username ,typee, date , time ,email );
+            writeVendors (username , date , time ,email,typee );
         }
         else if (typee.equals("photographer")){
             vendor_type = 3 ;
-            writeVendors (username ,typee, date , time ,email);
+            writeVendors (username , date , time ,email,typee);
         }
         else{
             vendor_type=-1;

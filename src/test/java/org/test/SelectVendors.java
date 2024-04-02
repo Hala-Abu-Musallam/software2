@@ -30,7 +30,7 @@ public class SelectVendors {
     public void user_choose_vendors(String string, String string2) {
         // Write code here that turns the phrase above into concrete actions
         VendorsByUser vendor =new VendorsByUser();
-        vendor.addVendor(username,string,date,time,string2);
+        vendor.addVendor(username,date,time,string2,string);
     }
 
     @Then("book vendor to the event")

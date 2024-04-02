@@ -21,6 +21,7 @@ public class CheckEvent {
     };
     public static boolean addSuccess;
     public static String username;
+    public static String name;
 
     private static void checkIfDateValid(Date inputDate) {
         Calendar calendar = Calendar.getInstance();
@@ -74,7 +75,7 @@ public class CheckEvent {
         return false;
     }
 
-    public void checkEvent(String date, String time, String username) {
+    public void checkEvent( String username,String date, String time,String name) {
         getEventfromFile();
         if (!checkDate(date)) {
             return;
@@ -99,7 +100,7 @@ public class CheckEvent {
             }
         }
 if (addSuccess)
-        writeUsers(username, date, time);
+        writeUsers(username, date, time,name);
 
 
     }
@@ -130,14 +131,13 @@ if (addSuccess)
         }
     }
 
-    public void writeUsers(String username, String date, String time) {
+    public void writeUsers(String username, String date, String time ,String name) {
         try {
             File file = new File("src/waitList.txt");
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {
-                String event = username + "," + date + "," + time + "\n";
+                String event = username + "," + date + "," + time + ","+name+"\n";
 
                 bufferedWriter.write(event);
-                //System.out.println(event);
                 addSuccess = true;
             }
             } catch (IOException e) {

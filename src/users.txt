@@ -4,4 +4,3 @@ mohammed@user.com,1234mohammed
 decoration@serviceprovider.com,1234decoration
 DJ@serviceprovider.com,1234DJ
 photographer@serviceprovider.com,1234photographer
-halakhaled@admin.com,hala1234
