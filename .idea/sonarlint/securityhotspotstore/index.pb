@@ -19,3 +19,9 @@ S
 src/budget.txt,f\e\fe1bf9d022bfd609315fdadaf115b02a2322cb43
 @
 src/calender.txt,9\f\9f2f02724e28d20d6a00a0f3437564f8a73b2f7e
+7
+pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
+<
+software.iml,c\e\cea4056e810d4bc56fbffea90cfe9f4412267ec5
+Z
+*src/test/java/org/test/AcceptanceTest.java,f\c\fc5769e2664b4e06367d0fb13db3285f6529086f
