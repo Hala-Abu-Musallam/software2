@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuite tests="24" failures="1" name="org.test.AcceptanceTest" time="0.918" errors="0" skipped="0">
+  <properties>
+    <property name="idea.version" value="2022.2.5"/>
+    <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
+    <property name="java.vm.version" value="18.0.1.1+2-6"/>
+    <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk-18.0.1.1\bin"/>
+    <property name="maven.multiModuleProjectDirectory" value="C:\soft\soft"/>
+    <property name="java.vm.vendor" value="Oracle Corporation"/>
+    <property name="java.vendor.url" value="https://java.oracle.com/"/>
+    <property name="guice.disable.misplaced.annotation.check" value="true"/>
+    <property name="path.separator" value=";"/>
+    <property name="java.vm.name" value="Java HotSpot(TM) 64-Bit Server VM"/>
+    <property name="sun.os.patch.level" value=""/>
+    <property name="user.script" value=""/>
+    <property name="user.country" value="US"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="user.dir" value="C:\soft\soft"/>
+    <property name="java.vm.compressedOopsMode" value="Zero based"/>
+    <property name="java.runtime.version" value="18.0.1.1+2-6"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.io.tmpdir" value="C:\Users\user\AppData\Local\Temp\"/>
+    <property name="line.separator" value="
+"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="user.variant" value=""/>
+    <property name="os.name" value="Windows 11"/>
+    <property name="maven.ext.class.path" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.2.3\plugins\maven\lib\maven-event-listener.jar"/>
+    <property name="classworlds.conf" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.2.3\plugins\maven\lib\maven3\bin\m2.conf"/>
+    <property name="sun.jnu.encoding" value="Cp1252"/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk-18.0.1.1\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\db_home\bin;C:\python\Python312\Scripts\;C:\python\Python312\;C:\Users\user\Downloads\app\db_home\bin;C:\Program Files\Common Files\Oracle\Java\javapath;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Users\user\.dnx\bin;C:\Program Files\Microsoft DNX\Dnvm\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Java\jdk-19\bin;C:\Program Files\Git\cmd;C:\Users\user\AppData\Local\Microsoft\WindowsApps;;C:\Users\user\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\JetBrains\PyCharm 2023.3.2\bin;;."/>
+    <property name="maven.conf" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.2.3\plugins\maven\lib\maven3/conf"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="java.class.version" value="62.0"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="os.version" value="10.0"/>
+    <property name="user.home" value="C:\Users\user"/>
+    <property name="user.timezone" value="Asia/Jerusalem"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.specification.version" value="18"/>
+    <property name="user.name" value="user"/>
+    <property name="java.class.path" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.2.3\plugins\maven\lib\maven3\boot\plexus-classworlds-2.6.0.jar;C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.2.3\plugins\maven\lib\maven3\boot\plexus-classworlds.license"/>
+    <property name="java.vm.specification.version" value="18"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="sun.java.command" value="org.codehaus.classworlds.Launcher -Didea.version=2022.2.5 test"/>
+    <property name="java.home" value="C:\Program Files\Java\jdk-18.0.1.1"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.version" value="18.0.1.1"/>
+    <property name="native.encoding" value="Cp1252"/>
+    <property name="java.vendor" value="Oracle Corporation"/>
+    <property name="sun.stderr.encoding" value="UTF-8"/>
+    <property name="maven.home" value="C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2022.2.3\plugins\maven\lib\maven3"/>
+    <property name="file.separator" value="\"/>
+    <property name="java.version.date" value="2022-04-22"/>
+    <property name="java.vendor.url.bug" value="https://bugreport.java.com/bugreport/"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="sun.stdout.encoding" value="UTF-8"/>
+    <property name="sun.cpu.isalist" value="amd64"/>
+  </properties>
+  <testcase classname="Vendor Management" name="Creating a New Vendor" time="0.296"/>
+  <testcase classname="Vendor Management" name="Editing an Existing Vendor" time="0.016"/>
+  <testcase classname="Vendor Management" name="Deleting an Existing Vendor" time="0.018"/>
+  <testcase classname="add event by user" name="add succeed" time="0.137"/>
+  <testcase classname="add event by user" name="add failed #1" time="0.028"/>
+  <testcase classname="add event by user" name="add failed #2" time="0.012"/>
+  <testcase classname="add event by user" name="add failed #3" time="0.013"/>
+  <testcase classname="Budget Planning" name="display budget planner" time="0.026"/>
+  <testcase classname="Show Calender" name="display calender" time="0.053"/>
+  <testcase classname="eventmanegment" name="Service Provider creates a new event." time="0.011"/>
+  <testcase classname="eventmanegment" name="Managing Events as a Service Provider" time="0.013"/>
+  <testcase classname="eventmanegment" name="Service Provider edits an existing event." time="0.014"/>
+  <testcase classname="eventmanegment" name="Service Provider deletes an existing event." time="0.011"/>
+  <testcase classname="Select Vendors" name="successfully add vendors #1" time="0.022"/>
+  <testcase classname="Select Vendors" name="successfully add vendors #2" time="0.012"/>
+  <testcase classname="Select Vendors" name="successfully add vendors #3" time="0.062"/>
+  <testcase classname="login and sign up" name="vaild login #1" time="0.019"/>
+  <testcase classname="login and sign up" name="vaild login #2" time="0.022"/>
+  <testcase classname="login and sign up" name="vaild login #3" time="0.045"/>
+  <testcase classname="login and sign up" name="invalid login #1" time="0.021"/>
+  <testcase classname="login and sign up" name="invalid login #2" time="0.025"/>
+  <testcase classname="login and sign up" name="valid sign up" time="0.022">
+    <failure type="java.lang.AssertionError">java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at org.test.signup.user_succesfully_signs_up(signup.java:22)
+	at ✽.user succesfully signs up(file:///C:/soft/soft/features/user_login.feature:29)
+</failure>
+  </testcase>
+  <testcase classname="login and sign up" name="invalid sign up #1" time="0.018"/>
+  <testcase classname="login and sign up" name="invalid sign up #2" time="0.002"/>
+</testsuite>

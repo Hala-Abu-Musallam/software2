@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DisplayB.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">software</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">DisplayB.java</span></div><h1>DisplayB.java</h1><pre class="source lang-java linenums">package org.example;
+import java.io.*;
+import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+
+<span class="fc" id="L8">public class DisplayB {</span>
+
+    public static String date;
+    public static String time;
+    public static double price;
+    public static double price1;
+    public static double price2;
+    public static double adminBudg;
+    public static double serviceBudg;
+    public static String username;
+    public static boolean  addToBudget;
+<span class="fc" id="L19">    private static final Logger logger = LoggerFactory.getLogger(DisplayB.class);</span>
+
+    public static String BudgCalen;
+<span class="fc" id="L22">    ArrayList&lt;DisplayB&gt; display = new ArrayList&lt;&gt;();</span>
+    public void getInformationfromFile() {
+        try {
+
+<span class="fc" id="L26">            display.clear();</span>
+<span class="fc" id="L27">            File file = new File(&quot;src/eventList.txt&quot;);</span>
+<span class="fc" id="L28">            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {</span>
+                String information;
+<span class="fc bfc" id="L30" title="All 2 branches covered.">                while ((information = bufferedReader.readLine()) != null) {</span>
+<span class="fc" id="L31">                    String[] data = information.split(&quot;,&quot;);</span>
+<span class="fc" id="L32">                    username=data[0];</span>
+<span class="fc" id="L33">                    date=data[1];</span>
+<span class="fc" id="L34">                    time=data[2];</span>
+<span class="fc" id="L35">                    price=Double.parseDouble(data[3]);</span>
+<span class="fc" id="L36">                    display.add(this);</span>
+<span class="fc" id="L37">                }</span>
+            }
+<span class="nc" id="L39">        } catch (IOException e) {</span>
+<span class="nc" id="L40">            logger.info(e.getMessage());</span>
+<span class="fc" id="L41">        }</span>
+<span class="fc" id="L42">    }</span>
+
+
+    public void BudgetDisplay(String BudgCalen){
+<span class="fc" id="L46">        getInformationfromFile();</span>
+<span class="pc bpc" id="L47" title="1 of 2 branches missed.">        if(BudgCalen.contains(&quot;budget&quot;)){</span>
+<span class="fc" id="L48">            price1=price;</span>
+<span class="fc" id="L49">            price2=price;</span>
+<span class="fc" id="L50">            serviceBudg = price1 *0.8;</span>
+<span class="fc" id="L51">            adminBudg = price2*0.2;</span>
+<span class="fc" id="L52">            writeInformation( username,date, time, price,serviceBudg, adminBudg);</span>
+<span class="fc" id="L53">            addToBudget = true;</span>
+        }
+        else
+<span class="nc" id="L56">            addToBudget=false;</span>
+<span class="fc" id="L57">        return;</span>
+    }
+
+
+    public void writeInformation(String username, String date, String time, double price,double serviceBudg, double adminBudg) {
+        try {
+<span class="fc" id="L63">            File file = new File(&quot;src/budget.txt&quot;);</span>
+
+<span class="fc" id="L65">            try(BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {</span>
+<span class="fc" id="L66">                String Bud = username + &quot;  ,  &quot;  + date + &quot;  ,  &quot; + time + &quot;,  Price:&quot; + price + &quot;,  ServiceBudget:&quot;+ serviceBudg + &quot;,  AdmainBudget:&quot;+adminBudg+&quot;\n&quot;;</span>
+<span class="fc" id="L67">                bufferedWriter.write(Bud);</span>
+<span class="fc" id="L68">                addToBudget = true;</span>
+
+            }
+<span class="fc" id="L71">            logger.info(&quot;Information stored successfully.&quot;);</span>
+<span class="nc" id="L72">        } catch (IOException e) {</span>
+<span class="nc" id="L73">            logger.info(e.getMessage());</span>
+<span class="fc" id="L74">        }</span>
+<span class="fc" id="L75">    }</span>
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

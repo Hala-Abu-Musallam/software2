@@ -99,7 +99,7 @@ public class CheckEvent {
                 addSuccess=true;
             }
         }
-if (addSuccess)
+ if (addSuccess)
         writeUsers(username, date, time,name);
 
 

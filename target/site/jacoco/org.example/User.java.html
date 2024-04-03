@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>User.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">software</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">User.java</span></div><h1>User.java</h1><pre class="source lang-java linenums">
+package org.example;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
+
+
+
+public class User {
+
+<span class="fc" id="L15">    public  Map&lt; String, String &gt; users = new HashMap&lt;&gt;();</span>
+    public String  username;
+
+    public static boolean loginFlag;
+    public static int user_type; //1 admin , 2 user , 3 service provider
+
+<span class="fc" id="L21">    public HashMap&lt;String,User&gt;userDatabase = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L22">    private static final Logger logger = LoggerFactory.getLogger(User.class);</span>
+
+
+<span class="fc" id="L25">    public User() {</span>
+<span class="fc" id="L26">        getUsersFromFile();</span>
+
+<span class="fc" id="L28">    }</span>
+
+
+    public boolean login(String username, String password) {
+<span class="pc bpc" id="L32" title="1 of 4 branches missed.">        if (users.containsKey(username) &amp;&amp; password.equals(users.get(username))) {</span>
+<span class="fc" id="L33">            this.username = username;</span>
+<span class="pc bpc" id="L34" title="1 of 2 branches missed.">            if (username.contains(&quot;@admin.com&quot;)) {</span>
+<span class="nc" id="L35">                user_type = 1;</span>
+<span class="nc" id="L36">                logger.info(&quot;Welcome Admin :)&quot;);</span>
+<span class="pc bpc" id="L37" title="1 of 2 branches missed.">            } else if (username.contains(&quot;@user.com&quot;)) {</span>
+<span class="fc" id="L38">                user_type = 2;</span>
+<span class="fc" id="L39">                logger.info(&quot;Welcome User :)&quot;);</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">            } else if (username.contains(&quot;@serviceprovider.com&quot;)) {</span>
+<span class="nc" id="L41">                user_type = 3;</span>
+<span class="nc" id="L42">                logger.info(&quot;Welcome Service Provider :)&quot;);</span>
+            }
+<span class="fc" id="L44">            loginFlag = true;</span>
+        } else {
+<span class="fc" id="L46">            logger.info(&quot;Check your username or password.&quot;);</span>
+<span class="fc" id="L47">            loginFlag = false;</span>
+        }
+<span class="fc" id="L49">        return loginFlag;</span>
+    }
+
+
+    public void adduser (String email, String password){
+<span class="fc bfc" id="L54" title="All 2 branches covered.">        if ( users.containsKey ( email ) ){</span>
+<span class="fc" id="L55">            loginFlag = false;</span>
+<span class="fc" id="L56">            return ;</span>
+        }
+
+<span class="pc bpc" id="L59" title="1 of 2 branches missed.">        if ( email.contains ( &quot;@admin&quot; ) ){</span>
+<span class="nc" id="L60">            user_type = 1;</span>
+<span class="nc" id="L61">            writeUsers (  email , password , users );</span>
+<span class="nc" id="L62">            loginFlag = true;}</span>
+<span class="pc bpc" id="L63" title="1 of 2 branches missed.">        else if (email.contains(&quot;@user&quot;)){</span>
+<span class="nc" id="L64">            user_type = 2 ;</span>
+<span class="nc" id="L65">            writeUsers (  email , password , users );</span>
+<span class="nc" id="L66">            loginFlag = true;}</span>
+<span class="pc bpc" id="L67" title="1 of 2 branches missed.">        else if (email.contains(&quot;@serviceprovider&quot;)){</span>
+<span class="nc" id="L68">            user_type = 3 ;</span>
+<span class="nc" id="L69">            writeUsers (  email , password , users );</span>
+<span class="nc" id="L70">            loginFlag = true;}</span>
+        else{
+<span class="fc" id="L72">            user_type=-1;</span>
+<span class="fc" id="L73">            loginFlag=false;</span>
+        }
+<span class="fc" id="L75">    }</span>
+
+    void getUsersFromFile ( ) {
+        try {
+<span class="fc" id="L79">            users.clear ( );</span>
+<span class="fc" id="L80">            File file = new File ( &quot;src/users.txt&quot; );</span>
+<span class="fc" id="L81">            try (BufferedReader bufferedReader = new BufferedReader ( new FileReader( file ) )) {</span>
+                String nameAndPass;
+<span class="fc bfc" id="L83" title="All 2 branches covered.">                while ( (nameAndPass = bufferedReader.readLine ( )) != null ) {</span>
+<span class="fc" id="L84">                    String[] data = nameAndPass.split ( &quot;,&quot; );//يقسم السترينج من عند الفاصلة</span>
+<span class="fc" id="L85">                    users.put ( data[ 0 ] , data[ 1 ] );</span>
+<span class="fc" id="L86">                }</span>
+            }
+        }
+<span class="nc" id="L89">        catch ( IOException e ) {</span>
+<span class="nc" id="L90">            logger.info(e.getMessage());</span>
+<span class="fc" id="L91">        }</span>
+<span class="fc" id="L92">    }</span>
+
+    public void writeUsers ( String username , String password , Map &lt; String, String &gt; users ) {
+        try {
+<span class="nc" id="L96">            users.clear ( );</span>
+<span class="nc" id="L97">            File file = new File ( &quot;src/users.txt&quot; );</span>
+<span class="nc" id="L98">            try (BufferedWriter bufferedWriter = new BufferedWriter ( new FileWriter ( file , true ) )) {</span>
+<span class="nc" id="L99">                String nameAndPass = &quot;\n&quot;+ username + &quot;,&quot; + password;</span>
+<span class="nc" id="L100">                bufferedWriter.write ( nameAndPass+ &quot;\n&quot; );</span>
+
+            }
+<span class="nc" id="L103">            getUsersFromFile ();</span>
+        }
+<span class="nc" id="L105">        catch ( IOException e ) {</span>
+<span class="nc" id="L106">            logger.info(e.getMessage());</span>
+<span class="nc" id="L107">        }</span>
+<span class="nc" id="L108">    }</span>
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

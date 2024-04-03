@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ServiceProvider.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">software</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">ServiceProvider.java</span></div><h1>ServiceProvider.java</h1><pre class="source lang-java linenums">package org.example;
+
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.stream.Stream;
+import java.util.logging.Logger;
+
+
+
+public class ServiceProvider {
+
+<span class="fc" id="L17">    private Map&lt;String, Vendor&gt; vendors = new HashMap&lt;&gt;();</span>
+    public static final String VENDORS_FILE_PATH = &quot;src/vendor.txt&quot;;
+
+    public static final String VENUES_FILE_PATH = &quot;src/Venues.txt&quot;;
+<span class="fc" id="L21">    private static final Map&lt;String, Event&gt; savedEvents = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L22">    private static final Logger logger = Logger.getLogger(ServiceProvider.class.getName());</span>
+
+    private String username;
+    private String password;
+    private boolean isLoggedIn;
+    private boolean choosingToCreateVenue;
+    private Event event;
+
+
+    private boolean choosingToCreateEvent;
+    private List&lt;Venue&gt; venues;
+
+<span class="fc" id="L34">    public ServiceProvider() {</span>
+<span class="fc" id="L35">        this.venues = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L36">    }</span>
+
+    public void login(String username, String password) {
+<span class="fc" id="L39">        this.username = username;</span>
+<span class="fc" id="L40">        this.password = password;</span>
+<span class="fc" id="L41">        isLoggedIn = true;</span>
+<span class="fc" id="L42">    }</span>
+
+    public boolean isLoggedIn() {
+<span class="fc" id="L45">        return isLoggedIn;</span>
+    }
+
+    public void chooseToCreateEvent() {
+<span class="fc" id="L49">        choosingToCreateEvent = true;</span>
+<span class="fc" id="L50">    }</span>
+
+    public boolean isChoosingToCreateEvent() {
+<span class="fc" id="L53">        return choosingToCreateEvent;</span>
+    }
+
+    public void promptForEventDetails() {
+<span class="nc" id="L57">        Scanner scanner = new Scanner(System.in);</span>
+<span class="nc" id="L58">        logger.info(&quot;Please enter event details:&quot;);</span>
+<span class="nc" id="L59">        logger.info(&quot;Event Name: &quot;);</span>
+<span class="nc" id="L60">        String eventName = scanner.nextLine();</span>
+<span class="nc" id="L61">        logger.info(&quot;Date: &quot;);</span>
+<span class="nc" id="L62">        String date = scanner.nextLine();</span>
+<span class="nc" id="L63">        logger.info(&quot;Time: &quot;);</span>
+<span class="nc" id="L64">        String time = scanner.nextLine();</span>
+<span class="nc" id="L65">        logger.info(&quot;Price: &quot;);</span>
+<span class="nc" id="L66">        double price = scanner.nextDouble();</span>
+<span class="nc" id="L67">        scanner.nextLine();</span>
+<span class="nc" id="L68">        logger.info(&quot;Vendor Name: &quot;);</span>
+<span class="nc" id="L69">        String vendorName = scanner.nextLine();</span>
+
+<span class="nc" id="L71">        event = new Event(eventName, date, time, price, vendorName);</span>
+<span class="nc" id="L72">    }</span>
+
+
+    public void saveEventDetails(String eventName, String date, String time, double price, String vendorName) {
+<span class="fc" id="L76">        Event event = new Event(eventName, date, time, price, vendorName);</span>
+<span class="fc" id="L77">        savedEvents.put(eventName, event);</span>
+<span class="fc" id="L78">        logger.info(&quot;Event saved successfully!&quot;);</span>
+<span class="fc" id="L79">    }</span>
+
+    public Event getEvent() {
+<span class="nc" id="L82">        return event;</span>
+    }
+
+
+    public void editEvent(String eventName) {
+<span class="nc" id="L87">        logger.info(&quot;Keys in savedEvents: &quot; + savedEvents.keySet());</span>
+
+<span class="nc bnc" id="L89" title="All 2 branches missed.">        if (savedEvents.containsKey(eventName)) {</span>
+<span class="nc" id="L90">            event = savedEvents.get(eventName);</span>
+<span class="nc" id="L91">            logger.info(&quot;Current event details: &quot; + event);</span>
+
+<span class="nc" id="L93">            logger.info(&quot;Enter new event details:&quot;);</span>
+<span class="nc" id="L94">            promptForEventDetails();</span>
+<span class="nc" id="L95">            savedEvents.put(eventName, event);</span>
+
+<span class="nc" id="L97">            logger.info(&quot;Event details updated successfully!&quot;);</span>
+        } else {
+<span class="nc" id="L99">            logger.warning(&quot;Event not found!&quot;);</span>
+        }
+<span class="nc" id="L101">    }</span>
+
+
+
+    public boolean deleteEvent(String eventName) {
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        if (savedEvents.containsKey(eventName)) {</span>
+<span class="fc" id="L107">            savedEvents.remove(eventName);</span>
+<span class="fc" id="L108">            logger.info(&quot;Event deleted successfully!&quot;);</span>
+<span class="fc" id="L109">            return true;</span>
+        } else {
+<span class="nc" id="L111">            logger.warning(&quot;Event not found!&quot;); // Logging a warning when the event is not found</span>
+<span class="nc" id="L112">            return false;</span>
+        }
+    }
+
+
+    public boolean modifyEventDetails(String eventName, String newDate, String newTime, double newPrice, String newVendorName) {
+<span class="fc" id="L118">        boolean[] modified = {false};</span>
+
+<span class="fc" id="L120">        savedEvents.computeIfPresent(eventName, (key, eventToUpdate) -&gt; {</span>
+<span class="fc" id="L121">            eventToUpdate.setDate(newDate);</span>
+<span class="fc" id="L122">            eventToUpdate.setTime(newTime);</span>
+<span class="fc" id="L123">            eventToUpdate.setPrice(newPrice);</span>
+<span class="fc" id="L124">            eventToUpdate.setVendorName(newVendorName);</span>
+<span class="fc" id="L125">            modified[0] = true;</span>
+<span class="fc" id="L126">            return eventToUpdate;</span>
+        });
+
+<span class="fc" id="L129">        return modified[0];</span>
+    }
+
+
+    public static Event getEventFromDatabase(String eventName) {
+<span class="fc" id="L134">        return savedEvents.get(eventName);</span>
+    }
+
+
+
+
+    public void addVenue(Venue venue) {
+<span class="nc" id="L141">        venues.add(venue);</span>
+<span class="nc" id="L142">        saveVenuesToFile();</span>
+
+<span class="nc" id="L144">    }</span>
+
+    public boolean deleteVenue(Venue venue) {
+<span class="nc" id="L147">        boolean removed = venues.remove(venue);</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">        if (removed) {</span>
+<span class="nc" id="L149">            saveVenuesToFile();</span>
+        }
+<span class="nc" id="L151">        return removed;</span>
+    }
+
+    public Venue findVenueByName(String name) {
+<span class="nc" id="L155">        return venues.stream()</span>
+<span class="nc" id="L156">                .filter(v -&gt; v.getName().equals(name))</span>
+<span class="nc" id="L157">                .findFirst()</span>
+<span class="nc" id="L158">                .orElse(null);</span>
+    }
+
+    public boolean updateVenue(String name,Venue updatedVenue) {
+<span class="nc bnc" id="L162" title="All 2 branches missed.">        for (int i = 0; i &lt; venues.size(); i++) {</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">            if (venues.get(i).getName().equals(name)) {</span>
+<span class="nc" id="L164">                venues.set(i, updatedVenue);</span>
+<span class="nc" id="L165">                saveVenuesToFile();</span>
+<span class="nc" id="L166">                return true;</span>
+            }
+        }
+<span class="nc" id="L169">        return false;</span>
+    }
+
+    public boolean containsVenue(Venue venue) {
+
+<span class="nc" id="L174">        return venues.contains(venue);</span>
+    }
+    public void displayVenuesFromFile() {
+<span class="nc" id="L177">        try (Stream&lt;String&gt; lines = Files.lines(Paths.get(VENUES_FILE_PATH))) {</span>
+<span class="nc" id="L178">            lines.forEach(logger::info);</span>
+<span class="nc" id="L179">        } catch (IOException e) {</span>
+<span class="nc" id="L180">            logger.severe(&quot;Error displaying venues from file: &quot; + e.getMessage());        }</span>
+<span class="nc" id="L181">    }</span>
+
+
+
+    public void saveVenuesToFile() {
+        try {
+<span class="nc" id="L187">            Path path = Paths.get(VENUES_FILE_PATH);</span>
+<span class="nc" id="L188">            List&lt;String&gt; lines = venues.stream()</span>
+<span class="nc" id="L189">                    .map(v -&gt; String.join(&quot;,&quot;, v.getName(), v.getOwnerName(), v.getLocation(),</span>
+<span class="nc" id="L190">                            String.valueOf(v.getCapacity()), String.valueOf(v.getPricing())))</span>
+<span class="nc" id="L191">                    .toList();</span>
+<span class="nc" id="L192">            Files.write(path, lines);</span>
+<span class="nc" id="L193">        } catch (IOException e) {</span>
+<span class="nc" id="L194">            logger.severe(&quot;Error saving venues to file: &quot; + e.getMessage());</span>
+<span class="nc" id="L195">        }</span>
+<span class="nc" id="L196">    }</span>
+
+
+    public void addVendor(Vendor vendor) {
+<span class="fc" id="L200">        vendors.put(vendor.getName(), vendor);</span>
+<span class="fc" id="L201">    }</span>
+
+    public Vendor findVendorByName(String name) {
+<span class="nc" id="L204">        return vendors.get(name);</span>
+    }
+
+    public void updateVendor(Vendor vendor) {
+<span class="fc" id="L208">        vendors.put(vendor.getName(), vendor);</span>
+<span class="fc" id="L209">    }</span>
+
+    public void deleteVendor(String name) {
+<span class="fc" id="L212">        vendors.remove(name);</span>
+<span class="fc" id="L213">    }</span>
+
+    public boolean containsVendor(Vendor vendor) {
+<span class="fc" id="L216">        return vendors.containsKey(vendor.getName());</span>
+    }
+
+
+
+    public void saveVendorsToFile() {
+<span class="nc" id="L222">        List&lt;String&gt; lines = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L223" title="All 2 branches missed.">        for (Vendor vendor : vendors.values()) {</span>
+<span class="nc" id="L224">            String line = String.join(&quot;,&quot;,</span>
+<span class="nc" id="L225">                    vendor.getName(),</span>
+<span class="nc" id="L226">                    vendor.getServiceType(),</span>
+<span class="nc" id="L227">                    vendor.getEmail(),</span>
+<span class="nc" id="L228">                    String.valueOf(vendor.getTime()),</span>
+<span class="nc" id="L229">                    String.valueOf(vendor.getDate()));</span>
+<span class="nc" id="L230">            lines.add(line);</span>
+<span class="nc" id="L231">        }</span>
+        try {
+<span class="nc" id="L233">            Files.write(Paths.get(VENDORS_FILE_PATH), lines);</span>
+<span class="nc" id="L234">        } catch (IOException e) {</span>
+<span class="nc" id="L235">            logger.severe(&quot;Error saving vendors to file: &quot; + e.getMessage());</span>
+<span class="nc" id="L236">        }</span>
+<span class="nc" id="L237">    }</span>
+
+
+    public void loadVendorsFromFile() {
+<span class="nc" id="L241">        vendors.clear();</span>
+        try {
+<span class="nc" id="L243">            List&lt;String&gt; lines = Files.readAllLines(Paths.get(VENDORS_FILE_PATH));</span>
+<span class="nc bnc" id="L244" title="All 2 branches missed.">            for (String line : lines) {</span>
+<span class="nc" id="L245">                String[] details = line.split(&quot;,&quot;);</span>
+<span class="nc bnc" id="L246" title="All 2 branches missed.">                if (details.length == 5) {</span>
+<span class="nc" id="L247">                    Vendor vendor = new Vendor(details[0], details[1], details[2], Integer.parseInt(details[3]), Integer.parseInt(details[4]));</span>
+<span class="nc" id="L248">                    vendors.put(vendor.getName(), vendor);</span>
+                }
+<span class="nc" id="L250">            }</span>
+<span class="nc" id="L251">        } catch (IOException e) {</span>
+<span class="nc" id="L252">            logger.severe(&quot;Error loading vendors from file: &quot; + e.getMessage());</span>
+<span class="nc" id="L253">        }</span>
+<span class="nc" id="L254">    }</span>
+
+
+    public Collection&lt;Vendor&gt; getAllVendors() {
+<span class="nc" id="L258">        return vendors.values();</span>
+    }
+
+
+
+
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DisplayC.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">software</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">DisplayC.java</span></div><h1>DisplayC.java</h1><pre class="source lang-java linenums">package org.example;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+import java.io.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Date;
+
+<span class="fc" id="L13">public class DisplayC {</span>
+
+<span class="fc" id="L15">    private final SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;dd/MM/yyyy&quot;);</span>
+<span class="fc" id="L16">    private static final Logger LOGGER = Logger.getLogger(DisplayC.class.getName());</span>
+
+<span class="fc" id="L18">    private final SimpleDateFormat timeFormat = new SimpleDateFormat(&quot;HH:mm&quot;);</span>
+
+    public static String username;
+    public static boolean addToCalen;
+
+<span class="fc" id="L23">    ArrayList&lt;DisplayC&gt; displayC = new ArrayList&lt;&gt;();</span>
+
+    public void sorting(String date, String time) {
+<span class="fc" id="L26">        fromFile();</span>
+
+<span class="fc" id="L28">        Collections.sort(displayC, new Comparator&lt;DisplayC&gt;() {</span>
+            @Override
+            public int compare(DisplayC o1, DisplayC o2) {
+                try {
+<span class="fc" id="L32">                    Date date1 = dateFormat.parse(o1.date);</span>
+<span class="fc" id="L33">                    Date date2 = dateFormat.parse(o2.date);</span>
+<span class="nc" id="L34">                    Date time1 = timeFormat.parse(o1.time);</span>
+<span class="nc" id="L35">                    Date time2 = timeFormat.parse(o2.time);</span>
+
+<span class="nc" id="L37">                    int dateComparison = date1.compareTo(date2);</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">                    if (dateComparison != 0) {</span>
+<span class="nc" id="L39">                        return dateComparison;</span>
+                    }
+
+<span class="nc" id="L42">                    return time1.compareTo(time2);</span>
+<span class="fc" id="L43">                } catch (ParseException e) {</span>
+<span class="fc" id="L44">                    LOGGER.log(Level.SEVERE, e.getMessage(), e);</span>
+<span class="fc" id="L45">                    return 0;</span>
+                }
+            }
+        });
+
+
+<span class="fc" id="L51">        saveToFile(date, time);</span>
+<span class="fc" id="L52">        addToCalen = true;</span>
+<span class="fc" id="L53">    }</span>
+
+    private void saveToFile(String date, String time) {
+        try {
+<span class="fc" id="L57">            File file = new File(&quot;src/calender.txt&quot;);</span>
+
+<span class="fc" id="L59">            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file))) {</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">                for (DisplayC event : displayC) {</span>
+<span class="fc" id="L61">                    event.username = username;</span>
+<span class="fc" id="L62">                    event.date = date;</span>
+<span class="fc" id="L63">                    event.time = time;</span>
+<span class="fc" id="L64">                    String Calen = username + &quot;, &quot; + date + &quot;, &quot; + time + &quot;\n&quot;;</span>
+<span class="fc" id="L65">                    bufferedWriter.write(Calen);</span>
+<span class="fc" id="L66">                }</span>
+            }
+<span class="fc" id="L68">            System.out.println(&quot;Information stored successfully.&quot;);</span>
+<span class="nc" id="L69">        } catch (IOException e) {</span>
+<span class="nc" id="L70">            System.out.println(e.getMessage());</span>
+<span class="fc" id="L71">        }</span>
+<span class="fc" id="L72">    }</span>
+
+    private void fromFile() {
+        try {
+<span class="fc" id="L76">            displayC.clear();</span>
+<span class="fc" id="L77">            File file = new File(&quot;src/eventList.txt&quot;);</span>
+<span class="fc" id="L78">            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {</span>
+                String info;
+<span class="fc bfc" id="L80" title="All 2 branches covered.">                while ((info = bufferedReader.readLine()) != null) {</span>
+<span class="fc" id="L81">                    String[] data = info.split(&quot;,&quot;);</span>
+<span class="fc" id="L82">                    username = data[0];</span>
+<span class="fc" id="L83">                    String date = data[1];</span>
+<span class="fc" id="L84">                    String time = data[2];</span>
+<span class="fc" id="L85">                    DisplayC event = new DisplayC();</span>
+<span class="fc" id="L86">                    event.username = username;</span>
+<span class="fc" id="L87">                    event.date = date;</span>
+<span class="fc" id="L88">                    event.time = time;</span>
+<span class="fc" id="L89">                    displayC.add(event);</span>
+<span class="fc" id="L90">                }</span>
+            }
+<span class="nc" id="L92">        } catch (IOException e) {</span>
+<span class="nc" id="L93">            System.out.println(e.getMessage());</span>
+<span class="fc" id="L94">        }</span>
+<span class="fc" id="L95">    }</span>
+
+    private String date;
+    private String time;
+
+    public String getUsername() {
+<span class="nc" id="L101">        return username;</span>
+    }
+
+    public void setUsername(String username) {
+<span class="nc" id="L105">        this.username = username;</span>
+<span class="nc" id="L106">    }</span>
+
+
+    public String getDate() {
+<span class="nc" id="L110">        return date;</span>
+    }
+
+    public void setDate(String date) {
+<span class="nc" id="L114">        this.date = date;</span>
+<span class="nc" id="L115">    }</span>
+
+    public String getTime() {
+<span class="nc" id="L118">        return time;</span>
+    }
+
+    public void setTime(String time) {
+<span class="nc" id="L122">        this.time = time;</span>
+<span class="nc" id="L123">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CheckEvent.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">software</a> &gt; <a href="index.source.html" class="el_package">org.example</a> &gt; <span class="el_source">CheckEvent.java</span></div><h1>CheckEvent.java</h1><pre class="source lang-java linenums">package org.example;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
+
+<span class="fc" id="L12">public class CheckEvent {</span>
+<span class="fc" id="L13">    private static final Logger logger = LoggerFactory.getLogger(CheckEvent.class);</span>
+
+<span class="fc" id="L15">    ArrayList&lt;String&gt; events = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L16">    static SimpleDateFormat[] simpleDateFormats = {</span>
+            new SimpleDateFormat(&quot;dd/MM/yyyy&quot;),
+            new SimpleDateFormat(&quot;dd/M/yyyy&quot;),
+            new SimpleDateFormat(&quot;d/MM/yyyy&quot;),
+            new SimpleDateFormat(&quot;d/M/yyyy&quot;)
+    };
+    public static boolean addSuccess;
+    public static String username;
+    public static String name;
+
+    private static void checkIfDateValid(Date inputDate) {
+<span class="fc" id="L27">        Calendar calendar = Calendar.getInstance();</span>
+<span class="fc" id="L28">        calendar.setTime(inputDate);</span>
+<span class="fc" id="L29">        int day = calendar.get(Calendar.DAY_OF_MONTH);</span>
+<span class="fc" id="L30">        int month = calendar.get(Calendar.MONTH) + 1;</span>
+<span class="fc" id="L31">        int year = calendar.get(Calendar.YEAR);</span>
+
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">        if (month &gt; 12) {</span>
+<span class="nc" id="L34">            throw new IllegalArgumentException(&quot;Invalid month in the date.&quot;);</span>
+        }
+
+<span class="fc" id="L37">        int monthDays = getDaysInMonth(month, year);</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if (day &gt; monthDays) {</span>
+<span class="nc" id="L39">            throw new IllegalArgumentException(&quot;Invalid day in this month.&quot;);</span>
+        }
+<span class="fc" id="L41">    }</span>
+
+    private static int getDaysInMonth(int month, int year) {
+<span class="pc bpc" id="L44" title="1 of 3 branches missed.">        return switch (month) {</span>
+            case 2 -&gt; {
+<span class="nc bnc" id="L46" title="All 6 branches missed.">                if ((year % 4 == 0 &amp;&amp; year % 100 != 0) || (year % 400 == 0)) yield 29;</span>
+<span class="nc" id="L47">                yield 28;</span>
+            }
+<span class="fc" id="L49">            case 4, 6, 9, 11 -&gt; 30;</span>
+<span class="fc" id="L50">            default -&gt; 31;</span>
+        };
+    }
+
+    public static boolean checkDate(String date) {
+<span class="pc bpc" id="L55" title="1 of 2 branches missed.">        for (SimpleDateFormat simpleDateFormat : simpleDateFormats) {</span>
+<span class="fc" id="L56">            simpleDateFormat.setLenient(false);</span>
+            try {
+<span class="fc" id="L58">                Date inputDate = simpleDateFormat.parse(date);</span>
+<span class="fc" id="L59">                checkIfDateValid(inputDate);</span>
+<span class="fc" id="L60">                Date currentDate = new Date();</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">                if (!inputDate.before(currentDate)) {</span>
+<span class="fc" id="L62">                    addSuccess = true;</span>
+<span class="fc" id="L63">                    return true;</span>
+                } else {
+<span class="fc" id="L65">                    logger.info(&quot;You cant make an appointment in passed days :/&quot;);</span>
+<span class="fc" id="L66">                    addSuccess = false;</span>
+<span class="fc" id="L67">                    return false;</span>
+                }
+<span class="nc" id="L69">            } catch (ParseException | IllegalArgumentException e) {</span>
+<span class="nc" id="L70">                logger.info(&quot;Date Format Wrong or Try another date ;)&quot;);</span>
+<span class="nc" id="L71">                addSuccess = false;</span>
+<span class="nc" id="L72">                return false;</span>
+            }
+        }
+<span class="nc" id="L75">        return false;</span>
+    }
+
+    public void checkEvent( String username,String date, String time,String name) {
+<span class="fc" id="L79">        getEventfromFile();</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">        if (!checkDate(date)) {</span>
+<span class="fc" id="L81">            return;</span>
+        }
+<span class="fc bfc" id="L83" title="All 2 branches covered.">        if (!checkTime(time)) {</span>
+<span class="fc" id="L84">            addSuccess = false;</span>
+<span class="fc" id="L85">            return;</span>
+        }
+
+
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        for (int i = 0; i &lt; events.size(); i++) {</span>
+
+
+<span class="fc bfc" id="L92" title="All 2 branches covered.">            if (events.get(i).equals(date)) {</span>
+<span class="fc bfc" id="L93" title="All 2 branches covered.">                if (events.get(i + 1).equals((time))){</span>
+<span class="fc" id="L94">                    addSuccess = false;</span>
+<span class="fc" id="L95">                return;}</span>
+            } else {
+
+<span class="fc" id="L98">                i++;</span>
+<span class="fc" id="L99">                addSuccess=true;</span>
+            }
+        }
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">if (addSuccess)</span>
+<span class="fc" id="L103">        writeUsers(username, date, time,name);</span>
+
+
+<span class="fc" id="L106">    }</span>
+
+    private static boolean checkTime(String time) {
+<span class="fc" id="L109">        String[] array = time.split(&quot;-&quot;);</span>
+<span class="fc" id="L110">        int startTime = Integer.parseInt(array[0]);</span>
+<span class="fc" id="L111">        int endTime = Integer.parseInt(array[1]);</span>
+<span class="pc bpc" id="L112" title="3 of 8 branches missed.">        if (startTime &lt; 0 || startTime &gt; 12 || endTime &lt; 0 || endTime &gt; 12)</span>
+<span class="fc" id="L113">            return false;</span>
+<span class="fc" id="L114">        return true;</span>
+    }
+
+    public void getEventfromFile() {
+        try {
+<span class="fc" id="L119">            events.clear();</span>
+<span class="fc" id="L120">            File file = new File(&quot;src/events.txt&quot;);</span>
+<span class="fc" id="L121">            try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file))) {</span>
+                String dateAndTime;
+<span class="fc bfc" id="L123" title="All 2 branches covered.">                while ((dateAndTime = bufferedReader.readLine()) != null) {</span>
+<span class="fc" id="L124">                    String[] data = dateAndTime.split(&quot;,&quot;);</span>
+<span class="fc" id="L125">                    events.add(data[1]);</span>
+<span class="fc" id="L126">                    events.add(data[2]);</span>
+<span class="fc" id="L127">                }</span>
+            }
+<span class="nc" id="L129">        } catch (IOException e) {</span>
+<span class="nc" id="L130">            logger.info(e.getMessage());</span>
+<span class="fc" id="L131">        }</span>
+<span class="fc" id="L132">    }</span>
+
+    public void writeUsers(String username, String date, String time ,String name) {
+        try {
+<span class="fc" id="L136">            File file = new File(&quot;src/waitList.txt&quot;);</span>
+<span class="fc" id="L137">            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file, true))) {</span>
+<span class="fc" id="L138">                String event = username + &quot;,&quot; + date + &quot;,&quot; + time + &quot;,&quot;+name+&quot;\n&quot;;</span>
+
+<span class="fc" id="L140">                bufferedWriter.write(event);</span>
+<span class="fc" id="L141">                addSuccess = true;</span>
+            }
+<span class="nc" id="L143">            } catch (IOException e) {</span>
+<span class="nc" id="L144">            logger.info(e.getMessage());</span>
+<span class="fc" id="L145">            }</span>
+
+
+
+<span class="fc" id="L149">    }</span>
+
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

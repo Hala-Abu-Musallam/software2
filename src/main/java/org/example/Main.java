@@ -1,4 +1,5 @@
 package org.example;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.io.*;
@@ -39,7 +40,7 @@ public class Main {
                     boolean tryAgain = true;
                     while (tryAgain) {
                         displayFile("src/Venues.txt");
-                        logger.info("Here is the venues list please choose one by its name:");
+                        logger.info("Here is the venues list please choose one by its name:\n");
                         String venue = scanner.nextLine();
 
                         logger.info("please enter the date to check if it's available:");
@@ -47,56 +48,53 @@ public class Main {
                         logger.info("please enter the time to check if it's available:");
                         String time = scanner.nextLine();
 
-                        logger.info("Type 'logout' to log out or any other key to continue:");
-                        String logoutInput = scanner.nextLine();
-                        if ("logout".equalsIgnoreCase(logoutInput)) {
-                            tryAgain = false;
-                            break;
-                        }
 
                         CheckEvent checker = new CheckEvent();
 
                         checker.checkEvent(user.username,date, time,venue );
                         if (CheckEvent.addSuccess) {
-                            logger.info("Event has been successfully added to wait list!\n");
+                            logger.info("\nEvent has been successfully added to wait list!\n");
                         } else {
                             logger.info("Failed to add event. Would you like to try another date and time? (yes/no)");
                             String tryAnother = scanner.nextLine();
                             if (!tryAnother.equalsIgnoreCase("yes")) {
+                                logger.info("Good Bye :) \n\n");
                                 tryAgain = false;
                             }
                             continue;
                         }
+                        logger.info("\nType 'logout' to log out or vendor to continue and add vendor for your event :");
+                        String logoutInput = scanner.nextLine();
+                        if ("logout".equalsIgnoreCase(logoutInput)) {
+                            logger.info("Good Bye :)\n\n ");
+                            tryAgain = false;
+                            break;
+                        }
 
                         boolean chooseAnotherVendor = true;
                         while (chooseAnotherVendor) {
-                            logger.info("Displaying vendors list:");
+                            logger.info("Displaying vendors list:\n");
                             displayFile("src/vendor.txt");
                             logger.info("Please choose a vendor by typing its name:");
                             String selectedVendor = scanner.nextLine();
                             logger.info("Please enter a vendor by typing its email");
                             String selectedVendorEmail = scanner.nextLine();
 
-                            logger.info("Type 'logout' to log out or any other key to continue:");
-                            logoutInput = scanner.nextLine();
-                            if ("logout".equalsIgnoreCase(logoutInput)) {
-                                tryAgain = false; // User chose to log out
-                                chooseAnotherVendor = false; // Exit the inner loop
-                                break; // Exit the outer loop
-                            }
 
                             VendorsByUser vendorByUser = new VendorsByUser();
-                            vendorByUser.addVendor(user.username, selectedVendor, date, time, selectedVendorEmail);
+                            vendorByUser.addVendor(user.username, date, time, selectedVendorEmail, selectedVendor);
                             if (VendorsByUser.vendor_type > 0 && VendorsByUser.vendor_type < 4) {
-                                logger.info("Vendor added to the wait list successfully!");
+                                logger.info("\nVendor added to the wait list successfully:)\n");
                             } else {
-                                logger.info("Sorry, can't add vendor, it's not available in the list :(");
-                                logger.info("Do you want to select another one? (yes/no)");
-                                String chooseAnother = scanner.nextLine();
-                                if (!chooseAnother.equalsIgnoreCase("yes"))
-                                    chooseAnotherVendor = false;
+                                logger.info("\nSorry, can't add vendor, it's not available in the list :(\n");
                             }
+                            logger.info("Do you want to select another one? (yes/no)");
+                            String chooseAnother = scanner.nextLine();
+                            if ("no".equalsIgnoreCase(chooseAnother))
+                                logger.info("Good Bye:) \n\n");
+                                chooseAnotherVendor = false;
                         }
+                        break;
                     }
 
                     break;

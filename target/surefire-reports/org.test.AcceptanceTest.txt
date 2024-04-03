@@ -1,0 +1,12 @@
+-------------------------------------------------------------------------------
+Test set: org.test.AcceptanceTest
+-------------------------------------------------------------------------------
+Tests run: 24, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 1.822 sec <<< FAILURE!
+valid sign up(login and sign up)  Time elapsed: 0.022 sec  <<< FAILURE!
+java.lang.AssertionError
+	at org.junit.Assert.fail(Assert.java:87)
+	at org.junit.Assert.assertTrue(Assert.java:42)
+	at org.junit.Assert.assertTrue(Assert.java:53)
+	at org.test.signup.user_succesfully_signs_up(signup.java:22)
+	at ✽.user succesfully signs up(file:///C:/soft/soft/features/user_login.feature:29)
+

@@ -59,14 +59,17 @@ public class User {
         if ( email.contains ( "@admin" ) ){
             user_type = 1;
             writeUsers (  email , password , users );
+            logger.info("Welcome Admin\n");
             loginFlag = true;}
         else if (email.contains("@user")){
             user_type = 2 ;
             writeUsers (  email , password , users );
+            logger.info("Welcome User\n");
             loginFlag = true;}
         else if (email.contains("@serviceprovider")){
             user_type = 3 ;
             writeUsers (  email , password , users );
+            logger.info("Welcome Service\n");
             loginFlag = true;}
         else{
             user_type=-1;
